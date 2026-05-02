@@ -508,7 +508,7 @@
       border-radius: 50%;
       margin-top: -5px;
       margin-left: -5px;
-      animation: orbitDot var(--orbit-speed, 4s) cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+      animation: orbitDot var(--orbit-speed, 4s) linear infinite;
     }
     .orbit-dot { width: 10px; height: 10px; }
     .orbit-dot.sm { width: 7px; height: 7px; margin-top: -3.5px; margin-left: -3.5px; }
@@ -1126,7 +1126,7 @@
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: shimmer 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        animation: shimmer 3s linear infinite;
         /* Override the section-label color rules that use var(--gold) */
       }
       /* Keep proof/book section labels working — same shimmer, lighter gold */
@@ -1137,7 +1137,7 @@
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: shimmer 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        animation: shimmer 3s linear infinite;
       }
     }
 
@@ -1201,13 +1201,13 @@
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: shimmer 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        animation: shimmer 3s linear infinite;
         opacity: 1; /* Override the 0.8 opacity since gradient handles luminosity */
       }
       /* Re-apply spring-in to work with the gradient text */
       .quote-mark.spring-in {
         animation: quoteMark 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-                   shimmer 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s infinite;
+                   shimmer 3s linear 0.5s infinite;
       }
       @keyframes quoteMark {
         from { transform: scale(0); opacity: 0; }
@@ -2072,7 +2072,7 @@
         radial-gradient(circle 1px at 55% 85%, rgba(0, 212, 255, 0.6), transparent);
       background-repeat: repeat;
       background-size: 400px 400px;
-      animation: particleFlow 12s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+      animation: particleFlow 12s linear infinite;
       z-index: 0;
       pointer-events: none;
     }
@@ -2171,6 +2171,82 @@
       }
       .hero-right { display: none; }
     }
+
+  /* ===== WAGE PREMIUM CALCULATOR ===== */
+  #wage-premium { padding: 60px 20px; background: linear-gradient(135deg, rgba(0,0,0,0.02), rgba(79,168,232,0.03)); border-top: 1px solid rgba(79,168,232,0.1); margin-top: 40px; }
+  .wage-premium-container { max-width: 600px; margin: 40px auto; perspective: 1000px; }
+  .wage-premium-explainer { max-width: 760px; margin: 32px auto 12px; padding: 28px 32px; background: rgba(255,255,255,0.65); border: 1px solid rgba(79,168,232,0.18); border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+  .wage-premium-explainer .wpe-heading { font-size: 18px; font-weight: 700; color: #0a2540; margin: 18px 0 8px; letter-spacing: 0.2px; }
+  .wage-premium-explainer .wpe-heading:first-child { margin-top: 0; }
+  .wage-premium-explainer p { font-size: 16px; line-height: 1.65; color: #2a3b52; margin: 0 0 4px; }
+  .gift-block { margin: 24px auto 18px; text-align: center; }
+  .gift-thanks { font-size: 16px; line-height: 1.55; color: #2a3b52; max-width: 480px; margin: 0 auto 16px; }
+  .gift-thanks em { color: #0a2540; font-style: italic; font-weight: 600; }
+  .gift-cover-wrap { display: inline-block; padding: 8px; border-radius: 8px; }
+  .gift-cover { width: 110px; height: auto; border-radius: 4px; box-shadow: 0 0 24px 4px rgba(245,166,35,0.55), 0 0 48px 8px rgba(245,166,35,0.28), 0 6px 18px rgba(0,0,0,0.25); animation: giftGoldPulse 2.6s ease-in-out infinite; }
+  @keyframes giftGoldPulse { 0%, 100% { box-shadow: 0 0 24px 4px rgba(245,166,35,0.55), 0 0 48px 8px rgba(245,166,35,0.28), 0 6px 18px rgba(0,0,0,0.25); } 50% { box-shadow: 0 0 32px 6px rgba(245,166,35,0.75), 0 0 64px 12px rgba(245,166,35,0.4), 0 6px 18px rgba(0,0,0,0.25); } }
+  @media (max-width: 768px) { .wage-premium-explainer { padding: 22px 20px; } .gift-cover { width: 90px; } }
+  .calculator-stage, .lock-stage, .results-stage { animation: fadeInUp 0.6s ease-out; }
+  .salary-input-group { margin-bottom: 24px; }
+  .salary-input-group label { display: block; font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .input-wrapper { display: flex; align-items: center; gap: 8px; position: relative; }
+  .currency-symbol { font-size: 1.2rem; font-weight: bold; color: var(--accent1); }
+  #salaryInput { flex: 1; padding: 14px 12px; font-size: 1.1rem; border: 2px solid rgba(79,168,232,0.3); border-radius: 8px; background: rgba(255,255,255,0.98); color: var(--text); transition: all 0.3s; }
+  #salaryInput:focus { outline: none; border-color: var(--accent1); box-shadow: 0 0 0 3px rgba(79,168,232,0.1); background: white; }
+  .input-wrapper .unit { font-size: 0.95rem; color: var(--text-secondary); font-weight: 500; }
+  .input-note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 10px; text-align: center; }
+  .calculate-btn { width: 100%; margin-bottom: 0; }
+  .lock-stage { text-align: center; padding: 40px 20px; }
+  .gate-lock-container { position: relative; height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .gate-lock-svg { width: 120px; height: 150px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15)); }
+  #wageLockSvg.lock-violent-shake { animation: violentShake 1.15s ease-in-out forwards; }
+  @keyframes violentShake {
+    0%   { transform: rotate(0deg)   translateX(0); }
+    5%   { transform: rotate(-14deg) translateX(-9px); }
+    10%  { transform: rotate(14deg)  translateX(9px); }
+    15%  { transform: rotate(-18deg) translateX(-12px); }
+    20%  { transform: rotate(18deg)  translateX(12px); }
+    28%  { transform: rotate(-22deg) translateX(-16px); }
+    36%  { transform: rotate(22deg)  translateX(16px); }
+    44%  { transform: rotate(-18deg) translateX(-12px); }
+    52%  { transform: rotate(18deg)  translateX(12px); }
+    60%  { transform: rotate(-24deg) translateX(-18px); }
+    68%  { transform: rotate(24deg)  translateX(18px); }
+    76%  { transform: rotate(-10deg) translateX(-6px); }
+    84%  { transform: rotate(10deg)  translateX(6px); }
+    92%  { transform: rotate(-3deg)  translateX(-2px); }
+    100% { transform: rotate(0deg)   translateX(0);    }
+  }
+  #wglShackle { transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: 50% 66px; }
+  #wglShackle.shackle-open { transform: translateY(-28px) rotate(28deg); }
+  .lock-flash-ring { position: absolute; top: 50%; left: 50%; width: 24px; height: 24px; border-radius: 50%; transform: translate(-50%, -50%) scale(0); pointer-events: none; }
+  .lock-flash-ring.ring-burst { border: 4px solid #ff8c00; animation: lockRingBurst 0.7s ease-out forwards; }
+  @keyframes lockRingBurst {
+    0%   { transform: translate(-50%, -50%) scale(0);  opacity: 1; border-color: #ffffff; }
+    30%  { transform: translate(-50%, -50%) scale(4);  opacity: 0.9; border-color: #ffcc00; }
+    70%  { transform: translate(-50%, -50%) scale(12); opacity: 0.4; border-color: #ff8c00; }
+    100% { transform: translate(-50%, -50%) scale(20); opacity: 0;   }
+  }
+  .lock-stage h3 { font-size: 1.2rem; color: var(--text); margin-bottom: 16px; }
+  .email-gate-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+  .email-gate-form input { padding: 12px; font-size: 1rem; border: 2px solid rgba(79,168,232,0.3); border-radius: 8px; background: white; color: var(--text); transition: all 0.3s; }
+  .email-gate-form input:focus { outline: none; border-color: var(--accent1); box-shadow: 0 0 0 3px rgba(79,168,232,0.1); }
+  .unlock-btn { width: 100%; margin: 0; }
+  .results-stage { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, rgba(79,168,232,0.05), rgba(255,168,0,0.05)); border-radius: 12px; }
+  .results-content h3 { font-size: 1.1rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .premium-amount { font-size: 3.2rem; font-weight: 900; color: var(--accent1); margin-bottom: 12px; line-height: 1; }
+  .premium-amount .currency { font-size: 2rem; vertical-align: super; }
+  .premium-amount .suffix { font-size: 1.2rem; vertical-align: baseline; color: var(--text-secondary); font-weight: 600; margin-left: 8px; }
+  .premium-desc { font-size: 1.05rem; color: var(--text); margin-bottom: 24px; line-height: 1.6; }
+  .premium-desc strong { color: var(--accent1); }
+  .btn-download { width: 100%; margin-bottom: 16px; }
+  .results-note { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
+  @media (max-width: 768px) {
+    #wage-premium { padding: 60px 20px; }
+    .gate-lock-svg { width: 100px; height: 130px; }
+    .premium-amount { font-size: 2.4rem; }
+    .premium-amount .currency { font-size: 1.6rem; }
+  }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -2550,6 +2626,120 @@
         <p class="framework-card-desc">Sales is a conversation, not a script. Adapt to every person, company, and moment. AI gives your team real-time signals — but only people with narrative intelligence know how to use them.</p>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- WAGE PREMIUM CALCULATOR -->
+<section id="wage-premium" class="wage-premium-section">
+  <div class="container">
+    <div class="section-label">STRATEGIC POSITIONING</div>
+    <h2 class="section-title">What Is Your Wage Premium Worth?</h2>
+    <p class="section-subtitle">See how strategic positioning increases your annual earning potential by up to 1.5x.</p>
+
+    <div class="wage-premium-explainer">
+      <h3 class="wpe-heading">What Is the Wage Premium?</h3>
+      <p>The wage premium is the additional income you can command above your current salary when you reposition yourself as a high-leverage, AI-fluent professional. It's not a raise you ask for — it's a market value you create. Top earners in every industry capture it by signaling rare, in-demand skills.</p>
+
+      <h3 class="wpe-heading">Why It Matters</h3>
+      <p>Most professionals leave 30–50% of their earning potential on the table because they sell their experience the same way they did five years ago. AI is rewriting which skills the market pays for, and the gap between "useful" and "indispensable" is widening every quarter. The professionals who close that gap aren't working harder — they're positioning differently. Falling behind isn't a slow drift anymore; it's a cliff.</p>
+
+      <h3 class="wpe-heading">How Practical AI Skills Help You Earn It</h3>
+      <p>Practical AI skills let you do in an hour what your peers do in a week — and more importantly, let you frame that output as strategic value, not task output. You learn to use AI to amplify judgment, storytelling, and decision-making, the three things buyers and bosses still pay a premium for. That combination — AI fluency plus human storyselling — is what unlocks the 1.5x.</p>
+    </div>
+
+    <div class="wage-premium-container">
+      <!-- Input Stage -->
+      <div id="calculatorStage" class="calculator-stage">
+        <div class="salary-input-group">
+          <label for="salaryInput">Annual Salary</label>
+          <div class="input-wrapper">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="salaryInput" placeholder="50000" min="30000" max="500000" required>
+            <span class="unit">/year</span>
+          </div>
+        </div>
+        <button class="btn-primary calculate-btn" onclick="calculateWagePremium()">Calculate My Premium →</button>
+        <p class="input-note">We accept salaries from $30k to $500k</p>
+      </div>
+
+      <!-- Lock Gate Stage (hidden until calculate clicked) -->
+      <div id="lockStage" class="lock-stage" style="display:none;">
+        <div class="gate-lock-container">
+          <svg class="gate-lock-svg" id="wageLockSvg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="wglBody" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%"   stop-color="#2d1200"/>
+                <stop offset="30%"  stop-color="#e86c00"/>
+                <stop offset="65%"  stop-color="#b84400"/>
+                <stop offset="100%" stop-color="#180800"/>
+              </linearGradient>
+              <linearGradient id="wglShackleGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%"   stop-color="#ffe066"/>
+                <stop offset="45%"  stop-color="#ff9900"/>
+                <stop offset="100%" stop-color="#cc4400"/>
+              </linearGradient>
+              <radialGradient id="wglAura" cx="50%" cy="55%" r="50%">
+                <stop offset="0%"   stop-color="rgba(255,130,0,0.35)"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+              <filter id="wglDrop">
+                <feDropShadow dx="3" dy="5" stdDeviation="5" flood-color="rgba(0,0,0,0.75)"/>
+              </filter>
+              <filter id="wglOrangeGlow">
+                <feDropShadow dx="0" dy="0" stdDeviation="7" flood-color="#ff8800" flood-opacity="0.9"/>
+              </filter>
+            </defs>
+            <ellipse cx="50" cy="88" rx="46" ry="30" fill="url(#wglAura)" class="lock-aura"/>
+            <g id="wglShackle">
+              <path d="M27 66 L27 36 Q27 10 50 10 Q73 10 73 36 L73 66"
+                    fill="none" stroke="rgba(0,0,0,0.45)" stroke-width="15" stroke-linecap="round"/>
+              <path d="M27 66 L27 36 Q27 10 50 10 Q73 10 73 36 L73 66"
+                    fill="none" stroke="url(#wglShackleGrad)" stroke-width="12"
+                    stroke-linecap="round" filter="url(#wglOrangeGlow)"/>
+              <path d="M30 64 L30 36 Q30 15 50 15 Q69 15 69 36 L69 64"
+                    fill="none" stroke="rgba(255,240,120,0.55)" stroke-width="3.5"
+                    stroke-linecap="round"/>
+            </g>
+            <rect x="15" y="62" width="78" height="54" rx="9" fill="rgba(0,0,0,0.45)" transform="translate(4,5)"/>
+            <rect x="15" y="62" width="78" height="54" rx="9" fill="url(#wglBody)" filter="url(#wglDrop)"/>
+            <rect x="15" y="62" width="78" height="11" rx="6" fill="rgba(255,160,50,0.32)"/>
+            <rect x="83" y="65" width="10" height="49" rx="5" fill="rgba(0,0,0,0.38)"/>
+            <rect x="15" y="65" width="7" height="49" rx="3" fill="rgba(255,255,255,0.055)"/>
+            <rect x="19" y="83" width="70" height="2.5" rx="1.2" fill="rgba(255,130,0,0.22)"/>
+            <circle cx="50" cy="87" r="11.5" fill="#120600" stroke="#ff8800" stroke-width="2.2" filter="url(#wglOrangeGlow)"/>
+            <circle cx="50" cy="87" r="7.5"  fill="#0a0300"/>
+            <path d="M47 87 L47 103 Q47 106 50 106 Q53 106 53 103 L53 87 Z" fill="#120600"/>
+            <circle cx="50" cy="87" r="9.5"  fill="none" stroke="rgba(255,140,0,0.4)" stroke-width="1.5"/>
+            <circle cx="46" cy="83" r="2.8" fill="rgba(255,200,100,0.38)"/>
+          </svg>
+          <div class="lock-flash-ring" id="wageLockFlashRing"></div>
+        </div>
+        <h3>Enter email to unlock your wage premium</h3>
+        <form class="email-gate-form" onsubmit="submitWagePremium(event)">
+          <input type="email" id="wageEmail" placeholder="your@email.com" required>
+          <button type="submit" class="btn-primary unlock-btn">Unlock My Wage Premium →</button>
+        </form>
+      </div>
+
+      <!-- Results Stage (hidden until unlocked) -->
+      <div id="resultsStage" class="results-stage" style="display:none;">
+        <div class="results-content">
+          <h3>Your Wage Premium</h3>
+          <div class="premium-amount">
+            <span class="currency">$</span><span class="amount" id="premiumAmount">0</span><span class="suffix">/year</span>
+          </div>
+          <p class="premium-desc">That's <strong>1.5x</strong> your annual salary through strategic positioning in the job market.</p>
+          <div class="gift-block">
+            <p class="gift-thanks">As a thank-you for sharing your email, we'd like to send you a free gift — the first chapter of Scott's book, <em>Storyselling in the Age of AI</em>.</p>
+            <div class="gift-cover-wrap">
+              <img src="book-cover.png" alt="Storyselling in the Age of AI — book cover" class="gift-cover" />
+            </div>
+          </div>
+          <a href="https://github.com/smagnacca/15-minute-sales-sprint/raw/main/src/downloads/storyselling-chapter-1.pdf" class="btn-primary btn-download" download>📥 Download Chapter 1 of Storyselling →</a>
+          <p class="results-note">Your chapter is downloading now. Check your downloads folder.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -3706,7 +3896,141 @@
     popIn(document.getElementById('bcBadge5'), 5100);
     fadeIn(document.getElementById('bcZoneLabels'), 600, 5500);
   })();
+
+// WAGE PREMIUM CALCULATOR STATE
+let wageCalculatorState = { salary: 0, premium: 0, email: '' };
+
+function calculateWagePremium() {
+  const salary = parseFloat(document.getElementById('salaryInput').value);
+  if (isNaN(salary) || salary < 30000 || salary > 500000) {
+    alert('Please enter a salary between $30,000 and $500,000');
+    return;
+  }
+  wageCalculatorState.salary = salary;
+  wageCalculatorState.premium = Math.round(salary * 1.5);
+  document.getElementById('calculatorStage').style.display = 'none';
+  document.getElementById('lockStage').style.display = 'block';
+  setTimeout(() => {
+    const lockSvg = document.getElementById('wageLockSvg');
+    if (lockSvg) lockSvg.classList.add('lock-violent-shake');
+  }, 100);
+}
+
+function submitWagePremium(event) {
+  event.preventDefault();
+  const email = document.getElementById('wageEmail').value.trim();
+  if (!email) { alert('Please enter your email address'); return; }
+  wageCalculatorState.email = email;
+  const submitBtn = event.target.querySelector('button');
+  submitBtn.disabled = true;
+  const formData = new URLSearchParams();
+  formData.append('form-name', 'wage-premium-leads');
+  formData.append('email', email);
+  formData.append('annual_salary', wageCalculatorState.salary);
+  formData.append('calculated_premium', wageCalculatorState.premium);
+  formData.append('timestamp', new Date().toISOString());
+  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() })
+  .catch(e => console.log('Form submitted'));
+  unlockSequenceWage();
+}
+
+function unlockSequenceWage() {
+  const lockSvg = document.getElementById('wageLockSvg');
+  const shackle = document.getElementById('wglShackle');
+  const ring = document.getElementById('wageLockFlashRing');
+  const form = document.querySelector('#lockStage .email-gate-form');
+  if (lockSvg) lockSvg.classList.remove('lock-violent-shake');
+  setTimeout(() => {
+    if (shackle) shackle.classList.add('shackle-open');
+    if (ring) ring.classList.add('ring-burst');
+    if (form) { form.style.transition = 'opacity 0.3s'; form.style.opacity = '0'; }
+    if (window.innerWidth >= 768) {
+      const rect = lockSvg.getBoundingClientRect();
+      if (rect && rect.width > 0) fireConfettiBurstWage(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    }
+  }, 1100);
+  setTimeout(() => {
+    document.getElementById('lockStage').style.display = 'none';
+    document.getElementById('resultsStage').style.display = 'block';
+    document.getElementById('premiumAmount').textContent = wageCalculatorState.premium.toLocaleString();
+  }, 2600);
+}
+
+function fireConfettiBurstWage(cx, cy) {
+  if (window.innerWidth < 768) return;
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  const particles = [];
+  const COLORS = ['#00FFFF', '#06B6D4', '#0891B2', '#67E8F9', '#38BDF8'];
+  for (let i = 0; i < 25; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const d = Math.random() * 80 + 20;
+    particles.push({
+      x: cx + Math.cos(a) * d, y: cy + Math.sin(a) * d,
+      vx: Math.cos(a) * (Math.random() * 1.5 + 0.5), vy: Math.sin(a) * (Math.random() * 1.5 + 0.5),
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      size: Math.random() * 2 + 1, alpha: 1, decay: 0.008
+    });
+  }
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    particles.forEach(p => {
+      if (p.alpha <= 0.01) return;
+      alive = true;
+      p.x += p.vx; p.y += p.vy; p.alpha -= p.decay;
+      ctx.globalAlpha = Math.max(0, p.alpha);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
+      g.addColorStop(0, p.color); g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const p1 = particles[i], p2 = particles[j];
+        const dx = p2.x - p1.x, dy = p2.y - p1.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 60 && p1.alpha > 0.1 && p2.alpha > 0.1) {
+          const alpha = (1 - dist / 60) * 0.3 * Math.min(p1.alpha, p2.alpha);
+          ctx.globalAlpha = alpha;
+          ctx.strokeStyle = '#00FFFF';
+          ctx.lineWidth = 1;
+          ctx.shadowColor = 'rgba(0, 255, 255, 0.5)';
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur = 0;
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+    if (alive) requestAnimationFrame(animate);
+    else canvas.remove();
+  }
+  animate();
+}
 </script>
+
+<!-- Hidden Netlify form for wage premium capture -->
+<form name="wage-premium-leads" method="POST" netlify hidden>
+  <input type="email" name="email" />
+  <input type="number" name="annual_salary" />
+  <input type="number" name="calculated_premium" />
+  <input type="text" name="timestamp" />
+</form>
 
 </body>
 </html>
