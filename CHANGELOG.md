@@ -2,6 +2,26 @@
 
 ---
 
+## 2026-05-03 — Value Prop Requirements Polish & Animation Sync (2 Changes)
+
+**Commits:** `553bd14` + `04eaeae` — Requirements section refinements and animation timing
+
+### 1. Requirements Section Headers — Visual Hierarchy
+Added descriptive sub-headers to elevate copy clarity and visual structure:
+- **Left column (avoid):** "You Won't Need to" — bold red text (`#ff4444`) above "Hire new people"
+- **Right column (get):** "Immediate impact" — bold white text above "No new hires"
+- **CSS:** New `.requirement-header` + `.requirement-header-text` classes with fade-in animation
+- **Spacing:** Added 32px top margin to `.value-prop-sentence` for visual separation between requirements grid and CTA
+
+### 2. Animation Sync — Requirements Trigger After Typewriter Completes
+Transformed scroll-trigger animations into typewriter-synchronized sequence:
+- **Before:** Requirements animated on scroll (independent of hero copy)
+- **After:** Requirements wait for hero typewriter to complete ("...days, not quarters."), then pause 1s, then animate
+- **Implementation:** Added `window.typewriterComplete` flag set when typewriter finishes; `initValuePropTimeline()` polls flag and starts animations 1s later
+- **Effect:** Cohesive, choreographed entrance sequence across hero + value prop sections; no jarring independent animations
+
+---
+
 ## 2026-05-03 — Broaden Appeal & Visual Enhancements (6 Changes)
 
 **Commit:** `fd542ab` — "feat: broaden site appeal by removing sales-specific language and add visual enhancements"
