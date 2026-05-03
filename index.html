@@ -3311,6 +3311,8 @@
         setTimeout(function() {
           cursor.style.animation = 'none';
           cursor.style.opacity = '0';
+          // Signal that typewriter is complete
+          window.typewriterComplete = true;
         }, 1500);
         return;
       }
@@ -3703,82 +3705,96 @@
   });
 
   /* ═══════════════════════════════════════════════════════════
-     VALUE PROP PARAGRAPH ANIMATIONS — GSAP + ScrollTrigger
+     VALUE PROP PARAGRAPH ANIMATIONS — GSAP + Typewriter Sync
+     Delays until typewriter animation completes, then waits 1s
   ═══════════════════════════════════════════════════════════ */
   gsap.registerPlugin(ScrollTrigger);
 
-  const valuePropTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.value-prop-paragraph',
-      start: 'top center',
-      once: true
+  let valuePropTimeline;
+
+  // Wait for typewriter to complete, then start animations
+  function initValuePropTimeline() {
+    if (window.typewriterComplete) {
+      // Wait 1 second after typewriter finishes, then start timeline
+      setTimeout(() => {
+        valuePropTimeline = gsap.timeline();
+        startValuePropAnimations();
+      }, 1000);
+    } else {
+      // Check again in 100ms
+      setTimeout(initValuePropTimeline, 100);
     }
-  });
+  }
+
+  // Start the check for typewriter completion
+  initValuePropTimeline();
 
 
-  // --- VALUE PROP REQUIREMENTS: sequential 1s per row ---
-  // Animate headers first
-  const avoidHeader = document.querySelector('.requirements-avoid .requirement-header');
-  const getHeader = document.querySelector('.requirements-get .requirement-header');
+  function startValuePropAnimations() {
+    // --- VALUE PROP REQUIREMENTS: sequential 1s per row ---
+    // Animate headers first
+    const avoidHeader = document.querySelector('.requirements-avoid .requirement-header');
+    const getHeader = document.querySelector('.requirements-get .requirement-header');
 
-  valuePropTimeline.fromTo(avoidHeader,
-    { opacity: 0, y: -10 },
-    { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0.5);
+    valuePropTimeline.fromTo(avoidHeader,
+      { opacity: 0, y: -10 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0.5);
 
-  valuePropTimeline.fromTo(getHeader,
-    { opacity: 0, y: -10 },
-    { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0.5);
+    valuePropTimeline.fromTo(getHeader,
+      { opacity: 0, y: -10 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0.5);
 
-  // X mark + text appear together, one row per second
-  const avoidItems = document.querySelectorAll('.requirements-avoid .requirement-item');
-  const avoidMarks = document.querySelectorAll('.requirements-avoid .x-mark');
-  const avoidTexts = document.querySelectorAll('.requirements-avoid .requirement-text');
-  const numAvoid = avoidItems.length; // 3
+    // X mark + text appear together, one row per second
+    const avoidItems = document.querySelectorAll('.requirements-avoid .requirement-item');
+    const avoidMarks = document.querySelectorAll('.requirements-avoid .x-mark');
+    const avoidTexts = document.querySelectorAll('.requirements-avoid .requirement-text');
+    const numAvoid = avoidItems.length; // 3
 
-  avoidItems.forEach((item, i) => {
-    const t = 1.2 + (i * 1.0); // 1s per row, starting at 1.2s (after headers)
-    // X mark pops in
-    valuePropTimeline.fromTo(avoidMarks[i],
-      { opacity: 0, scale: 0 },
-      { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out' }, t);
-    // Row text slides in 0.2s after mark
-    valuePropTimeline.fromTo(item,
-      { opacity: 0, x: -10 },
-      { opacity: 1, x: 0, duration: 0.4 }, t + 0.2);
-  });
+    avoidItems.forEach((item, i) => {
+      const t = 1.2 + (i * 1.0); // 1s per row, starting at 1.2s (after headers)
+      // X mark pops in
+      valuePropTimeline.fromTo(avoidMarks[i],
+        { opacity: 0, scale: 0 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out' }, t);
+      // Row text slides in 0.2s after mark
+      valuePropTimeline.fromTo(item,
+        { opacity: 0, x: -10 },
+        { opacity: 1, x: 0, duration: 0.4 }, t + 0.2);
+    });
 
-  // Strikethroughs sweep across each X text, one per 0.6s
-  const strikeStart = 1.0 + (numAvoid * 1.0) + 0.5;
-  avoidTexts.forEach((txt, i) => {
-    valuePropTimeline.call(() => { txt.classList.add('strikethrough-visible'); }, null, strikeStart + (i * 0.6));
-  });
+    // Strikethroughs sweep across each X text, one per 0.6s
+    const strikeStart = 1.0 + (numAvoid * 1.0) + 0.5;
+    avoidTexts.forEach((txt, i) => {
+      valuePropTimeline.call(() => { txt.classList.add('strikethrough-visible'); }, null, strikeStart + (i * 0.6));
+    });
 
-  // Checkmark + text appear together, one row per second
-  const getItems = document.querySelectorAll('.requirements-get .requirement-item');
-  const getMarks = document.querySelectorAll('.requirements-get .checkmark');
-  const numGet = getItems.length; // 3
-  const checkStart = strikeStart + (numAvoid * 0.6) + 0.5;
+    // Checkmark + text appear together, one row per second
+    const getItems = document.querySelectorAll('.requirements-get .requirement-item');
+    const getMarks = document.querySelectorAll('.requirements-get .checkmark');
+    const numGet = getItems.length; // 3
+    const checkStart = strikeStart + (numAvoid * 0.6) + 0.5;
 
-  getItems.forEach((item, i) => {
-    const t = checkStart + (i * 1.0);
-    valuePropTimeline.fromTo(getMarks[i],
-      { opacity: 0, scale: 0 },
-      { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out' }, t);
-    valuePropTimeline.fromTo(item,
-      { opacity: 0, x: 10 },
-      { opacity: 1, x: 0, duration: 0.4 }, t + 0.2);
-  });
+    getItems.forEach((item, i) => {
+      const t = checkStart + (i * 1.0);
+      valuePropTimeline.fromTo(getMarks[i],
+        { opacity: 0, scale: 0 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out' }, t);
+      valuePropTimeline.fromTo(item,
+        { opacity: 0, x: 10 },
+        { opacity: 1, x: 0, duration: 0.4 }, t + 0.2);
+    });
 
-  // CTA sentence fades in after all rows done
-  const ctaStart = checkStart + (numGet * 1.0) + 0.5;
-  valuePropTimeline
-    .fromTo('.value-prop-sentence:nth-child(2)',
-      { opacity: 0 },
-      { opacity: 1, duration: 0.5 }, ctaStart)
-    .fromTo('.value-prop-sentence:nth-child(2) .cta-link',
-      { textShadow: '0 0 0 rgba(245,166,35,0)' },
-      { textShadow: '0 0 8px rgba(245,166,35,0.6)', duration: 0.6, repeat: -1, yoyo: true },
-      ctaStart + 0.3);
+    // CTA sentence fades in after all rows done
+    const ctaStart = checkStart + (numGet * 1.0) + 0.5;
+    valuePropTimeline
+      .fromTo('.value-prop-sentence:nth-child(2)',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5 }, ctaStart)
+      .fromTo('.value-prop-sentence:nth-child(2) .cta-link',
+        { textShadow: '0 0 0 rgba(245,166,35,0)' },
+        { textShadow: '0 0 8px rgba(245,166,35,0.6)', duration: 0.6, repeat: -1, yoyo: true },
+        ctaStart + 0.3);
+  }
 
   /* ─── BIO TYPEWRITER EFFECT ─── */
   (function() {
