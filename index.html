@@ -2203,7 +2203,7 @@
   .gift-thanks { font-size: 16px; line-height: 1.55; color: #2a3b52; max-width: 480px; margin: 0 auto 16px; }
   .gift-thanks em { color: #0a2540; font-style: italic; font-weight: 600; }
   .gift-cover-wrap { display: inline-block; padding: 8px; border-radius: 8px; overflow: visible; }
-  .gift-cover { width: 110px; height: auto; border-radius: 4px; box-shadow: 0 0 24px 4px rgba(245,166,35,0.55), 0 0 48px 8px rgba(245,166,35,0.28), 0 6px 18px rgba(0,0,0,0.25); animation: giftGoldPulse 2.6s ease-in-out infinite; display: block; object-fit: contain; }
+  .gift-cover { width: 110px; height: 165px; border-radius: 4px; box-shadow: 0 0 24px 4px rgba(245,166,35,0.55), 0 0 48px 8px rgba(245,166,35,0.28), 0 6px 18px rgba(0,0,0,0.25); animation: giftGoldPulse 2.6s ease-in-out infinite; display: block; object-fit: cover; object-position: top center; }
   @keyframes giftGoldPulse { 0%, 100% { box-shadow: 0 0 24px 4px rgba(245,166,35,0.55), 0 0 48px 8px rgba(245,166,35,0.28), 0 6px 18px rgba(0,0,0,0.25); } 50% { box-shadow: 0 0 32px 6px rgba(245,166,35,0.75), 0 0 64px 12px rgba(245,166,35,0.4), 0 6px 18px rgba(0,0,0,0.25); } }
   @media (max-width: 768px) { .wage-premium-explainer { padding: 22px 20px; } .gift-cover { width: 90px; } }
   .calculator-stage, .lock-stage, .results-stage { animation: fadeInUp 0.6s ease-out; }
@@ -2794,8 +2794,11 @@
           <p class="premium-desc">That's <strong>1.5x</strong> your annual salary through strategic positioning in the job market.</p>
           <div class="gift-block">
             <p class="gift-thanks">As a thank-you for sharing your email, we'd like to send you a free gift — the first chapter of Scott's book, <em>Storyselling in the Age of AI</em>.</p>
-            <div class="gift-cover-wrap">
-              <img src="book-cover.png" alt="Storyselling in the Age of AI — book cover" class="gift-cover" />
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+              <div class="gift-cover-wrap">
+                <img src="book-cover.png" alt="Storyselling in the Age of AI — book cover" class="gift-cover" />
+              </div>
+              <a href="https://a.co/d/01EE7EdH" target="_blank" class="btn-small" style="font-size: 0.85rem; padding: 8px 16px; background: #f5a623; color: #0a1628; font-weight: 600; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-block;">Get the Book on Amazon</a>
             </div>
           </div>
           <a href="https://github.com/smagnacca/15-minute-sales-sprint/raw/main/src/downloads/storyselling-chapter-1.pdf" class="btn-primary btn-download" download>📥 Download Chapter 1 of Storyselling →</a>
