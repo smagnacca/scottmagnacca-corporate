@@ -2195,7 +2195,7 @@
   /* ===== WAGE PREMIUM CALCULATOR ===== */
   #wage-premium { padding: 60px 20px; background: linear-gradient(135deg, rgba(0,0,0,0.02), rgba(79,168,232,0.03)); border-top: 1px solid rgba(79,168,232,0.1); margin-top: 40px; }
   .wage-premium-container { max-width: 600px; margin: 40px auto; perspective: 1000px; }
-  .wage-premium-explainer { max-width: 760px; margin: 32px auto 12px; padding: 28px 32px; background: rgba(255,255,255,0.65); border: 1px solid rgba(79,168,232,0.18); border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+  .wage-premium-explainer { max-width: 760px; margin: 32px auto 12px; padding: 28px 32px; background: rgba(255,255,255,0.65); border: 3px solid #f5a623; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); animation: pulseGoldGreen 2s ease-in-out infinite; }
   .wage-premium-explainer .wpe-heading { font-size: 18px; font-weight: 700; color: #0a2540; margin: 18px 0 8px; letter-spacing: 0.2px; }
   .wage-premium-explainer .wpe-heading:first-child { margin-top: 0; }
   .wage-premium-explainer p { font-size: 16px; line-height: 1.65; color: #2a3b52; margin: 0 0 4px; }
@@ -2288,12 +2288,19 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
   }
-  .cred-badge:nth-child(1) { animation: credBadgeFadeIn 0.3s ease-out forwards, credBadgeFlash 1.7s ease-in-out 0.3s infinite; }
-  .cred-badge:nth-child(2) { animation: credBadgeFadeIn 0.3s ease-out 0.2s forwards, credBadgeFlash 1.7s ease-in-out 0.5s infinite; }
-  .cred-badge:nth-child(3) { animation: credBadgeFadeIn 0.3s ease-out 0.4s forwards, credBadgeFlash 1.7s ease-in-out 0.7s infinite; }
-  .cred-badge:nth-child(4) { animation: credBadgeFadeIn 0.3s ease-out 0.6s forwards, credBadgeFlash 1.7s ease-in-out 0.9s infinite; }
-  .cred-badge:nth-child(5) { animation: credBadgeFadeIn 0.3s ease-out 0.8s forwards, credBadgeFlash 1.7s ease-in-out 1.1s infinite; }
-  .cred-badge:nth-child(6) { animation: credBadgeFadeIn 0.3s ease-out 1.0s forwards, credBadgeFlash 1.7s ease-in-out 1.3s infinite; }
+  @keyframes credBadgePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }
+  .cred-badge { opacity: 0; }
+  /* After bio typewriter completes, badges animate in with 1s stagger and pulse */
+  .cred-badge.badge-animate:nth-child(1) { animation: credBadgeFadeIn 0.4s ease-out forwards, credBadgePulse 0.5s ease-in-out forwards; }
+  .cred-badge.badge-animate:nth-child(2) { animation: credBadgeFadeIn 0.4s ease-out 1s forwards, credBadgePulse 0.5s ease-in-out 1s forwards; }
+  .cred-badge.badge-animate:nth-child(3) { animation: credBadgeFadeIn 0.4s ease-out 2s forwards, credBadgePulse 0.5s ease-in-out 2s forwards; }
+  .cred-badge.badge-animate:nth-child(4) { animation: credBadgeFadeIn 0.4s ease-out 3s forwards, credBadgePulse 0.5s ease-in-out 3s forwards; }
+  .cred-badge.badge-animate:nth-child(5) { animation: credBadgeFadeIn 0.4s ease-out 4s forwards, credBadgePulse 0.5s ease-in-out 4s forwards; }
+  .cred-badge.badge-animate:nth-child(6) { animation: credBadgeFadeIn 0.4s ease-out 5s forwards, credBadgePulse 0.5s ease-in-out 5s forwards; }
   .framework-card { border: 6px solid #f5a623 !important; animation: pulseGoldGreen 2s ease-in-out infinite; }
   .formats-guarantee { border: 4px solid #22c55e; padding: 24px; border-radius: 8px; animation: pulseGreen 2s ease-in-out infinite; background: rgba(34, 197, 94, 0.05); }
   </style>
@@ -3897,6 +3904,14 @@
           bold.style.color = 'var(--babson-green)';
         }, index * 100);
       });
+
+      // Trigger badge animations after typewriter completes
+      setTimeout(() => {
+        const badges = document.querySelectorAll('.cred-badge');
+        badges.forEach(badge => {
+          badge.classList.add('badge-animate');
+        });
+      }, 100);
     }
   })();
 
