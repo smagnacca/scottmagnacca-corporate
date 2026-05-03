@@ -2,6 +2,33 @@
 
 ---
 
+## 2026-05-03 — About Section Animations & Book Cover Fix (3 Changes)
+
+**Commits:** `88d769c` + `e8fcc59` — Badge animations, wage premium border polish, and book display
+
+### 1. Wage Premium Explainer — Pulsing Gold-Green Border
+Added emphasis to the "What Is the Wage Premium?" section with a dynamic glowing border:
+- **Border:** 3px solid gold (#f5a623) with `pulseGoldGreen` animation (alternates gold ↔ green every 2s)
+- **Effect:** Draws attention to key value-definition content; matches framework card styling
+- **CSS:** Applied `animation: pulseGoldGreen 2s ease-in-out infinite;` to `.wage-premium-explainer`
+
+### 2. Credential Badges — Staggered Fade-In with Pulse on Appearance
+Transformed badge animations to trigger after the "About Scott" bio typewriter completes:
+- **Default state:** Badges hidden (`opacity: 0`)
+- **Trigger:** After bio typewriter finishes, badges fade in sequentially at 1-second intervals (top-left → bottom-right)
+- **Animation:** Each badge pulses once (scale 1 → 1.08 → 1) as it appears
+- **Implementation:** New `credBadgePulse` keyframe; added `.badge-animate` class triggered by JavaScript after `animateBoldsToGreen()`
+- **Effect:** Choreographed entrance sequence for credential badges; no jarring automatic animations
+
+### 3. Book Cover Image — Fixed Top Cutoff & Added Amazon Button
+Fixed the book cover display in the wage premium results section:
+- **Image fix:** Set explicit height (165px); changed `object-fit: contain` → `object-fit: cover` with `object-position: top center`
+- **Result:** Full book cover now displays without clipping the top
+- **Amazon button:** Added small gold button below book cover linking to https://a.co/d/01EE7EdH (opens in new tab)
+- **Styling:** Gold background (#f5a623), rounded corners, smooth transitions to match page design
+
+---
+
 ## 2026-05-03 — Value Prop Requirements Polish & Animation Sync (2 Changes)
 
 **Commits:** `553bd14` + `04eaeae` — Requirements section refinements and animation timing
