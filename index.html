@@ -2624,12 +2624,7 @@
            data-suffix="+ Leaders Trained"
            data-duration="2500"
            data-format="comma">4,127+ Leaders Trained</div>
-      <div class="stat-pill"
-           data-count-to="1"
-           data-prefix="$"
-           data-suffix="B+ Client Value Generated"
-           data-duration="2000"
-           data-format="plain">$1B+ Client Value Generated</div>
+      <div class="stat-pill">Over $1 Billion in Sales Generated</div>
       <div class="stat-pill"
            data-count-to="56"
            data-prefix=""
@@ -3357,17 +3352,6 @@
       leadersPill.textContent = leaders.toLocaleString('en-US') + '+ Leaders Trained';
     }
 
-    // Patch the value pill — format as $XB+ or $X.XXB+
-    var valuePill = document.querySelector('.stat-pill[data-count-to="1"]');
-    if (valuePill) {
-      var display = value >= 2
-        ? '$' + value.toFixed(1) + 'B+'
-        : '$' + (value > 1.01 ? value.toFixed(2) : '1') + 'B+';
-      valuePill.textContent = display + ' Client Value Generated';
-      // Freeze the count-up to show static computed value
-      valuePill.dataset.countTo  = '';
-      valuePill.dataset.duration = '0';
-    }
   })();
 
   /* ─────────────────────────────────────────────────────────────
@@ -3433,15 +3417,18 @@
           pill.style.opacity = '1';
           pill.style.transform = 'scale(1)';
           // Start count-up 200ms after each pill appears
-          if (!prefersReduced) {
-            setTimeout(function() { animateCountUp(pill); }, 200);
+          if (pill.dataset.countTo) {
+            if (!prefersReduced) {
+              setTimeout(function() { animateCountUp(pill); }, 200);
+            } else {
+              var target = pill.dataset.countTo;
+              var prefix = pill.dataset.prefix || '';
+              var suffix = pill.dataset.suffix || '';
+              var format = pill.dataset.format || 'plain';
+              pill.textContent = prefix + (format === 'comma' ? parseInt(target).toLocaleString('en-US') : target) + suffix;
+              pill.classList.add('bar-animate');
+            }
           } else {
-            // Instant static for reduced motion
-            var target = pill.dataset.countTo;
-            var prefix = pill.dataset.prefix || '';
-            var suffix = pill.dataset.suffix || '';
-            var format = pill.dataset.format || 'plain';
-            pill.textContent = prefix + (format === 'comma' ? parseInt(target).toLocaleString('en-US') : target) + suffix;
             pill.classList.add('bar-animate');
           }
         }, i * 100);

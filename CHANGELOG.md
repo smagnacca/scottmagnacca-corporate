@@ -2,6 +2,25 @@
 
 ---
 
+## 2026-05-19 — UI Tweaks, Pill Fix & Form Fix (commits `8908d91` + pending)
+
+### UI Changes
+- **Hero text:** "with AI + Narrative Intelligence" full gold (including "with" word)
+- **Visit counter:** `localStorage` increments Leaders Trained by +1–3 and tracks visits per session
+- **Stat pill fix:** "$1B+ Client Value Generated" → static "Over $1 Billion in Sales Generated" (fixed NaN bug)
+- **Bridge line:** Bounce-in animation on scroll reveal
+- **Quote:** Center-aligned, smaller font, flows as single paragraph (no line breaks)
+- **Format cards:** Sequential green glow pulse border (cards fire in order: Workshop → Keynote → Deep Dive → Custom)
+- **Formats-note:** Thicker gold border, more visible
+
+### Form Fix
+- **Root cause:** `SENDGRID_API_KEY` was missing from Netlify environment
+- **Fix:** Key located in `~/.claude/tokens/.sendgrid_token` and injected via Netlify CLI
+- **Verified:** Live `POST /.netlify/functions/contact-form` returns `{"success":true}`
+- **Behavior:** Submissions write to Google Sheet (`Discovery_Calls` tab) and email scott.magnacca1@gmail.com
+
+---
+
 ## 2026-05-19 — Babson Magazine Feature Strip (commit `fd8e177`)
 
 Added a small credibility strip between the "About Scott" section and FAQ.
