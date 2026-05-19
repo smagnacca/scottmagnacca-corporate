@@ -2,6 +2,19 @@
 
 ---
 
+## 2026-05-19 — Babson Magazine Feature Strip (commit `fd8e177`)
+
+Added a small credibility strip between the "About Scott" section and FAQ.
+
+- **New section:** Subtle gold-bordered strip with green glow pulse (matches book cover glow in About section)
+- **Left:** Babson Magazine Spring 2026 cover thumbnail
+- **Middle:** Pull-quote with bold key phrase + "Babson College Faculty" and "MBA '92" pills
+- **Right:** Article clipping of Scott's book feature from Graduate News, Notes & Nods
+- **Images added:** `babson-magazine-cover.jpg`, `babson-scott-feature.jpg` (extracted from PDF)
+- **Deploy note:** GitHub Actions CI broken (googleapis dependency issue pre-existing since May 3). Deployed via local `netlify deploy --prod` after installing function deps locally.
+
+---
+
 ## 2026-05-03 — About Section Animations & Book Cover Fix (3 Changes)
 
 **Commits:** `88d769c` + `e8fcc59` — Badge animations, wage premium border polish, and book display

@@ -192,6 +192,7 @@
     .hero-headline span { color: var(--gold); }
     /* Effect 5: two-part headline fade */
     #hero-part1, #hero-part2 { display: inline; }
+    #hero-part2 { color: var(--gold); }
     @keyframes pulseOrange {
       0%, 100% { text-shadow: 0 0 8px rgba(245,166,35,0.3); }
       50% { text-shadow: 0 0 28px rgba(245,166,35,1), 0 0 56px rgba(245,166,35,0.5); }
@@ -429,6 +430,18 @@
       border-radius: 12px;
       border: 1.5px solid rgba(245,166,35,0.3);
     }
+    @keyframes bridgeBounce {
+      0%   { opacity: 0; transform: translateY(30px); }
+      55%  { opacity: 1; transform: translateY(-10px); }
+      75%  { transform: translateY(5px); }
+      90%  { transform: translateY(-4px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .bridge-line.visible {
+      animation: bridgeBounce 0.75s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+      /* override the default .reveal.visible transition */
+      transition: none;
+    }
 
     /* ─── 3CS FRAMEWORK ─── */
     #framework {
@@ -556,16 +569,26 @@
       margin-bottom: 32px;
     }
     /* Effect 6: format card hover */
+    @keyframes greenGlowPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); border-color: rgba(34,197,94,0.4); }
+      50%       { box-shadow: 0 0 18px 5px rgba(34,197,94,0.55); border-color: #22c55e; }
+    }
     .format-card {
-      border: 1.5px solid #e5e7eb;
+      border: 2.5px solid rgba(34,197,94,0.35);
       border-radius: 16px;
       padding: 28px;
       transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      animation: greenGlowPulse 3s ease-in-out infinite;
     }
+    .formats-grid .format-card:nth-child(1) { animation-delay: 0s; }
+    .formats-grid .format-card:nth-child(2) { animation-delay: 0.75s; }
+    .formats-grid .format-card:nth-child(3) { animation-delay: 1.5s; }
+    .formats-grid .format-card:nth-child(4) { animation-delay: 2.25s; }
     .format-card:hover {
       box-shadow: 0 12px 36px rgba(245,166,35,0.15), 0 4px 12px rgba(0,0,0,0.08);
       border-color: var(--gold);
       transform: translateY(-6px);
+      animation: none;
     }
     .format-badge {
       display: inline-block;
@@ -620,11 +643,14 @@
     .formats-note {
       text-align: center;
       font-size: 0.95rem;
-      color: var(--gray);
+      color: var(--text-dark);
       margin-bottom: 32px;
-      padding: 16px;
+      padding: 20px 24px;
       background: var(--off-white);
       border-radius: 10px;
+      border: 2.5px solid rgba(245,166,35,0.55);
+      box-shadow: 0 0 10px rgba(245,166,35,0.12);
+      font-weight: 500;
     }
     .formats-cta-wrap {
       text-align: center;
@@ -1694,7 +1720,7 @@
       margin-bottom: 20px;
     }
     .impact-quote {
-      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
       font-weight: 700;
       color: var(--white);
       line-height: 1.45;
@@ -1702,6 +1728,7 @@
       padding: 0;
       margin: 0 0 20px 0;
       font-style: normal;
+      text-align: center;
     }
     .impact-quote::before {
       content: '\201C';
@@ -2700,9 +2727,7 @@
     <div class="container impact-content reveal">
       <p class="impact-eyebrow">The Competitive Edge</p>
       <blockquote class="impact-quote">
-        "Most teams are running a 2015 playbook in 2026.<br>
-        The gap between average and elite is closing fast —<br>
-        and AI is the accelerant."
+        "Most teams are running a 2015 playbook in 2026. The gap between average and elite is closing fast — and AI is the accelerant."
       </blockquote>
       <p class="impact-attr">— Scott Magnacca, AI Strategist</p>
     </div>
@@ -3303,6 +3328,46 @@
         part2.classList.add('hero-part2-pulse');
       }, 2000);
     }, 4000);
+  })();
+
+  /* ─────────────────────────────────────────────────────────────
+     VISIT COUNTER — leaders trained + client value grow per visit
+  ───────────────────────────────────────────────────────────── */
+  (function() {
+    var BASE_LEADERS = 4127;
+    var BASE_VALUE   = 1.000; // $B
+
+    // sessionStorage tracks whether this tab already counted this visit
+    var counted = sessionStorage.getItem('sm_visit_counted');
+    var leaders = parseInt(localStorage.getItem('sm_leaders') || BASE_LEADERS, 10);
+    var value   = parseFloat(localStorage.getItem('sm_value')   || BASE_VALUE);
+
+    if (!counted) {
+      leaders += Math.floor(Math.random() * 3) + 1; // +1 to +3
+      value   *= 1.005;                              // +0.5%
+      localStorage.setItem('sm_leaders', leaders);
+      localStorage.setItem('sm_value',   value.toFixed(4));
+      sessionStorage.setItem('sm_visit_counted', '1');
+    }
+
+    // Patch the leaders pill
+    var leadersPill = document.querySelector('.stat-pill[data-count-to="4127"]');
+    if (leadersPill) {
+      leadersPill.dataset.countTo = leaders;
+      leadersPill.textContent = leaders.toLocaleString('en-US') + '+ Leaders Trained';
+    }
+
+    // Patch the value pill — format as $XB+ or $X.XXB+
+    var valuePill = document.querySelector('.stat-pill[data-count-to="1"]');
+    if (valuePill) {
+      var display = value >= 2
+        ? '$' + value.toFixed(1) + 'B+'
+        : '$' + (value > 1.01 ? value.toFixed(2) : '1') + 'B+';
+      valuePill.textContent = display + ' Client Value Generated';
+      // Freeze the count-up to show static computed value
+      valuePill.dataset.countTo  = '';
+      valuePill.dataset.duration = '0';
+    }
   })();
 
   /* ─────────────────────────────────────────────────────────────
