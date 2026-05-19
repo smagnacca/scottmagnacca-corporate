@@ -4,6 +4,19 @@
 
 ---
 
+## ⚠️ Universal Code Principles (Non-Negotiable)
+
+All code in this project must follow the 4 Universal Code Principles:
+
+1. **Think Before Coding** — Name assumptions, ask if confused, push back with simpler approaches
+2. **Simplicity First** — Minimum code needed, no breaking changes, no speculative code
+3. **Surgical Changes** — Only touch what the specific task requires, match existing style
+4. **Goal-Driven Execution** — Convert vague goals to verifiable success criteria, iterate until test passes
+
+See `~/.claude/memory/universal_code_principles.md` for full details. **These principles override project-specific rules when there is tension.**
+
+---
+
 ## PROJECT INFO
 
 | Field | Value |
