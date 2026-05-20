@@ -872,17 +872,33 @@
     }
     .babson-mag-thumb {
       flex: 0 0 auto;
-      width: 72px;
+      width: 108px;
       border-radius: 4px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.15);
       display: block;
     }
-    .babson-article-thumb {
+    .babson-article-card {
       flex: 0 0 auto;
-      width: 110px;
+      width: 108px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-self: flex-start;
+    }
+    .babson-article-card img {
+      width: 100%;
       border-radius: 4px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.15);
       display: block;
+    }
+    .babson-article-caption {
+      font-size: 0.55rem;
+      color: var(--text-mid);
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .babson-strip-text {
       flex: 1;
@@ -3116,7 +3132,10 @@
             <span class="babson-pill">MBA '92</span>
           </div>
         </div>
-        <img src="babson-scott-feature.jpg" alt="Scott Magnacca featured in Babson Magazine" class="babson-article-thumb" />
+        <div class="babson-article-card">
+          <img src="Cover.png" alt="Storyselling in the Age of AI — Scott Magnacca" />
+          <p class="babson-article-caption">Scott Magnacca MBA'92 recently published <em>Storyselling in The Age of AI</em>, a book focused on helping entrepreneurs and those in sales use generative AI to boost profits while maintaining the human touch.</p>
+        </div>
       </div>
     </div>
   </div>
