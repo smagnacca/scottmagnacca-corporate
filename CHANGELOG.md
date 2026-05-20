@@ -2,6 +2,22 @@
 
 ---
 
+## 2026-05-19 — UI Tweaks, Pill Fix, Form Fix & Sequential Stats (commits `8908d91`→`87aff68`)
+
+### Work Distribution
+| | Estimate | Actual |
+|---|---|---|
+| Local | ~80% | ~88% |
+| Token-based | ~18% | ~10% |
+| Internet/API | ~2% | ~2% |
+
+**Local work:** File edits (index.html, CHANGELOG.md), git commits/pushes, Playwright preview screenshots (8), curl form test, Netlify CLI env:set, token file lookups, lock file cleanup
+**Token-based:** Code generation for 7 changes, bug diagnosis (NaN pill, sequential count-up), planning
+**Internet/API:** Netlify deploy API status checks, live form endpoint test (`POST /.netlify/functions/contact-form`)
+**Delta:** Local higher than estimated — SendGrid key was in `~/.claude/tokens/` so no manual steps needed; all QA ran in local preview server
+
+---
+
 ## 2026-05-19 — UI Tweaks, Pill Fix & Form Fix (commits `8908d91` + pending)
 
 ### UI Changes
