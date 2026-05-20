@@ -1641,6 +1641,11 @@
       opacity: 1;
       transform: translateY(0);
     }
+    @keyframes statGlowPulse {
+      0%   { text-shadow: 0 0 0px rgba(245,166,35,0); }
+      40%  { text-shadow: 0 0 28px rgba(245,166,35,1), 0 0 56px rgba(245,166,35,0.6); }
+      100% { text-shadow: 0 0 10px rgba(245,166,35,0.3); }
+    }
     .stat-number {
       font-size: 3.8rem;
       font-weight: 900;
@@ -1649,6 +1654,7 @@
       margin-bottom: 8px;
       font-variant-numeric: tabular-nums;
     }
+    .stat-number.glow { animation: statGlowPulse 1s ease-out forwards; }
     .stat-number .stat-suffix {
       font-size: 2.4rem;
       font-weight: 700;
@@ -3676,19 +3682,35 @@
     var cards = statsSection.querySelectorAll('.stat-card');
     var fired = false;
 
-    function countUp(el, target, duration) {
-      var start = 0;
+    var COUNT_DURATION = 1000; // 1s per stat = 3s total, sequential
+
+    function countUp(card, onDone) {
+      var target = parseInt(card.getAttribute('data-target') || '0', 10);
+      var valueEl = card.querySelector('.stat-value');
+      var numberEl = card.querySelector('.stat-number');
       var startTime = null;
+      card.classList.add('visible');
       function step(timestamp) {
         if (!startTime) startTime = timestamp;
-        var progress = Math.min((timestamp - startTime) / duration, 1);
-        // Ease out cubic
+        var progress = Math.min((timestamp - startTime) / COUNT_DURATION, 1);
         var eased = 1 - Math.pow(1 - progress, 3);
-        var current = Math.round(eased * target);
-        el.textContent = current;
-        if (progress < 1) requestAnimationFrame(step);
+        if (valueEl) valueEl.textContent = Math.round(eased * target);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          if (valueEl) valueEl.textContent = target;
+          if (numberEl) numberEl.classList.add('glow');
+          if (onDone) onDone();
+        }
       }
       requestAnimationFrame(step);
+    }
+
+    function runSequential(index) {
+      if (index >= cards.length) return;
+      countUp(cards[index], function() {
+        runSequential(index + 1);
+      });
     }
 
     var statsObserver = new IntersectionObserver(function(entries) {
@@ -3696,21 +3718,8 @@
         if (entry.isIntersecting && !fired) {
           fired = true;
           statsObserver.unobserve(statsSection);
-
-          // Fade in label
           if (label) label.classList.add('visible');
-
-          // Stagger cards + count-up
-          cards.forEach(function(card) {
-            var delay = parseInt(card.getAttribute('data-delay') || '0', 10);
-            var target = parseInt(card.getAttribute('data-target') || '0', 10);
-            var valueEl = card.querySelector('.stat-value');
-
-            setTimeout(function() {
-              card.classList.add('visible');
-              if (valueEl) countUp(valueEl, target, 1800);
-            }, delay + 300);
-          });
+          setTimeout(function() { runSequential(0); }, 300);
         }
       });
     }, { threshold: 0.25 });
