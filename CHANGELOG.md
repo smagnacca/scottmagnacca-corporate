@@ -2,6 +2,24 @@
 
 ---
 
+## 2026-05-20 — Babson Strip Book Cover Update (commit `6846284`)
+
+**What changed:**
+- Replaced `babson-scott-feature.jpg` with full book cover `Cover.png` (full title "Storyselling in The Age of AI" now visible)
+- Rebuilt right-side element as an HTML card: cover image + 3-line caption below
+- Sized both left (Babson magazine) and right (book cover) images to 108px wide for visual balance
+
+**Deploy:** `state=ready` at 2026-05-20T01:12:08Z — live at https://scottmagnacca-corporate.netlify.app
+
+### Work Distribution
+| | Actual |
+|---|---|
+| Local | ~70% |
+| Token-based | ~30% |
+| Internet/API | ~5% (Netlify deploy) |
+
+---
+
 ## 2026-05-19 — UI Tweaks, Pill Fix, Form Fix & Sequential Stats (commits `8908d91`→`87aff68`)
 
 ### Work Distribution
