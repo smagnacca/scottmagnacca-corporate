@@ -2,6 +2,24 @@
 
 ---
 
+## 2026-05-22 — Add 3Cs Comparative Analysis Charts (commits `9bd1e53`→`0a9385c`)
+
+**What changed:**
+- Added `3cs-charts-clean.png` — comparative analysis graphs (+38%, +215%, +64%) below the 3Cs framework cards in `#framework` section
+- Used Python/Pillow to remove Gemini AI sparkle watermark; required 3 passes to catch all antialiased stray pixels
+- 8-line HTML insert in `index.html` at line ~2832, centered 960px max-width, rounded corners, `reveal` scroll animation
+
+**Deploy:** `state=ready` at 2026-05-22T22:58:01Z — live at https://scottmagnacca-corporate.netlify.app
+
+### Work Distribution
+| | Actual |
+|---|---|
+| Local | ~72% (Pillow image editing, git) |
+| Token-based | ~26% (planning, HTML edit) |
+| Internet/API | ~2% (Netlify deploy) |
+
+---
+
 ## 2026-05-20 — Babson Strip Book Cover Update (commit `6846284`)
 
 **What changed:**
