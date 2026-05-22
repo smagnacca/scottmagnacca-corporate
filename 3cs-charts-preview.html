@@ -75,6 +75,36 @@
             margin-bottom: 40px;
             font-size: 16px;
         }
+        @keyframes statGlowPulse {
+            0%   { text-shadow: 0 0 0px rgba(245, 166, 35, 0); }
+            40%  { text-shadow: 0 0 28px rgba(245, 166, 35, 1), 0 0 56px rgba(245, 166, 35, 0.6); }
+            100% { text-shadow: 0 0 10px rgba(245, 166, 35, 0.3); }
+        }
+        .stat-card {
+            position: relative;
+            text-align: center;
+            opacity: 0;
+        }
+        .stat-card.visible {
+            opacity: 1;
+        }
+        .stat-number {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #f5a623;
+            margin: 0;
+            line-height: 1;
+        }
+        .stat-number.glow {
+            animation: statGlowPulse 1s ease-out forwards;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -85,7 +115,12 @@
         <div class="charts-wrapper">
             <!-- Bar Chart -->
             <div class="chart-card">
-                <div class="chart-label label-above">+38% Performance</div>
+                <div class="chart-label label-above">
+                    <div class="stat-card" data-target="38">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Performance</div>
+                    </div>
+                </div>
                 <div class="chart-canvas-wrapper">
                     <canvas id="barChart"></canvas>
                 </div>
@@ -93,7 +128,12 @@
 
             <!-- Line/Area Chart -->
             <div class="chart-card">
-                <div class="chart-label label-right">+215% Growth</div>
+                <div class="chart-label label-right">
+                    <div class="stat-card" data-target="215">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Growth</div>
+                    </div>
+                </div>
                 <div class="chart-canvas-wrapper">
                     <canvas id="lineChart"></canvas>
                 </div>
@@ -101,9 +141,29 @@
 
             <!-- Radar Chart -->
             <div class="chart-card">
-                <div class="chart-label label-bottom">+64% Capability</div>
-                <div class="chart-canvas-wrapper">
+                <div class="chart-label label-bottom">
+                    <div class="stat-card" data-target="64">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Capability</div>
+                    </div>
+                </div>
+                <div class="chart-canvas-wrapper" style="position: relative;">
                     <canvas id="radarChart"></canvas>
+                    <!-- Orange expansion arrows SVG overlay -->
+                    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;" viewBox="0 0 300 300">
+                        <!-- Right arrow -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#ff6b35" />
+                            </marker>
+                        </defs>
+                        <!-- Top-right arrow -->
+                        <line x1="200" y1="100" x2="240" y2="60" stroke="#ff6b35" stroke-width="2.5" marker-end="url(#arrowhead)" opacity="0.8" />
+                        <!-- Right arrow -->
+                        <line x1="220" y1="150" x2="260" y2="150" stroke="#ff6b35" stroke-width="2.5" marker-end="url(#arrowhead)" opacity="0.8" />
+                        <!-- Bottom-right arrow -->
+                        <line x1="200" y1="200" x2="240" y2="240" stroke="#ff6b35" stroke-width="2.5" marker-end="url(#arrowhead)" opacity="0.8" />
+                    </svg>
                 </div>
             </div>
         </div>
@@ -269,6 +329,56 @@
                 }
             }
         });
+
+        // Stat count-up animations
+        const COUNT_DURATION = 1000;
+        const statCards = document.querySelectorAll('.stat-card');
+
+        function countUp(card, onDone) {
+            const target = parseInt(card.getAttribute('data-target') || '0', 10);
+            const numberEl = card.querySelector('.stat-number');
+            let startTime = null;
+            card.classList.add('visible');
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / COUNT_DURATION, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                if (numberEl) numberEl.textContent = Math.round(eased * target) + '%';
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    if (numberEl) {
+                        numberEl.textContent = target + '%';
+                        numberEl.classList.add('glow');
+                    }
+                    if (onDone) onDone();
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
+        function runSequential(index) {
+            if (index >= statCards.length) return;
+            countUp(statCards[index], function() {
+                runSequential(index + 1);
+            });
+        }
+
+        // IntersectionObserver to trigger animations on scroll
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    runSequential(0);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const chartsWrapper = document.querySelector('.charts-wrapper');
+        if (chartsWrapper) {
+            observer.observe(chartsWrapper);
+        }
     </script>
 </body>
 </html>
