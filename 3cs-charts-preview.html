@@ -217,151 +217,149 @@
             }
         };
 
-        // Bar Chart
-        new Chart(document.getElementById('barChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Avg Emp 1', 'Avg Emp 2', 'Avg Emp 3', 'Avg Emp 4', 'Curious 1', 'Curious 2'],
-                datasets: [
-                    {
-                        label: 'Average Employee',
-                        data: [65, 68, 62, 70, 58, 65],
-                        backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                        borderColor: 'rgba(255, 255, 255, 0.3)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'High Curiosity',
-                        data: [92, 94, 89, 96, 98, 95],
-                        backgroundColor: '#00d4ff',
-                        borderColor: '#00d4ff',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                ...chartDefaults,
-                animation: {
-                    duration: 800,
-                    easing: 'easeOutCubic'
-                },
-                scales: {
-                    x: {
-                        ticks: { display: false }
-                    }
-                }
-            }
-        });
+        let barChart, lineChart, radarChart;
+        const CHART_ANIMATION_DURATION = 2500;
+        const CHART_STAGGER_DELAY = 300;
 
-        // Line/Area Chart
-        new Chart(document.getElementById('lineChart'), {
-            type: 'line',
-            data: {
-                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
-                datasets: [
-                    {
-                        label: 'Average Skills',
-                        data: [20, 30, 40, 50, 60],
-                        borderColor: 'rgba(255, 255, 255, 0.4)',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        fill: true,
-                        tension: 0.4,
-                        borderWidth: 2,
-                        pointBackgroundColor: 'rgba(255, 255, 255, 0.3)',
-                        pointBorderColor: 'rgba(255, 255, 255, 0.5)',
-                        pointRadius: 4
-                    },
-                    {
-                        label: 'Agile & Adaptable',
-                        data: [45, 75, 110, 150, 190],
-                        borderColor: '#00d4ff',
-                        backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        borderWidth: 2,
-                        pointBackgroundColor: '#00d4ff',
-                        pointBorderColor: '#00d4ff',
-                        pointRadius: 5
-                    }
-                ]
-            },
-            options: {
-                ...chartDefaults,
-                animation: {
-                    duration: 1000,
-                    easing: 'easeOutCubic'
-                },
-                scales: {
-                    ...chartDefaults.scales,
-                    y: {
-                        ...chartDefaults.scales.y,
-                        beginAtZero: true,
-                        max: 200
-                    }
-                }
-            }
-        });
+        const barChartData = {
+            labels: ['Avg Emp 1', 'Avg Emp 2', 'Avg Emp 3', 'Avg Emp 4', 'Curious 1', 'Curious 2'],
+            emptyData: [[0, 0], [0, 0]],
+            fullData: [[65, 68, 62, 70, 58, 65], [92, 94, 89, 96, 98, 95]]
+        };
 
-        // Radar Chart
-        new Chart(document.getElementById('radarChart'), {
-            type: 'radar',
-            data: {
-                labels: [
-                    'Speed to New Tech',
-                    'Effectiveness in Pivoting',
-                    'Resilience to Shifts',
-                    'Proactive Innovation',
-                    'Speed to New Tech'
-                ],
-                datasets: [
-                    {
-                        label: 'Average Employee',
-                        data: [60, 55, 65, 50, 60],
-                        borderColor: 'rgba(255, 255, 255, 0.3)',
-                        backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                        pointBackgroundColor: 'rgba(255, 255, 255, 0.3)',
-                        pointBorderColor: 'rgba(255, 255, 255, 0.5)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Agile & Adaptable',
-                        data: [95, 88, 98, 92, 95],
-                        borderColor: '#00d4ff',
-                        backgroundColor: 'rgba(0, 212, 255, 0.15)',
-                        pointBackgroundColor: '#00d4ff',
-                        pointBorderColor: '#00d4ff',
-                        pointRadius: 5,
-                        borderWidth: 2.5
-                    }
-                ]
-            },
-            options: {
-                ...chartDefaults,
-                animation: {
-                    duration: 1000,
-                    easing: 'easeOutCubic'
-                },
-                scales: {
-                    r: {
-                        ...chartDefaults.scales.r,
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            display: false,
-                            stepSize: 20
+        const lineChartData = {
+            labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+            emptyData: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
+            fullData: [[20, 30, 40, 50, 60], [45, 75, 110, 150, 190]]
+        };
+
+        const radarChartData = {
+            labels: ['Speed to New Tech', 'Effectiveness in Pivoting', 'Resilience to Shifts', 'Proactive Innovation', 'Speed to New Tech'],
+            emptyData: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
+            fullData: [[60, 55, 65, 50, 60], [95, 88, 98, 92, 95]]
+        };
+
+        function createCharts() {
+            // Bar Chart - starts with empty data
+            barChart = new Chart(document.getElementById('barChart'), {
+                type: 'bar',
+                data: {
+                    labels: barChartData.labels,
+                    datasets: [
+                        {
+                            label: 'Average Employee',
+                            data: barChartData.emptyData[0],
+                            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                            borderColor: 'rgba(255, 255, 255, 0.3)',
+                            borderWidth: 1
                         },
-                        pointLabels: {
-                            color: '#FFFFFF',
-                            font: { size: 12 }
+                        {
+                            label: 'High Curiosity',
+                            data: barChartData.emptyData[1],
+                            backgroundColor: '#00d4ff',
+                            borderColor: '#00d4ff',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    ...chartDefaults,
+                    animation: { duration: CHART_ANIMATION_DURATION, easing: 'easeOutCubic' },
+                    scales: { x: { ticks: { display: false } } }
+                }
+            });
+
+            // Line/Area Chart - starts with empty data
+            lineChart = new Chart(document.getElementById('lineChart'), {
+                type: 'line',
+                data: {
+                    labels: lineChartData.labels,
+                    datasets: [
+                        {
+                            label: 'Average Skills',
+                            data: lineChartData.emptyData[0],
+                            borderColor: 'rgba(255, 255, 255, 0.4)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(255, 255, 255, 0.3)',
+                            pointBorderColor: 'rgba(255, 255, 255, 0.5)',
+                            pointRadius: 4
+                        },
+                        {
+                            label: 'Agile & Adaptable',
+                            data: lineChartData.emptyData[1],
+                            borderColor: '#00d4ff',
+                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2,
+                            pointBackgroundColor: '#00d4ff',
+                            pointBorderColor: '#00d4ff',
+                            pointRadius: 5
+                        }
+                    ]
+                },
+                options: {
+                    ...chartDefaults,
+                    animation: { duration: CHART_ANIMATION_DURATION, easing: 'easeOutCubic' },
+                    scales: {
+                        ...chartDefaults.scales,
+                        y: { ...chartDefaults.scales.y, beginAtZero: true, max: 200 }
+                    }
+                }
+            });
+
+            // Radar Chart - starts with empty data
+            radarChart = new Chart(document.getElementById('radarChart'), {
+                type: 'radar',
+                data: {
+                    labels: radarChartData.labels,
+                    datasets: [
+                        {
+                            label: 'Average Employee',
+                            data: radarChartData.emptyData[0],
+                            borderColor: 'rgba(255, 255, 255, 0.3)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                            pointBackgroundColor: 'rgba(255, 255, 255, 0.3)',
+                            pointBorderColor: 'rgba(255, 255, 255, 0.5)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Agile & Adaptable',
+                            data: radarChartData.emptyData[1],
+                            borderColor: '#00d4ff',
+                            backgroundColor: 'rgba(0, 212, 255, 0.15)',
+                            pointBackgroundColor: '#00d4ff',
+                            pointBorderColor: '#00d4ff',
+                            pointRadius: 5,
+                            borderWidth: 2.5
+                        }
+                    ]
+                },
+                options: {
+                    ...chartDefaults,
+                    animation: { duration: CHART_ANIMATION_DURATION, easing: 'easeOutCubic' },
+                    scales: {
+                        r: {
+                            ...chartDefaults.scales.r,
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { display: false, stepSize: 20 },
+                            pointLabels: { color: '#FFFFFF', font: { size: 12 } }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
+
+        createCharts();
 
         // Stat count-up animations
         const COUNT_DURATION = 800;
         const statCards = document.querySelectorAll('.stat-card');
+        let chartsAnimationTriggered = false;
 
         function countUp(card, onDone) {
             const target = parseInt(card.getAttribute('data-target') || '0', 10);
@@ -397,8 +395,41 @@
         // IntersectionObserver to trigger animations on scroll
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    runSequential(0);
+                if (entry.isIntersecting && !chartsAnimationTriggered) {
+                    chartsAnimationTriggered = true;
+
+                    // Populate bar chart data to trigger animation
+                    setTimeout(() => {
+                        if (barChart) {
+                            barChart.data.datasets[0].data = barChartData.fullData[0];
+                            barChart.data.datasets[1].data = barChartData.fullData[1];
+                            barChart.update('default');
+                        }
+                    }, 0);
+
+                    // Populate line chart data with stagger
+                    setTimeout(() => {
+                        if (lineChart) {
+                            lineChart.data.datasets[0].data = lineChartData.fullData[0];
+                            lineChart.data.datasets[1].data = lineChartData.fullData[1];
+                            lineChart.update('default');
+                        }
+                    }, CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY);
+
+                    // Populate radar chart data with more stagger
+                    setTimeout(() => {
+                        if (radarChart) {
+                            radarChart.data.datasets[0].data = radarChartData.fullData[0];
+                            radarChart.data.datasets[1].data = radarChartData.fullData[1];
+                            radarChart.update('default');
+                        }
+                    }, 2 * (CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY));
+
+                    // Trigger stat count-ups after all charts have animated
+                    setTimeout(() => {
+                        runSequential(0);
+                    }, 3 * (CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY));
+
                     observer.unobserve(entry.target);
                 }
             });
