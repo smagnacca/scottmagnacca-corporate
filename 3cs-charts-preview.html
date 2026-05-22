@@ -96,7 +96,7 @@
             line-height: 1;
         }
         .stat-number.glow {
-            animation: statGlowPulse 1s ease-out forwards;
+            animation: statGlowPulse 0.8s cubic-bezier(0.46, 1, 0, 1) forwards;
         }
         .stat-label {
             font-size: 14px;
@@ -109,7 +109,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>3Cs Comparative Analysis</h1>
+        <h1>Comparative Analysis</h1>
         <p class="subtitle">Performance gains with Curiosity, Lifelong Learning, and Agility & Adaptability</p>
 
         <div class="charts-wrapper">
@@ -121,6 +121,7 @@
                         <div class="stat-label">Performance</div>
                     </div>
                 </div>
+                <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Productivity & Engagement</div>
                 <div class="chart-canvas-wrapper">
                     <canvas id="barChart"></canvas>
                 </div>
@@ -128,12 +129,13 @@
 
             <!-- Line/Area Chart -->
             <div class="chart-card">
-                <div class="chart-label label-right">
+                <div class="chart-label label-above">
                     <div class="stat-card" data-target="215">
                         <div class="stat-number">0</div>
                         <div class="stat-label">Growth</div>
                     </div>
                 </div>
+                <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Skills Acquisition Over Time</div>
                 <div class="chart-canvas-wrapper">
                     <canvas id="lineChart"></canvas>
                 </div>
@@ -141,12 +143,13 @@
 
             <!-- Radar Chart -->
             <div class="chart-card">
-                <div class="chart-label label-bottom">
+                <div class="chart-label label-above">
                     <div class="stat-card" data-target="64">
                         <div class="stat-number">0</div>
                         <div class="stat-label">Capability</div>
                     </div>
                 </div>
+                <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Agility & Adaptability</div>
                 <div class="chart-canvas-wrapper" style="position: relative;">
                     <canvas id="radarChart"></canvas>
                     <!-- Orange expansion arrows SVG overlay -->
@@ -331,7 +334,7 @@
         });
 
         // Stat count-up animations
-        const COUNT_DURATION = 1000;
+        const COUNT_DURATION = 800;
         const statCards = document.querySelectorAll('.stat-card');
 
         function countUp(card, onDone) {
@@ -343,7 +346,7 @@
             function step(timestamp) {
                 if (!startTime) startTime = timestamp;
                 const progress = Math.min((timestamp - startTime) / COUNT_DURATION, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
+                const eased = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
                 if (numberEl) numberEl.textContent = Math.round(eased * target) + '%';
                 if (progress < 1) {
                     requestAnimationFrame(step);
@@ -373,7 +376,7 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.3 });
+        }, { threshold: 0.4 });
 
         const chartsWrapper = document.querySelector('.charts-wrapper');
         if (chartsWrapper) {
