@@ -3485,23 +3485,31 @@
   })();
 
   /* ─────────────────────────────────────────────────────────────
-     VISIT COUNTER — leaders trained + client value grow per visit
+     VISIT COUNTER — leaders trained grows per visit, stored in cookie
   ───────────────────────────────────────────────────────────── */
   (function() {
     var BASE_LEADERS = 4142;
-    var BASE_VALUE   = 1.000; // $B
 
-    // sessionStorage tracks whether this tab already counted this visit
-    var counted = sessionStorage.getItem('sm_visit_counted');
-    var leaders = parseInt(localStorage.getItem('sm_leaders') || BASE_LEADERS, 10);
-    var value   = parseFloat(localStorage.getItem('sm_value')   || BASE_VALUE);
+    function getCookie(name) {
+      var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+      return match ? decodeURIComponent(match[1]) : null;
+    }
+    function setCookie(name, value, days) {
+      var expires = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/; SameSite=Lax';
+    }
+    function setSessionCookie(name, value) {
+      // No Max-Age/expires = session cookie (cleared when browser closes)
+      document.cookie = name + '=' + encodeURIComponent(value) + '; path=/; SameSite=Lax';
+    }
+
+    var counted = getCookie('sm_visit_counted');
+    var leaders = parseInt(getCookie('sm_leaders') || BASE_LEADERS, 10);
 
     if (!counted) {
       leaders += Math.floor(Math.random() * 3) + 1; // +1 to +3
-      value   *= 1.005;                              // +0.5%
-      localStorage.setItem('sm_leaders', leaders);
-      localStorage.setItem('sm_value',   value.toFixed(4));
-      sessionStorage.setItem('sm_visit_counted', '1');
+      setCookie('sm_leaders', leaders, 730);         // persist 2 years
+      setSessionCookie('sm_visit_counted', '1');     // one increment per browser session
     }
 
     // Patch the leaders pill
