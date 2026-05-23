@@ -2364,8 +2364,9 @@
   .wpe-bar { width: 3px; min-width: 3px; background: #f5a623; border-radius: 2px; height: 0; transition: height 0.5s cubic-bezier(0.22,1,0.36,1); box-shadow: 0 0 8px rgba(245,166,35,0.6); }
   .wpe-block.active .wpe-bar { height: 28px; }
   .wage-premium-explainer .wpe-heading { font-size: 18px; font-weight: 700; color: #ffffff; margin: 0; letter-spacing: 0.2px; background: linear-gradient(90deg, #ffffff 0%, #f5a623 40%, #ffffff 60%, #ffffff 100%); background-size: 250% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .wpe-block.active .wpe-heading { animation: wpeShimmer 0.9s ease-out 0.2s forwards; }
+  .wpe-block.active .wpe-heading { animation: wpeShimmer 0.9s ease-out 0.2s forwards, wpeGoldPulse 2.2s ease-in-out 1.2s infinite; }
   @keyframes wpeShimmer { 0% { background-position: 200% center; } 100% { background-position: -50% center; } }
+  @keyframes wpeGoldPulse { 0%, 100% { filter: drop-shadow(0 0 3px rgba(245,166,35,0.3)); } 50% { filter: drop-shadow(0 0 10px rgba(245,166,35,0.95)); } }
 
   /* Body text */
   .wage-premium-explainer p { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.82); margin: 0 0 4px; padding-left: 17px; }
