@@ -2,6 +2,21 @@
 
 ---
 
+## 2026-05-23 — Phase 9: 4 Targeted UX Updates (commit `3258ffd`)
+
+**What changed:**
+1. **Methodology typewriter + gold finish** — "Ideas alone don't move people — stories do." now types out character-by-character on scroll into the Methodology section, then transitions to bright gold (`#f5a623`) when complete. Uses IntersectionObserver on `#framework`, reuses existing `cursorBlink` CSS keyframe. Rest of paragraph stays as static text.
+2. **3Cs paragraph rewrite** — "The 3Cs below" replaced with full life-skills framing: "The three life skills of Curiosity, Lifelong learning and Agility & Adaptability are life skills. They are how your team embeds this power into every interaction, sustained by AI as the accelerator."
+3. **Skills Acquisition chart legend** — Blue line label changed from "Agile & Adaptable" → "Lifelong learning" (line chart dataset only; radar chart label unchanged).
+4. **Leaders count unified to 4,142** — Updated 6 locations: meta description, stat pill `data-count-to`, stat pill fallback text, bio text ("4,142+ sales professionals"), About cred-badge, and `BASE_LEADERS` JS variable. Visit counter continues to increment from new base.
+
+**QA:** Preview screenshot confirmed typewriter turns gold ✅, new paragraph text ✅, chart legend "Lifelong learning" ✅, cred-badge 4,142+ ✅, zero console errors ✅
+
+**Deploy:** `state=ready` — live at https://scottmagnacca-corporate.netlify.app ✅
+**Git:** local and remote both at commit `3258ffd`
+
+---
+
 ## 2026-05-22 — Phase 8: 3Cs Chart Fixes — Stats Below Charts, Sequential Count-up, White APA Citations (commit `3c96212`)
 
 **What changed:**
