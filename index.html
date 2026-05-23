@@ -2481,19 +2481,6 @@
     height: 300px;
     width: 100%;
   }
-  .chart-label {
-    position: absolute;
-    color: #f5a623;
-    font-weight: bold;
-    font-size: 24px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  }
-  .label-above {
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-  }
   @keyframes statGlowPulse {
     0%   { text-shadow: 0 0 0px rgba(245, 166, 35, 0); }
     40%  { text-shadow: 0 0 28px rgba(245, 166, 35, 1), 0 0 56px rgba(245, 166, 35, 0.6); }
@@ -2503,6 +2490,10 @@
     position: relative;
     text-align: center;
     opacity: 0;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: opacity 0.3s ease;
   }
   .stat-card.visible {
     opacity: 1;
@@ -2517,27 +2508,24 @@
   .stat-number.glow {
     animation: statGlowPulse 0.8s cubic-bezier(0.46, 1, 0, 1) forwards;
   }
+  .chart-citation {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+    font-style: italic;
+    text-align: center;
+    margin-top: 8px;
+  }
   .charts-citations {
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  .charts-research {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
-  }
-  .charts-research div {
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 13px;
-    line-height: 1.6;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
   .charts-disclosure {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
     line-height: 1.7;
     font-style: italic;
+    text-align: center;
   }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -2915,40 +2903,32 @@
       <div class="charts-wrapper">
         <!-- Bar Chart -->
         <div class="chart-card">
-          <div class="chart-label label-above">
-            <div class="stat-card" data-target="38">
-              <div class="stat-number">0</div>
-              <div class="stat-label">Performance</div>
-            </div>
-          </div>
           <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Productivity & Engagement</div>
           <div class="chart-canvas-wrapper">
             <canvas id="barChart"></canvas>
           </div>
+          <div class="stat-card" data-target="38">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Performance</div>
+          </div>
+          <div class="chart-citation">Gale et al. (2024)</div>
         </div>
 
         <!-- Line/Area Chart -->
         <div class="chart-card">
-          <div class="chart-label label-above">
-            <div class="stat-card" data-target="215">
-              <div class="stat-number">0</div>
-              <div class="stat-label">Growth</div>
-            </div>
-          </div>
           <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Skills Acquisition Over Time</div>
           <div class="chart-canvas-wrapper">
             <canvas id="lineChart"></canvas>
           </div>
+          <div class="stat-card" data-target="215">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Growth</div>
+          </div>
+          <div class="chart-citation">Mateo-Berganza Diaz et al. (2022)</div>
         </div>
 
         <!-- Radar Chart -->
         <div class="chart-card">
-          <div class="chart-label label-above">
-            <div class="stat-card" data-target="64">
-              <div class="stat-number">0</div>
-              <div class="stat-label">Capability</div>
-            </div>
-          </div>
           <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Agility & Adaptability</div>
           <div class="chart-canvas-wrapper" style="position: relative;">
             <canvas id="radarChart"></canvas>
@@ -2968,23 +2948,17 @@
               <line x1="200" y1="200" x2="240" y2="240" stroke="#ff6b35" stroke-width="2.5" marker-end="url(#arrowhead)" opacity="0.8" />
             </svg>
           </div>
+          <div class="stat-card" data-target="64">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Capability</div>
+          </div>
+          <div class="chart-citation">Peng et al. (2023)</div>
         </div>
       </div>
 
       <div class="charts-citations">
-        <div class="charts-research">
-          <div>
-            <div style="color: rgba(0, 0, 0, 0.7); font-size: 13px; line-height: 1.6;">Based on the Gale et al. (2024) model</div>
-          </div>
-          <div>
-            <div style="color: rgba(0, 0, 0, 0.7); font-size: 13px; line-height: 1.6;">Based on the Mateo-Berganza Diaz et al. (2022) model</div>
-          </div>
-          <div>
-            <div style="color: rgba(0, 0, 0, 0.7); font-size: 13px; line-height: 1.6;">Based on the Peng et al. (2023) model</div>
-          </div>
-        </div>
         <div class="charts-disclosure">
-          The exact numerical statistics displayed in charts (+38%, +215%, and +64%) were synthesized to visually represent the trends found in peer-reviewed research and are provided for illustrative purposes.
+          Exact numerical statistics displayed in charts (+38%, +215%, and +64%) were synthesized to visually represent the trends found in the papers.
         </div>
       </div>
     </div>
@@ -4668,11 +4642,11 @@ function fireConfettiBurstWage(cx, cy) {
   function initCharts() {
     createCharts();
 
-    const COUNT_DURATION = 800;
-    const statCards = document.querySelectorAll('.stat-card');
+    const COUNT_DURATION = 2000;
+    const statCards = document.querySelectorAll('.charts-wrapper .stat-card');
     let chartsAnimationTriggered = false;
 
-    function countUp(card, onDone) {
+    function countUp(card) {
       const target = parseInt(card.getAttribute('data-target') || '0', 10);
       const numberEl = card.querySelector('.stat-number');
       let startTime = null;
@@ -4690,17 +4664,9 @@ function fireConfettiBurstWage(cx, cy) {
             numberEl.textContent = target + '%';
             numberEl.classList.add('glow');
           }
-          if (onDone) onDone();
         }
       }
       requestAnimationFrame(step);
-    }
-
-    function runSequential(index) {
-      if (index >= statCards.length) return;
-      countUp(statCards[index], function() {
-        runSequential(index + 1);
-      });
     }
 
     const observer = new IntersectionObserver(function(entries) {
@@ -4732,9 +4698,10 @@ function fireConfettiBurstWage(cx, cy) {
             }
           }, 2 * (CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY));
 
-          setTimeout(() => {
-            runSequential(0);
-          }, 3 * (CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY));
+          // Each stat counts up right after its own chart animation finishes
+          setTimeout(() => { if (statCards[0]) countUp(statCards[0]); }, CHART_ANIMATION_DURATION);
+          setTimeout(() => { if (statCards[1]) countUp(statCards[1]); }, (CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY) + CHART_ANIMATION_DURATION);
+          setTimeout(() => { if (statCards[2]) countUp(statCards[2]); }, 2 * (CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY) + CHART_ANIMATION_DURATION);
 
           observer.unobserve(entry.target);
         }
