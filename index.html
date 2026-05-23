@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scott Magnacca | AI Training for Corporate Teams</title>
-  <meta name="description" content="Scott Magnacca equips sales teams with AI + Narrative Intelligence. 4,127+ leaders trained. Book a discovery call for corporate training and keynote speaking." />
+  <meta name="description" content="Scott Magnacca equips sales teams with AI + Narrative Intelligence. 4,142+ leaders trained. Book a discovery call for corporate training and keynote speaking." />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2709,11 +2709,11 @@
     <!-- STAT PILLS + BUTTONS — full width, balanced across both columns -->
     <div class="stat-pills" id="stat-pills" style="justify-content:center;margin-top:72px;">
       <div class="stat-pill"
-           data-count-to="4127"
+           data-count-to="4142"
            data-prefix=""
            data-suffix="+ Leaders Trained"
            data-duration="2500"
-           data-format="comma">4,127+ Leaders Trained</div>
+           data-format="comma">4,142+ Leaders Trained</div>
       <div class="stat-pill">Over $1 Billion in Sales Generated</div>
       <div class="stat-pill"
            data-count-to="56"
@@ -2826,8 +2826,8 @@
     <h2 class="section-title reveal">The Framework Behind the Results</h2>
     <p class="section-subtitle reveal">Three principles that transform how teams think, communicate, and adapt — with AI as the accelerator.</p>
     <div class="framework-intro reveal" style="max-width: 720px; margin: 32px auto 48px; text-align: center; font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,0.8);">
-      <p>Ideas alone don't move people — <strong style="color: #ffffff;">stories do.</strong> You craft a narrative that resonates with your audience's hopes, fears, and ambitions. Then you take action, telling that story so compellingly that others believe, invest, and follow. For professionals, this isn't optional—it's the engine that turns vision into momentum.</p>
-      <p style="margin-top: 16px; color: rgba(255,255,255,0.7);">The 3Cs below are how your team embeds this power into every interaction, sustained by AI as the accelerator.</p>
+      <p><span id="methodology-tw-wrap" style="font-weight:700; transition: color 0.6s ease;"><span id="methodology-tw-out"></span><span id="methodology-cursor" style="animation: cursorBlink 0.9s step-end infinite;">|</span></span> You craft a narrative that resonates with your audience's hopes, fears, and ambitions. Then you take action, telling that story so compellingly that others believe, invest, and follow. For professionals, this isn't optional—it's the engine that turns vision into momentum.</p>
+      <p style="margin-top: 16px; color: rgba(255,255,255,0.7);">The three life skills of Curiosity, Lifelong learning and Agility &amp; Adaptability are life skills. They are how your team embeds this power into every interaction, sustained by AI as the accelerator.</p>
     </div>
     <div class="cards-3 reveal-children">
 
@@ -3211,7 +3211,7 @@
       <div>
         <div class="typewriter-container" id="bio-typewriter">
           <p class="about-bio typewriter-text">
-            Scott Magnacca is an <strong>AI Strategist</strong> who has trained <strong>4,127+ sales professionals</strong> across financial services, technology, and professional associations. He teaches at <strong class="babson-green">Babson College</strong> and holds a <strong>Master's in Psychology (ALM) from <span class="harvard-crimson">Harvard</span></strong>, and brings 25+ years of practitioner experience to every engagement.
+            Scott Magnacca is an <strong>AI Strategist</strong> who has trained <strong>4,142+ sales professionals</strong> across financial services, technology, and professional associations. He teaches at <strong class="babson-green">Babson College</strong> and holds a <strong>Master's in Psychology (ALM) from <span class="harvard-crimson">Harvard</span></strong>, and brings 25+ years of practitioner experience to every engagement.
           </p>
           <p class="about-bio typewriter-text">
             His <strong>Storyselling + AI methodology</strong> is the only framework that combines narrative intelligence with modern AI-powered sales tools — producing measurable improvements in meeting booking rates, deal velocity, and rep confidence within the first 30 days.
@@ -3230,7 +3230,7 @@
             <span class="cred-badge-label">ALM — Psychology</span>
           </div>
           <div class="cred-badge">
-            <span class="cred-badge-value">4,127+</span>
+            <span class="cred-badge-value">4,142+</span>
             <span class="cred-badge-label">Leaders Trained</span>
           </div>
           <div class="cred-badge">
@@ -3488,7 +3488,7 @@
      VISIT COUNTER — leaders trained + client value grow per visit
   ───────────────────────────────────────────────────────────── */
   (function() {
-    var BASE_LEADERS = 4127;
+    var BASE_LEADERS = 4142;
     var BASE_VALUE   = 1.000; // $B
 
     // sessionStorage tracks whether this tab already counted this visit
@@ -3505,7 +3505,7 @@
     }
 
     // Patch the leaders pill
-    var leadersPill = document.querySelector('.stat-pill[data-count-to="4127"]');
+    var leadersPill = document.querySelector('.stat-pill[data-count-to="4142"]');
     if (leadersPill) {
       leadersPill.dataset.countTo = leaders;
       leadersPill.textContent = leaders.toLocaleString('en-US') + '+ Leaders Trained';
@@ -4574,7 +4574,7 @@ function fireConfettiBurstWage(cx, cy) {
             pointRadius: 4
           },
           {
-            label: 'Agile & Adaptable',
+            label: 'Lifelong learning',
             data: lineChartData.emptyData[1],
             borderColor: '#00d4ff',
             backgroundColor: 'rgba(0, 212, 255, 0.1)',
@@ -4719,6 +4719,40 @@ function fireConfettiBurstWage(cx, cy) {
   } else {
     initCharts();
   }
+</script>
+
+<script>
+// Methodology section typewriter — types sentence on scroll, turns gold when done
+(function() {
+  var tw = document.getElementById('methodology-tw-out');
+  var cursor = document.getElementById('methodology-cursor');
+  var wrap = document.getElementById('methodology-tw-wrap');
+  if (!tw || !cursor || !wrap) return;
+  var text = "Ideas alone don’t move people — stories do.";
+  var idx = 0;
+  var started = false;
+  function tick() {
+    if (idx < text.length) {
+      tw.textContent += text.charAt(idx++);
+      setTimeout(tick, 45);
+    } else {
+      cursor.style.animation = 'none';
+      cursor.style.opacity = '0';
+      wrap.style.color = '#f5a623';
+    }
+  }
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !started) {
+        started = true;
+        obs.disconnect();
+        setTimeout(tick, 300);
+      }
+    });
+  }, { threshold: 0.3 });
+  var section = document.getElementById('framework');
+  if (section) obs.observe(section);
+})();
 </script>
 
 </body>
