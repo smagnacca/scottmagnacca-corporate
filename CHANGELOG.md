@@ -2,6 +2,30 @@
 
 ---
 
+## 2026-05-22 — Phase 7: Animated 3Cs Charts Merged into index.html (commit `03fdce8`)
+
+**What changed:**
+- Replaced static `3cs-charts-clean.png` with the fully animated Chart.js charts directly in `index.html`
+- Added Chart.js CDN to `<head>`
+- Inserted chart CSS, HTML structure (bar, line, radar), and scroll-triggered JavaScript
+- Charts animate over 2.5 seconds each with 300ms stagger on scroll
+- Stat count-ups (+38%, +215%, +64%) fire after all charts complete
+- Research citations (Gale et al. 2024, Mateo-Berganza Diaz et al. 2022, Peng et al. 2023) visible on main site
+- Synthesized statistics disclosure included
+
+**Deploy:** `state=ready` at 2026-05-22T23:59:20Z — live at https://scottmagnacca-corporate.netlify.app
+
+### Work Distribution
+| | Actual |
+|---|---|
+| Local | ~80% (git, verification) |
+| Token-based | ~18% (surgical merge, JS adaptation) |
+| Internet/API | ~2% (Netlify deploy) |
+
+**Status:** ✅ Phase 7 complete. Animated charts are live on the main site.
+
+---
+
 ## 2026-05-22 — 3Cs Animated Charts + Scroll-Triggered Animations (commits `00ab8e2`→`1b8e279`)
 
 **What changed:**
