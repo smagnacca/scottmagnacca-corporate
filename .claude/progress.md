@@ -1,33 +1,27 @@
-## Checkpoint 1 — 3Cs Charts Build — 2026-05-22 22:15 UTC
+## Checkpoint 2 — 3Cs Charts Ready for Scott Approval — 2026-05-22 22:35 UTC
 
-**What I just completed:** Phase 1 scaffold — created standalone `3cs-charts-preview.html` with full Chart.js setup.
+**What's complete (Phases 1-5):**
+- ✅ Phase 1: Scaffold with full Chart.js setup (bar, line, radar)
+- ✅ Phase 2: Chart configurations with proper data and animations
+- ✅ Phase 3: Stat pop animations (38%, 215%, 64%) with scroll trigger + glow pulse
+- ✅ Phase 4: Orange SVG arrow overlay on radar chart
+- ✅ Phase 5: LLaVA visual QA — ALL PASS (Graphics 9/10, Animation 8/10, Quality 9/10)
 
-**Files modified:**
-- `3cs-charts-preview.html` — NEW, 273 lines, complete production-ready preview
-
-**What's done:**
-- ✅ Standalone preview file created (not in index.html yet per plan)
-- ✅ Dark navy background (#12192c) matching site
-- ✅ All 3 Chart.js charts scaffolded (bar, line/area, radar)
-- ✅ Correct colors: gold #f5a623 labels, cyan #00d4ff data, grey baseline
-- ✅ Responsive grid layout (auto-fit, max 1200px)
-- ✅ Chart animations wired (easeOutCubic, staggered timings)
-- ✅ Axis labels and stat overlays positioned (+38%, +215%, +64%)
+**Current state:**
+- `3cs-charts-preview.html` is production-ready, standalone, never touched index.html
+- Committed to main (commit 34cd2b7)
+- Netlify build triggered automatically
+- Preview live at: https://scottmagnacca-corporate.netlify.app/3cs-charts-preview.html
 
 **What's NOT done yet:**
-- ⏳ Phase 2: Detailed chart data configs (Ollama or direct)
-- ⏳ Phase 3: Stat pop animations (countUp + glow pulse)
-- ⏳ Phase 4: Radar orange arrow SVG overlay
-- ⏳ Phase 5: LLaVA visual QA
-- ⏳ Phase 6: Scott approval gate
-- ⏳ Phase 7: Merge into index.html
+- ⏳ Phase 6: Scott approval — awaiting explicit "merge it" confirmation
+- ⏳ Phase 7: Surgical merge into index.html (remove 8-line img block, insert ~420 lines chart HTML/JS)
 - ⏳ Phase 8: Deploy + verify live
 
-**Next action if I crash:** `git push origin main` (to save checkpoint), then proceed to Phase 2 chart configs.
+**Approval checklist:**
+- [ ] Scott views the preview
+- [ ] Scott approves the look, feel, animations, colors
+- [ ] Scott says "looks good, merge it"
+- [ ] ONLY THEN: proceed to Phase 7
 
----
-
-**Session notes:**
-- Phase 1 completed without Ollama (Ollama output had terminal control chars; wrote HTML directly instead — faster, guaranteed correctness)
-- Preview file is standalone, production-ready, and contains all baseline structure needed
-- Ready to proceed to Phase 2 (chart data refinement) or Phase 5 (visual QA with LLaVA) depending on priority
+**Next action:** Show preview screenshot to Scott + QA results. Wait for approval.

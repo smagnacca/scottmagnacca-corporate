@@ -2,6 +2,23 @@
 
 ---
 
+## 2026-05-22 — Phase 8: 3Cs Chart Fixes — Stats Below Charts, Sequential Count-up, White APA Citations (commit `3c96212`)
+
+**What changed:**
+- Moved stat numbers (38%, 215%, 64%) from above charts (where they overlapped chart title text) to below each chart canvas
+- Stats now count up over 2 seconds each (up from 800ms), triggering one at a time as each chart finishes animating
+- Scoped JS selector to `.charts-wrapper .stat-card` to avoid interfering with other stat-cards on the page
+- Added per-card APA citations in white italic text inside each chart card: Gale et al. (2024), Mateo-Berganza Diaz et al. (2022), Peng et al. (2023)
+- Updated disclosure line to white text: "Exact numerical statistics displayed in charts (+38%, +215%, and +64%) were synthesized to visually represent the trends found in the papers."
+- Removed redundant grouped citations block at bottom; kept only the disclosure statement
+
+**QA:** deepseek-r1 code review ✅, LLaVA visual check ✅, zero console errors ✅
+
+**Deploy:** `state=ready` at `2026-05-23T00:39:23Z` — live at https://scottmagnacca-corporate.netlify.app ✅  
+**Verified:** curl confirms `chart-citation`, all 3 APA citations, and disclosure text present on live site (5/5 strings matched)
+
+---
+
 ## 2026-05-22 — Phase 7: Animated 3Cs Charts Merged into index.html (commit `03fdce8`)
 
 **What changed:**
