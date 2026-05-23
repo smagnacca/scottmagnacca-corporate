@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scott Magnacca | AI Training for Corporate Teams</title>
   <meta name="description" content="Scott Magnacca equips sales teams with AI + Narrative Intelligence. 4,127+ leaders trained. Book a discovery call for corporate training and keynote speaking." />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -2460,6 +2461,84 @@
   .cred-badge.badge-animate:nth-child(6) { animation: credBadgeFadeIn 0.4s ease-out 5s forwards, credBadgePulse 0.5s ease-in-out 5s forwards; }
   .framework-card { border: 6px solid #f5a623 !important; animation: pulseGoldGreen 2s ease-in-out infinite; }
   .formats-guarantee { border: 4px solid #22c55e; padding: 24px; border-radius: 8px; animation: pulseGreen 2s ease-in-out infinite; background: rgba(34, 197, 94, 0.05); }
+
+  /* ─── 3CS ANIMATED CHARTS ─── */
+  .charts-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .chart-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .chart-canvas-wrapper {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+  .chart-label {
+    position: absolute;
+    color: #f5a623;
+    font-weight: bold;
+    font-size: 24px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  .label-above {
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  @keyframes statGlowPulse {
+    0%   { text-shadow: 0 0 0px rgba(245, 166, 35, 0); }
+    40%  { text-shadow: 0 0 28px rgba(245, 166, 35, 1), 0 0 56px rgba(245, 166, 35, 0.6); }
+    100% { text-shadow: 0 0 10px rgba(245, 166, 35, 0.3); }
+  }
+  .stat-card {
+    position: relative;
+    text-align: center;
+    opacity: 0;
+  }
+  .stat-card.visible {
+    opacity: 1;
+  }
+  .stat-number {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: #f5a623;
+    margin: 0;
+    line-height: 1;
+  }
+  .stat-number.glow {
+    animation: statGlowPulse 0.8s cubic-bezier(0.46, 1, 0, 1) forwards;
+  }
+  .charts-citations {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .charts-research {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  .charts-research div {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .charts-disclosure {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    line-height: 1.7;
+    font-style: italic;
+  }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -2832,12 +2911,82 @@
     </div>
 
     <!-- 3Cs Comparative Analysis Charts -->
-    <div class="reveal" style="margin-top: 56px; text-align: center;">
-      <img
-        src="3cs-charts-clean.png"
-        alt="The 3Cs Comparative Analysis — +38% performance with high curiosity, +215% skills with lifelong learning, +64% change response with agility"
-        style="max-width: 100%; width: 960px; border-radius: 12px; display: block; margin: 0 auto;"
-      >
+    <div class="reveal" style="margin-top: 56px;">
+      <div class="charts-wrapper">
+        <!-- Bar Chart -->
+        <div class="chart-card">
+          <div class="chart-label label-above">
+            <div class="stat-card" data-target="38">
+              <div class="stat-number">0</div>
+              <div class="stat-label">Performance</div>
+            </div>
+          </div>
+          <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Productivity & Engagement</div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Line/Area Chart -->
+        <div class="chart-card">
+          <div class="chart-label label-above">
+            <div class="stat-card" data-target="215">
+              <div class="stat-number">0</div>
+              <div class="stat-label">Growth</div>
+            </div>
+          </div>
+          <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Skills Acquisition Over Time</div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Radar Chart -->
+        <div class="chart-card">
+          <div class="chart-label label-above">
+            <div class="stat-card" data-target="64">
+              <div class="stat-number">0</div>
+              <div class="stat-label">Capability</div>
+            </div>
+          </div>
+          <div style="text-align: center; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Agility & Adaptability</div>
+          <div class="chart-canvas-wrapper" style="position: relative;">
+            <canvas id="radarChart"></canvas>
+            <!-- Orange expansion arrows SVG overlay -->
+            <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;" viewBox="0 0 300 300">
+              <!-- Right arrow -->
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                  <polygon points="0 0, 10 3, 0 6" fill="#ff6b35" />
+                </marker>
+              </defs>
+              <!-- Top-right arrow -->
+              <line x1="200" y1="100" x2="240" y2="60" stroke="#ff6b35" stroke-width="2.5" marker-end="url(#arrowhead)" opacity="0.8" />
+              <!-- Right arrow -->
+              <line x1="220" y1="150" x2="260" y2="150" stroke="#ff6b35" stroke-width="2.5" marker-end="url(#arrowhead)" opacity="0.8" />
+              <!-- Bottom-right arrow -->
+              <line x1="200" y1="200" x2="240" y2="240" stroke="#ff6b35" stroke-width="2.5" marker-end="url(#arrowhead)" opacity="0.8" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-citations">
+        <div class="charts-research">
+          <div>
+            <div style="color: rgba(0, 0, 0, 0.7); font-size: 13px; line-height: 1.6;">Based on the Gale et al. (2024) model</div>
+          </div>
+          <div>
+            <div style="color: rgba(0, 0, 0, 0.7); font-size: 13px; line-height: 1.6;">Based on the Mateo-Berganza Diaz et al. (2022) model</div>
+          </div>
+          <div>
+            <div style="color: rgba(0, 0, 0, 0.7); font-size: 13px; line-height: 1.6;">Based on the Peng et al. (2023) model</div>
+          </div>
+        </div>
+        <div class="charts-disclosure">
+          The exact numerical statistics displayed in charts (+38%, +215%, and +64%) were synthesized to visually represent the trends found in peer-reviewed research and are provided for illustrative purposes.
+        </div>
+      </div>
     </div>
 
   </div>
@@ -4346,6 +4495,264 @@ function fireConfettiBurstWage(cx, cy) {
   <input type="number" name="calculated_premium" />
   <input type="text" name="timestamp" />
 </form>
+
+<!-- 3Cs Animated Charts Script -->
+<script>
+  const chartDefaults = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: 'rgba(255, 255, 255, 0.7)',
+          font: { size: 12 }
+        }
+      }
+    },
+    scales: {
+      r: {
+        ticks: { color: 'rgba(255, 255, 255, 0.5)' },
+        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+      },
+      x: {
+        ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+        grid: { color: 'rgba(255, 255, 255, 0.05)' }
+      },
+      y: {
+        ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+        grid: { color: 'rgba(255, 255, 255, 0.05)' }
+      }
+    }
+  };
+
+  let barChart, lineChart, radarChart;
+  const CHART_ANIMATION_DURATION = 2500;
+  const CHART_STAGGER_DELAY = 300;
+
+  const barChartData = {
+    labels: ['Avg Emp 1', 'Avg Emp 2', 'Avg Emp 3', 'Avg Emp 4', 'Curious 1', 'Curious 2'],
+    emptyData: [[0, 0], [0, 0]],
+    fullData: [[65, 68, 62, 70, 58, 65], [92, 94, 89, 96, 98, 95]]
+  };
+
+  const lineChartData = {
+    labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+    emptyData: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
+    fullData: [[20, 30, 40, 50, 60], [45, 75, 110, 150, 190]]
+  };
+
+  const radarChartData = {
+    labels: ['Speed to New Tech', 'Effectiveness in Pivoting', 'Resilience to Shifts', 'Proactive Innovation', 'Speed to New Tech'],
+    emptyData: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
+    fullData: [[60, 55, 65, 50, 60], [95, 88, 98, 92, 95]]
+  };
+
+  function createCharts() {
+    const barChartEl = document.getElementById('barChart');
+    const lineChartEl = document.getElementById('lineChart');
+    const radarChartEl = document.getElementById('radarChart');
+
+    if (!barChartEl || !lineChartEl || !radarChartEl) return;
+
+    barChart = new Chart(barChartEl, {
+      type: 'bar',
+      data: {
+        labels: barChartData.labels,
+        datasets: [
+          {
+            label: 'Average Employee',
+            data: barChartData.emptyData[0],
+            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1
+          },
+          {
+            label: 'High Curiosity',
+            data: barChartData.emptyData[1],
+            backgroundColor: '#00d4ff',
+            borderColor: '#00d4ff',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        ...chartDefaults,
+        animation: { duration: CHART_ANIMATION_DURATION, easing: 'easeOutCubic' },
+        scales: { x: { ticks: { display: false } } }
+      }
+    });
+
+    lineChart = new Chart(lineChartEl, {
+      type: 'line',
+      data: {
+        labels: lineChartData.labels,
+        datasets: [
+          {
+            label: 'Average Skills',
+            data: lineChartData.emptyData[0],
+            borderColor: 'rgba(255, 255, 255, 0.4)',
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            fill: true,
+            tension: 0.4,
+            borderWidth: 2,
+            pointBackgroundColor: 'rgba(255, 255, 255, 0.3)',
+            pointBorderColor: 'rgba(255, 255, 255, 0.5)',
+            pointRadius: 4
+          },
+          {
+            label: 'Agile & Adaptable',
+            data: lineChartData.emptyData[1],
+            borderColor: '#00d4ff',
+            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+            fill: true,
+            tension: 0.4,
+            borderWidth: 2,
+            pointBackgroundColor: '#00d4ff',
+            pointBorderColor: '#00d4ff',
+            pointRadius: 5
+          }
+        ]
+      },
+      options: {
+        ...chartDefaults,
+        animation: { duration: CHART_ANIMATION_DURATION, easing: 'easeOutCubic' },
+        scales: {
+          ...chartDefaults.scales,
+          y: { ...chartDefaults.scales.y, beginAtZero: true, max: 200 }
+        }
+      }
+    });
+
+    radarChart = new Chart(radarChartEl, {
+      type: 'radar',
+      data: {
+        labels: radarChartData.labels,
+        datasets: [
+          {
+            label: 'Average Employee',
+            data: radarChartData.emptyData[0],
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            pointBackgroundColor: 'rgba(255, 255, 255, 0.3)',
+            pointBorderColor: 'rgba(255, 255, 255, 0.5)',
+            borderWidth: 2
+          },
+          {
+            label: 'Agile & Adaptable',
+            data: radarChartData.emptyData[1],
+            borderColor: '#00d4ff',
+            backgroundColor: 'rgba(0, 212, 255, 0.15)',
+            pointBackgroundColor: '#00d4ff',
+            pointBorderColor: '#00d4ff',
+            pointRadius: 5,
+            borderWidth: 2.5
+          }
+        ]
+      },
+      options: {
+        ...chartDefaults,
+        animation: { duration: CHART_ANIMATION_DURATION, easing: 'easeOutCubic' },
+        scales: {
+          r: {
+            ...chartDefaults.scales.r,
+            beginAtZero: true,
+            max: 100,
+            ticks: { display: false, stepSize: 20 },
+            pointLabels: { color: '#FFFFFF', font: { size: 12 } }
+          }
+        }
+      }
+    });
+  }
+
+  function initCharts() {
+    createCharts();
+
+    const COUNT_DURATION = 800;
+    const statCards = document.querySelectorAll('.stat-card');
+    let chartsAnimationTriggered = false;
+
+    function countUp(card, onDone) {
+      const target = parseInt(card.getAttribute('data-target') || '0', 10);
+      const numberEl = card.querySelector('.stat-number');
+      let startTime = null;
+      card.classList.add('visible');
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / COUNT_DURATION, 1);
+        const eased = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+        if (numberEl) numberEl.textContent = Math.round(eased * target) + '%';
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          if (numberEl) {
+            numberEl.textContent = target + '%';
+            numberEl.classList.add('glow');
+          }
+          if (onDone) onDone();
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    function runSequential(index) {
+      if (index >= statCards.length) return;
+      countUp(statCards[index], function() {
+        runSequential(index + 1);
+      });
+    }
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !chartsAnimationTriggered) {
+          chartsAnimationTriggered = true;
+
+          setTimeout(() => {
+            if (barChart) {
+              barChart.data.datasets[0].data = barChartData.fullData[0];
+              barChart.data.datasets[1].data = barChartData.fullData[1];
+              barChart.update('default');
+            }
+          }, 0);
+
+          setTimeout(() => {
+            if (lineChart) {
+              lineChart.data.datasets[0].data = lineChartData.fullData[0];
+              lineChart.data.datasets[1].data = lineChartData.fullData[1];
+              lineChart.update('default');
+            }
+          }, CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY);
+
+          setTimeout(() => {
+            if (radarChart) {
+              radarChart.data.datasets[0].data = radarChartData.fullData[0];
+              radarChart.data.datasets[1].data = radarChartData.fullData[1];
+              radarChart.update('default');
+            }
+          }, 2 * (CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY));
+
+          setTimeout(() => {
+            runSequential(0);
+          }, 3 * (CHART_ANIMATION_DURATION + CHART_STAGGER_DELAY));
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    const chartsWrapper = document.querySelector('.charts-wrapper');
+    if (chartsWrapper) {
+      observer.observe(chartsWrapper);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCharts);
+  } else {
+    initCharts();
+  }
+</script>
 
 </body>
 </html>
