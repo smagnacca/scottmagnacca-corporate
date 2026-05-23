@@ -2382,8 +2382,9 @@
   .wpe-block { opacity: 0; transform: translateX(-28px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .wpe-block.active { opacity: 1; transform: none; }
   .gift-block { margin: 24px auto 18px; text-align: center; }
-  .gift-thanks { font-size: 16px; line-height: 1.55; color: #2a3b52; max-width: 480px; margin: 0 auto 16px; }
-  .gift-thanks em { color: #0a2540; font-style: italic; font-weight: 600; }
+  .gift-thanks { font-size: 16px; line-height: 1.55; color: #ffffff; max-width: 480px; margin: 0 auto 16px; animation: orangePulse 2s ease-in-out infinite; }
+  .gift-thanks em { color: #ffffff; font-style: italic; font-weight: 600; }
+  @keyframes orangePulse { 0%, 100% { color: #ffffff; } 50% { color: #ff8c00; } }
   .gift-cover-wrap { display: inline-block; padding: 8px; border-radius: 8px; overflow: visible; }
   .gift-cover { width: 110px; height: 165px; border-radius: 4px; box-shadow: 0 0 24px 4px rgba(245,166,35,0.55), 0 0 48px 8px rgba(245,166,35,0.28), 0 6px 18px rgba(0,0,0,0.25); animation: giftGoldPulse 2.6s ease-in-out infinite; display: block; object-fit: cover; object-position: top center; }
   @keyframes giftGoldPulse { 0%, 100% { box-shadow: 0 0 24px 4px rgba(245,166,35,0.55), 0 0 48px 8px rgba(245,166,35,0.28), 0 6px 18px rgba(0,0,0,0.25); } 50% { box-shadow: 0 0 32px 6px rgba(245,166,35,0.75), 0 0 64px 12px rgba(245,166,35,0.4), 0 6px 18px rgba(0,0,0,0.25); } }
