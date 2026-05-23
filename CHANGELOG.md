@@ -2,6 +2,26 @@
 
 ---
 
+## 2026-05-23 — Phase 10: Wage Premium Visual Overhaul + Copy Fixes (commits `586d043`→`508be27`)
+
+**What changed:**
+1. **Wage Premium section background** — switched from near-white to dark navy (`#0a1628`) matching brand; section label/title/subtitle forced white on dark
+2. **Glassmorphism card** — white card replaced with dark glass (`rgba(255,255,255,0.04)` + `blur(12px)`) with subtle gold border; removed pulsing gold/green border
+3. **Headings** — fade in bright gold (`#f5a623`) over 2s on scroll, then slow continuous gold glow pulse (`wpeGoldPulse`, 3s cycle)
+4. **Animated gold bar** — 3px bar beside each heading draws down (height 0→28px) on entry
+5. **Stat callouts** — `30–50%` and `1.5x` count up from zero on scroll with gold glow
+6. **Key phrase highlights** — "a market value you create" and "a cliff" flash gold background on entry
+7. **Staggered slide-in** — 3 content blocks slide in from left sequentially (0ms / 220ms / 440ms)
+8. **"Enter in Your Current Salary"** — bright orange instruction label added above salary input
+9. **Book title fix** — "He is the author of *Storyselling*" → "*Storyselling in The Age of AI*"
+10. **Guarantee text** — updated closing line to "You'll leave the workshop with at least three stories you can use to drive sales and ROI in your next meeting this week — guaranteed."
+
+**QA:** DOM inspection confirmed all CSS animations active, stat counts correct, zero console errors ✅
+
+**Deploy:** Live at https://scottmagnacca-corporate.netlify.app ✅
+
+---
+
 ## 2026-05-23 — Phase 9: 4 Targeted UX Updates (commit `3258ffd`)
 
 **What changed:**
