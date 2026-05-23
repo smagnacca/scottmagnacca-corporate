@@ -2353,10 +2353,14 @@
   /* ===== WAGE PREMIUM CALCULATOR ===== */
   #wage-premium { padding: 60px 20px; background: linear-gradient(135deg, rgba(0,0,0,0.02), rgba(79,168,232,0.03)); border-top: 1px solid rgba(79,168,232,0.1); margin-top: 40px; }
   .wage-premium-container { max-width: 600px; margin: 40px auto; perspective: 1000px; }
-  .wage-premium-explainer { max-width: 760px; margin: 32px auto 12px; padding: 28px 32px; background: rgba(255,255,255,0.65); border: 3px solid #f5a623; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); animation: pulseGoldGreen 2s ease-in-out infinite; }
-  .wage-premium-explainer .wpe-heading { font-size: 18px; font-weight: 700; color: #0a2540; margin: 18px 0 8px; letter-spacing: 0.2px; }
+  .wage-premium-explainer { max-width: 760px; margin: 32px auto 12px; padding: 32px 36px; background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1.5px solid rgba(245,166,35,0.25); border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 0 40px rgba(245,166,35,0.04); }
+  .wage-premium-explainer .wpe-heading { font-size: 18px; font-weight: 700; color: #ffffff; margin: 22px 0 8px; letter-spacing: 0.2px; border-left: 3px solid #f5a623; padding-left: 14px; margin-left: -2px; }
   .wage-premium-explainer .wpe-heading:first-child { margin-top: 0; }
-  .wage-premium-explainer p { font-size: 16px; line-height: 1.65; color: #2a3b52; margin: 0 0 4px; }
+  .wage-premium-explainer p { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.82); margin: 0 0 4px; padding-left: 16px; }
+  .wpe-stat { color: #f5a623; font-weight: 700; font-size: 1.08em; text-shadow: 0 0 12px rgba(245,166,35,0.4); }
+  .wpe-block { }
+  .wpe-block.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .wpe-block.reveal.visible { opacity: 1; transform: none; }
   .gift-block { margin: 24px auto 18px; text-align: center; }
   .gift-thanks { font-size: 16px; line-height: 1.55; color: #2a3b52; max-width: 480px; margin: 0 auto 16px; }
   .gift-thanks em { color: #0a2540; font-style: italic; font-weight: 600; }
@@ -2973,15 +2977,21 @@
     <h2 class="section-title">What Is Your Wage Premium Worth?</h2>
     <p class="section-subtitle">See how strategic positioning increases your annual earning potential by up to 1.5x.</p>
 
-    <div class="wage-premium-explainer">
-      <h3 class="wpe-heading">What Is the Wage Premium?</h3>
-      <p>The wage premium is the additional income you can command above your current salary when you reposition yourself as a high-leverage, AI-fluent professional. It's not a raise you ask for — it's a market value you create. Top earners in every industry capture it by signaling rare, in-demand skills.</p>
+    <div class="wage-premium-explainer reveal">
+      <div class="wpe-block reveal" style="transition-delay:0s">
+        <h3 class="wpe-heading">What Is the Wage Premium?</h3>
+        <p>The wage premium is the additional income you can command above your current salary when you reposition yourself as a high-leverage, AI-fluent professional. It's not a raise you ask for — it's a market value you create. Top earners in every industry capture it by signaling rare, in-demand skills.</p>
+      </div>
 
-      <h3 class="wpe-heading">Why It Matters</h3>
-      <p>Most professionals leave 30–50% of their earning potential on the table because they sell their experience the same way they did five years ago. AI is rewriting which skills the market pays for, and the gap between "useful" and "indispensable" is widening every quarter. The professionals who close that gap aren't working harder — they're positioning differently. Falling behind isn't a slow drift anymore; it's a cliff.</p>
+      <div class="wpe-block reveal" style="transition-delay:0.18s">
+        <h3 class="wpe-heading">Why It Matters</h3>
+        <p>Most professionals leave <span class="wpe-stat">30–50%</span> of their earning potential on the table because they sell their experience the same way they did five years ago. AI is rewriting which skills the market pays for, and the gap between "useful" and "indispensable" is widening every quarter. The professionals who close that gap aren't working harder — they're positioning differently. Falling behind isn't a slow drift anymore; it's a cliff.</p>
+      </div>
 
-      <h3 class="wpe-heading">How Practical AI Skills Help You Earn It</h3>
-      <p>Practical AI skills let you do in an hour what your peers do in a week — and more importantly, let you frame that output as strategic value, not task output. You learn to use AI to amplify judgment, storytelling, and decision-making, the three things buyers and bosses still pay a premium for. That combination — AI fluency plus human storyselling — is what unlocks the 1.5x.</p>
+      <div class="wpe-block reveal" style="transition-delay:0.36s">
+        <h3 class="wpe-heading">How Practical AI Skills Help You Earn It</h3>
+        <p>Practical AI skills let you do in an hour what your peers do in a week — and more importantly, let you frame that output as strategic value, not task output. You learn to use AI to amplify judgment, storytelling, and decision-making, the three things buyers and bosses still pay a premium for. That combination — AI fluency plus human storyselling — is what unlocks the <span class="wpe-stat">1.5x</span>.</p>
+      </div>
     </div>
 
     <div class="wage-premium-container">
