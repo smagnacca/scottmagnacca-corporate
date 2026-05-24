@@ -2,6 +2,27 @@
 
 ---
 
+## 2026-05-24 — Mobile Responsive Fixes: Comparison Grid, Stat Pills, CTA Buttons (commit `da0645d`)
+
+**What changed:**
+- **Comparison Grid** (CRITICAL fix) — Removed inline `style="grid-template-columns: 1fr 1fr"` that was permanently overriding the CSS 900px media query. Grid now correctly collapses to single column on mobile. Root cause: inline styles always beat CSS media queries regardless of specificity.
+- **CTA Buttons** — Updated 640px media query: `.hero-actions` now uses `align-items: stretch` (was `flex-start`) so "Book a Discovery Call" and "See Speaking Formats" buttons are full-width on mobile. Added `text-align: center` to button text.
+- **Stat Pills** — Updated 640px media query: `.stat-pills` now uses `align-items: stretch` so credential pills are full-width and centered on mobile. Added `text-align: center` to pill text.
+- **CSS cleanup** — Added `align-items: start` to `.comparison-grid` CSS rule to preserve the desktop column-alignment behaviour previously set by the (now-removed) inline style.
+
+**Files changed:** `index.html` only — 6 insertions, 3 deletions
+
+**QA:** ✅ Playwright screenshots verified at 375×812 (mobile) and 1280×800 (desktop). No regressions. Netlify deploy confirmed `state: ready` at 2026-05-24T15:03:05Z.
+
+**Work distribution:**
+| | Actual |
+|---|---|
+| Local | ~85% (Playwright screenshots, git, grep, file reads) |
+| Token-based | ~15% (analysis, edits) |
+| Internet/API | ~0% (Netlify status check only) |
+
+---
+
 ## 2026-05-23 — Booking Form Enhancement: Scott Headshot with Pulsing Gold Border (commit `9c8b2e9`)
 
 **What changed:**
