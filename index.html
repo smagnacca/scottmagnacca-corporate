@@ -343,6 +343,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
+      align-items: start;
       margin-bottom: 32px;
     }
     .compare-col {
@@ -1257,9 +1258,11 @@
     @media (max-width: 640px) {
       .nav-cta { display: none; }
       .hamburger { display: flex; }
-      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions a { text-align: center; }
       .badge-grid { grid-template-columns: 1fr; }
-      .stat-pills { flex-direction: column; align-items: flex-start; }
+      .stat-pills { flex-direction: column; align-items: stretch; }
+      .stat-pill { text-align: center; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       .form-wrap { padding: 28px 20px; }
       .section-title { font-size: 1.75rem; }
@@ -2857,7 +2860,7 @@
     <div class="section-label reveal">The Challenge</div>
     <h2 class="section-title reveal">The Modern Skills Gap</h2>
     <p class="section-subtitle reveal">Top performers have pulled ahead — and the gap is widening every quarter.</p>
-    <div class="comparison-grid reveal-children" style="grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;">
+    <div class="comparison-grid reveal-children">
       <div class="compare-col bad compare-old">
         <div class="compare-col-header">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
