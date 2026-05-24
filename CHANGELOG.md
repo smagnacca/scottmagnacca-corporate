@@ -2,6 +2,28 @@
 
 ---
 
+## 2026-05-23 — Booking Form Enhancement: Scott Headshot with Pulsing Gold Border (commit `9c8b2e9`)
+
+**What changed:**
+- **Booking Form Layout** — Restructured "Book a Discovery Call" section from single column to 2-column grid layout
+- **Scott Headshot** — Added professional headshot image (200×200px) on right side of form, locally hosted at `src/images/scott-headshot.jpg`
+- **Pulsing Gold Border Animation** — Implemented smooth pulsing border effect on headshot with 2-second cycle:
+  - Border cycles: subtle glow (0-50%) → bright gold (#f5a623) with shadow (50%) → subtle glow (50-100%)
+  - Box-shadow creates expanding/contracting glow effect
+  - Continuous infinite animation
+- **Responsive Design** — Mobile layout (≤768px) stacks vertically with headshot above form, sized at 160×160px
+
+**Layout Details:**
+- Desktop: Form (left) + Headshot (right) in 2-column grid, 40px gap
+- Form width: 60% of container, Headshot width: 25% of container
+- Mobile: Single column, headshot reordered to top, sized smaller for mobile viewport
+
+**QA:** ✅ Verified on desktop (1280px) and mobile (375px) viewports, form functionality intact, animation smooth
+
+**Deploy:** Pushed to main — GitHub Actions triggers Netlify deploy
+
+---
+
 ## 2026-05-23 — Phase 11: Three Animated Enhancements (commits `6edb3b8`→`75108d5`)
 
 **What changed:**
