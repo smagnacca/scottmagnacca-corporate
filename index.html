@@ -1694,6 +1694,39 @@
       #so-what-stats { padding: 48px 0; }
     }
 
+    /* ─── METHODOLOGY PULSE ANIMATION ─── */
+    .methodology-pulse {
+      font-weight: 700;
+      animation: methodologyPulse 2s ease-in-out infinite;
+    }
+    @keyframes methodologyPulse {
+      0%   { color: #ffffff; text-shadow: 0 0 0px rgba(255,140,0,0); }
+      20%  { color: #ffffff; text-shadow: 0 0 0px rgba(255,140,0,0); }
+      50%  { color: #ff8c00; text-shadow: 0 0 20px rgba(255,140,0,0.8), 0 0 40px rgba(255,140,0,0.4); }
+      80%  { color: #ff8c00; text-shadow: 0 0 20px rgba(255,140,0,0.8), 0 0 40px rgba(255,140,0,0.4); }
+      100% { color: #ffffff; text-shadow: 0 0 0px rgba(255,140,0,0); }
+    }
+
+    /* ─── SEQUENTIAL STAT PULSE ─── */
+    #so-what-stats .stat-number {
+      animation: sequentialStatPulse 6s ease-in-out infinite;
+    }
+    #so-what-stats .stat-card:nth-child(1) .stat-number {
+      animation-delay: 0s;
+    }
+    #so-what-stats .stat-card:nth-child(2) .stat-number {
+      animation-delay: 2s;
+    }
+    #so-what-stats .stat-card:nth-child(3) .stat-number {
+      animation-delay: 4s;
+    }
+    @keyframes sequentialStatPulse {
+      0%   { color: var(--gold); text-shadow: 0 0 0px rgba(245,166,35,0); }
+      25%  { color: var(--gold); text-shadow: 0 0 30px rgba(245,166,35,1), 0 0 60px rgba(245,166,35,0.6); }
+      50%  { color: var(--gold); text-shadow: 0 0 10px rgba(245,166,35,0.3); }
+      100% { color: var(--gold); text-shadow: 0 0 0px rgba(245,166,35,0); }
+    }
+
     /* ─── IMPACT STRIP ─── */
     #impact-strip {
       position: relative;
@@ -1718,6 +1751,7 @@
       object-position: center 20%;
       animation: kenBurnsHero 14s ease-in-out infinite;
       filter: brightness(0.45);
+      display: none;
     }
     @keyframes kenBurnsHero {
       0%   { transform: scale(1.0) translate(0, 0); }
@@ -1753,6 +1787,15 @@
       margin: 0 0 20px 0;
       font-style: normal;
       text-align: center;
+      animation: quoteOrangePulse 5s ease-in-out forwards;
+    }
+    @keyframes quoteOrangePulse {
+      0%   { color: #ffffff; }
+      10%  { color: #ffffff; }
+      20%  { color: #ff8c00; }
+      75%  { color: #ff8c00; }
+      90%  { color: #ffffff; }
+      100% { color: #ffffff; }
     }
     .impact-quote::before {
       content: '\201C';
@@ -2852,7 +2895,7 @@
     <p class="section-subtitle reveal">Three principles that transform how teams think, communicate, and adapt — with AI as the accelerator.</p>
     <div class="framework-intro reveal" style="max-width: 720px; margin: 32px auto 48px; text-align: center; font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,0.8);">
       <p><span id="methodology-tw-wrap" style="font-weight:700; transition: color 0.6s ease;"><span id="methodology-tw-out"></span><span id="methodology-cursor" style="animation: cursorBlink 0.9s step-end infinite;">|</span></span> You craft a narrative that resonates with your audience's hopes, fears, and ambitions. Then you take action, telling that story so compellingly that others believe, invest, and follow. For professionals, this isn't optional—it's the engine that turns vision into momentum.</p>
-      <p style="margin-top: 16px; color: rgba(255,255,255,0.7);">The three life skills of Curiosity, Lifelong learning and Agility &amp; Adaptability are life skills. They are how your team embeds this power into every interaction, sustained by AI as the accelerator.</p>
+      <p style="margin-top: 16px; color: rgba(255,255,255,0.7);">The three life skills of <span class="methodology-pulse">Curiosity, Lifelong learning and Agility &amp; Adaptability</span> are life skills. They are how your team embeds this power into every interaction, sustained by AI as the accelerator.</p>
     </div>
     <div class="cards-3 reveal-children">
 
