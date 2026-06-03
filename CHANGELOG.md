@@ -2,6 +2,32 @@
 
 ---
 
+## 2026-06-03 — Babson Course + Harvard Verified Credential Badges (commits `1e5c292`, `f091583`, `186e501`, `bcb7bdc`, `9a6d5e2`)
+
+**What changed:**
+- **2 new Babson credential buttons** added to the `.badge-grid` in the About Scott section:
+  - "Babson Summer Course" / Becoming UNSTOPPABLE: AI Productivity Lab — links to Babson course page
+  - "Babson Online Course" / AI Enabled Selling for Financial Professionals — links to Babson course page
+- **Harvard Verified button** added — "Harvard Verified" / Official Digital Credential — ALM Psychology — links to `cecredential-validation.tlt.harvard.edu`
+- **Harvard label fix** — changed from "ALM — Psychology" to "Masters (ALM) — Psychology"
+- **Animation fix** — added `nth-child(7)`, `(8)`, `(9)` CSS rules so new badges animate in correctly (were stuck at opacity:0)
+- **Person schema added** to `<head>` with full `hasCredential` entries:
+  - Becoming UNSTOPPABLE course (Babson, instructor) + URL
+  - AI Enabled Selling course (Babson, instructor) + URL
+  - Harvard ALM Psychology + verified URL (`cecredential-validation.tlt.harvard.edu`)
+- **knowsAbout** expanded: added "AI Productivity" and "Financial Services Sales"
+
+**Files changed:** `index.html` only
+**Both sites updated:** `scottmagnacca-corporate.netlify.app` ✅ + `scottmagnacca.com` ✅
+**3-Agent QA:** All agents scored ≥8/10. Visual, brand, persuasion all passed.
+
+**SEO impact:**
+- Harvard schema URL links Google directly to a `harvard.edu` subdomain for credential verification
+- Babson course links to live `babson.edu` course listing — verifiable institutional authority
+- `hasCredential` in JSON-LD makes credentials machine-readable to Google (not just human-visible)
+
+---
+
 ## 2026-05-24 — Mobile Responsive Fixes: Comparison Grid, Stat Pills, CTA Buttons (commit `da0645d`)
 
 **What changed:**
