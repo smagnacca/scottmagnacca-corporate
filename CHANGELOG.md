@@ -28,6 +28,30 @@
 
 ---
 
+## 2026-06-03 — Google Search Console Setup + Priority Crawl Request (commit `f3960bf`)
+
+**What changed:**
+- **GSC verification meta tag** added to `<head>` of both sites (`blS-HBmTl581kniXshak0zo049tsF86Hy1R0MMst9OQ`)
+  - ⚠️ **DO NOT REMOVE** — removing it breaks Search Console ownership verification
+- **Enabled Google Search Console API** on the `email-robot-491000` GCP project (via browser as Owner)
+- **Verified `https://scottmagnacca.com/`** as a URL-prefix property (HTML-tag method)
+- **Submitted sitemap.xml** to Search Console
+- **Requested Indexing** on the homepage → added to Google's **priority crawl queue**
+
+**Why:** Forces Google to re-crawl within ~24–48 hours (instead of 3–14 days) to pick up the new
+Babson/Harvard credential buttons + `hasCredential` schema from the earlier commits this session.
+
+**Status confirmed in GSC:** URL is on Google ✅ · Page is indexed ✅ · Served over HTTPS ✅ · Indexing requested ✅
+
+**Automation note:** Service-account API path was blocked (GSC "Add User" only grants Full/Restricted,
+not Owner, to service accounts). Pivoted to driving the GSC UI directly as the verified owner via
+Chrome MCP — identical result, faster. ~90% of prep (sitemap checks, URL list, script, dry-run) ran
+locally at zero token cost.
+
+**Files changed:** `index.html` (both sites) — 1 insertion each
+
+---
+
 ## 2026-05-24 — Mobile Responsive Fixes: Comparison Grid, Stat Pills, CTA Buttons (commit `da0645d`)
 
 **What changed:**
