@@ -1271,6 +1271,23 @@
       .footer-inner { flex-direction: column; align-items: flex-start; }
       .form-wrap { padding: 28px 20px; }
       .section-title { font-size: 1.75rem; }
+      .value-prop-sentence {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
+      }
+      .cta-link {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 20px;
+        border-bottom: none;
+        border: 1.5px solid var(--gold);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(245,166,35,0.15);
+      }
     }
 
     /* ─── SECTION LABEL ─── */
@@ -2160,7 +2177,7 @@
       animation: checkmarkPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
     .checkmark svg {
-      stroke: var(--gold);
+      stroke: var(--babson-green);
       stroke-width: 2.5;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -2278,21 +2295,39 @@
       margin-top: 32px;
     }
     .cta-link {
-      color: var(--white);
-      font-weight: 600;
-      border-bottom: 2px solid var(--gold);
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+      color: #fff;
+      font-weight: 700;
+      border-bottom: 2px dashed var(--gold);
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(245,166,35,0.08);
+      transition: all 0.3s ease;
+      display: inline-block;
+      position: relative;
+      animation: ctaLinkPulse 2s infinite ease-in-out;
+      text-decoration: none;
     }
     .cta-link:hover {
-      color: var(--gold);
-      text-shadow: 0 0 8px rgba(245,166,35,0.5);
+      color: var(--navy) !important;
+      background: var(--gold) !important;
+      border-bottom-color: transparent;
+      box-shadow: 0 0 18px var(--gold);
+      transform: scale(1.05);
     }
-    .cta-link.pulse {
-      animation: ctaPulse 1.5s ease-in-out infinite;
+    @keyframes ctaLinkPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(245,166,35,0.4);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 12px 6px rgba(245,166,35,0.7);
+        transform: scale(1.04);
+        background: rgba(245,166,35,0.18);
+      }
     }
-    @keyframes ctaPulse {
-      0%, 100% { text-shadow: 0 0 0 rgba(245,166,35,0); }
-      50% { text-shadow: 0 0 8px rgba(245,166,35,0.6); }
+    @keyframes btnReportGlow {
+      0%, 100% { box-shadow: 0 0 0px rgba(0, 208, 132, 0); }
+      50% { box-shadow: 0 0 22px rgba(0, 208, 132, 0.55), 0 0 8px rgba(0, 208, 132, 0.3); }
     }
 
     /* ─── ENHANCED MULTIPLIER WITH PULSE ─── */
@@ -2592,8 +2627,8 @@
   .cred-badge.badge-animate:nth-child(7) { animation: credBadgeFadeIn 0.4s ease-out 6s forwards, credBadgePulse 0.5s ease-in-out 6s forwards; }
   .cred-badge.badge-animate:nth-child(8) { animation: credBadgeFadeIn 0.4s ease-out 7s forwards, credBadgePulse 0.5s ease-in-out 7s forwards; }
   .cred-badge.badge-animate:nth-child(9) { animation: credBadgeFadeIn 0.4s ease-out 8s forwards, credBadgePulse 0.5s ease-in-out 8s forwards; }
-  .framework-card { border: 6px solid #f5a623 !important; animation: pulseGoldGreen 2s ease-in-out infinite; }
-  .formats-guarantee { border: 4px solid #22c55e; padding: 24px; border-radius: 8px; animation: pulseGreen 2s ease-in-out infinite; background: rgba(34, 197, 94, 0.05); }
+  .framework-card { border: 1.5px solid rgba(255,255,255,0.15); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+  .formats-guarantee { border: 2.5px solid #22c55e; padding: 24px; border-radius: 8px; background: rgba(34, 197, 94, 0.03); }
 
   /* ─── 3CS ANIMATED CHARTS ─── */
   .charts-wrapper {
@@ -2723,6 +2758,7 @@
   <a href="#problem" onclick="document.getElementById('mobile-toggle').checked=false">The Problem</a>
   <a href="#framework" onclick="document.getElementById('mobile-toggle').checked=false">The Framework</a>
   <a href="#formats" onclick="document.getElementById('mobile-toggle').checked=false">Training Formats</a>
+  <a href="#free-sprints" onclick="document.getElementById('mobile-toggle').checked=false">Free Masterclass</a>
   <a href="#proof" onclick="document.getElementById('mobile-toggle').checked=false">Testimonials</a>
   <a href="#book" onclick="document.getElementById('mobile-toggle').checked=false">Book a Call</a>
 </div>
@@ -2736,51 +2772,51 @@
         <div class="hero-eyebrow">AI Training for Corporate Teams</div>
         <!-- Effect 5: words will be wrapped by JS -->
         <h1 class="hero-headline" id="hero-headline-raw">
-          <span id="hero-part1" style="opacity:0">Equip Your Team</span><br>
-          <span id="hero-part2" style="opacity:0">with <span>AI + Narrative Intelligence</span></span>
+          <span id="hero-part1" style="opacity:0">AI Won't Close the Deal.</span><br>
+          <span id="hero-part2" style="opacity:0">Your <span>Story Will.</span></span>
         </h1>
         <!-- Effect 2: typewriter subhead — JS populates #typewriter-output -->
         <p class="hero-subhead" id="hero-subhead">
-          <span id="typewriter-output"></span><span class="tw-cursor" id="tw-cursor"></span>
+          Most teams are running a 2015 playbook in 2026. <strong style="color: #007AFF; font-weight: 700;">Close the gap.</strong> The winning move isn't 'smarter prompts'—it's using AI to hyper-personalize outreach and build trust. Teams doing this see 3x faster pipelines and win rates that move in days, not quarters. Your team will <span id="typewriter-output" style="color: #007AFF; font-weight: 700;"></span><span class="tw-cursor" id="tw-cursor"></span>
         </p>
         <!-- VALUE PROP PARAGRAPH WITH ANIMATIONS -->
         <div class="value-prop-paragraph">
           <!-- Requirements split: X marks vs Checkmarks -->
           <div class="requirements-grid">
-            <!-- LEFT: What you DON'T need -->
+            <!-- LEFT: What you DON'T need (Reducing Risk & Cost) -->
             <div class="requirements-column requirements-avoid">
               <div class="requirement-header">
-                <span class="requirement-header-text">You Won't Need to</span>
+                <span class="requirement-header-text">Zero Operational Friction</span>
               </div>
               <div class="requirement-item">
                 <span class="x-mark"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 2 L18 18 M18 2 L2 18" stroke="currentColor" stroke-width="2"/></svg></span>
-                <span class="requirement-text">Hire new people</span>
+                <span class="requirement-text">No expensive new software seats to buy</span>
               </div>
               <div class="requirement-item">
                 <span class="x-mark"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 2 L18 18 M18 2 L2 18" stroke="currentColor" stroke-width="2"/></svg></span>
-                <span class="requirement-text">Rip out your current process</span>
+                <span class="requirement-text">No disruption to current CRM workflows</span>
               </div>
               <div class="requirement-item">
                 <span class="x-mark"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 2 L18 18 M18 2 L2 18" stroke="currentColor" stroke-width="2"/></svg></span>
-                <span class="requirement-text">Wait months to see results</span>
+                <span class="requirement-text">No compliance or off-channel recording risks</span>
               </div>
             </div>
-            <!-- RIGHT: What you DO get -->
+            <!-- RIGHT: What you DO get (ROI & Pipeline Yield) -->
             <div class="requirements-column requirements-get">
               <div class="requirement-header requirement-header-impact">
-                <span class="requirement-header-text">Immediate impact</span>
+                <span class="requirement-header-text">Immediate Pipeline Impact</span>
               </div>
               <div class="requirement-item">
                 <span class="checkmark"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 L8 16 L18 4"/></svg></span>
-                <span class="requirement-text">No new hires</span>
+                <span class="requirement-text">Maximize yield from your existing reps</span>
               </div>
               <div class="requirement-item">
                 <span class="checkmark"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 L8 16 L18 4"/></svg></span>
-                <span class="requirement-text">No ripping out your current process</span>
+                <span class="requirement-text">Integrate AI directly into current sales plays</span>
               </div>
               <div class="requirement-item">
                 <span class="checkmark"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 L8 16 L18 4"/></svg></span>
-                <span class="requirement-text">Results show up on Monday's client calls</span>
+                <span class="requirement-text">Book qualified meetings on next week's calls</span>
               </div>
             </div>
           </div>
@@ -2887,7 +2923,7 @@
            data-suffix="+ Leaders Trained"
            data-duration="2500"
            data-format="comma">4,142+ Leaders Trained</div>
-      <div class="stat-pill">Over $1 Billion in Sales Generated</div>
+      <div class="stat-pill">Proven Frameworks for Complex, Trust-Based Sales</div>
       <div class="stat-pill"
            data-count-to="56"
            data-prefix=""
@@ -2896,8 +2932,8 @@
            data-format="plain">56% Wage Premium for AI + Narrative Skills</div>
     </div>
     <div class="hero-actions" id="hero-actions" style="justify-content:center;margin-top:24px;padding-bottom:16px;">
-      <a href="#book" class="btn-primary">Book a Discovery Call</a>
-      <a href="#formats" class="btn-secondary">See Speaking Formats</a>
+      <a href="#book" class="btn-primary">Book Corporate Training</a>
+      <a href="#free-sprints" class="btn-secondary" style="border-color: var(--gold); color: var(--gold);">Free 15-Min Sales Sprint</a>
     </div>
   </div>
 </section>
@@ -2906,7 +2942,7 @@
 <section id="problem">
   <div class="container">
     <div class="section-label reveal">The Challenge</div>
-    <h2 class="section-title reveal">The Modern Skills Gap</h2>
+    <h2 class="section-title reveal">The Legacy Sales Playbook is Broken</h2>
     <p class="section-subtitle reveal">Top performers have pulled ahead — and the gap is widening every quarter.</p>
     <div class="comparison-grid reveal-children">
       <div class="compare-col bad compare-old">
@@ -2996,7 +3032,7 @@
 <section id="framework">
   <div class="container">
     <div class="section-label reveal">The Methodology</div>
-    <h2 class="section-title reveal">The Framework Behind the Results</h2>
+    <h2 class="section-title reveal">The CLA Framework: How Elite Teams Outsell the Market</h2>
     <p class="section-subtitle reveal">Three principles that transform how teams think, communicate, and adapt — with AI as the accelerator.</p>
     <div class="framework-intro reveal" style="max-width: 720px; margin: 32px auto 48px; text-align: center; font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,0.8);">
       <p><span id="methodology-tw-wrap" style="font-weight:700; transition: color 0.6s ease;"><span id="methodology-tw-out"></span><span id="methodology-cursor" style="animation: cursorBlink 0.9s step-end infinite;">|</span></span> You craft a narrative that resonates with your audience's hopes, fears, and ambitions. Then you take action, telling that story so compellingly that others believe, invest, and follow. For professionals, this isn't optional—it's the engine that turns vision into momentum.</p>
@@ -3039,7 +3075,7 @@
           <span class="orbit-dot pink" style="--orbit-speed:5s;"></span>
           <span class="orbit-dot yellow sm" style="--orbit-speed:8s; animation-delay:-3s;"></span>
         </div>
-        <div class="framework-card-label">The 3Cs — Principle 1</div>
+        <div class="framework-card-label">The CLA — Principle 1</div>
         <div class="framework-card-title">Curiosity</div>
         <p class="framework-card-desc">Ask better questions. AI helps you find what to be curious about before every call — giving your team the context to open conversations that matter and create genuine buyer interest.</p>
       </div>
@@ -3061,7 +3097,7 @@
           <span class="orbit-dot yellow" style="--orbit-speed:6s;"></span>
           <span class="orbit-dot blue-dot sm" style="--orbit-speed:10s; animation-delay:-4s;"></span>
         </div>
-        <div class="framework-card-label">The 3Cs — Principle 2</div>
+        <div class="framework-card-label">The CLA — Principle 2</div>
         <div class="framework-card-title">Lifelong Learning</div>
         <p class="framework-card-desc">Markets move fast. The learn &rarr; apply &rarr; teach cycle keeps teams ahead of every shift. Teams that embed learning into daily practice outperform those that rely on annual training events.</p>
       </div>
@@ -3082,7 +3118,7 @@
           <span class="orbit-dot teal" style="--orbit-speed:4.5s;"></span>
           <span class="orbit-dot pink sm" style="--orbit-speed:9s; animation-delay:-2s;"></span>
         </div>
-        <div class="framework-card-label">The 3Cs — Principle 3</div>
+        <div class="framework-card-label">The CLA — Principle 3</div>
         <div class="framework-card-title">Agility &amp; Adaptability</div>
         <p class="framework-card-desc">Connection and persuasion is a conversation, not a script. Adapt to every person, company, and moment. AI gives your team real-time signals — but only people with narrative intelligence know how to use them.</p>
       </div>
@@ -3157,53 +3193,53 @@
   </div>
 </section>
 
-<!-- WAGE PREMIUM CALCULATOR -->
+<!-- TEAM CAPACITY CALCULATOR -->
 <section id="wage-premium" class="wage-premium-section">
   <div class="container">
-    <div class="section-label">STRATEGIC POSITIONING</div>
-    <h2 class="section-title">What Is Your Wage Premium Worth?</h2>
-    <p class="section-subtitle">See how strategic positioning increases your annual earning potential by up to 1.5x.</p>
+    <div class="section-label">TEAM ROI CALCULATOR</div>
+    <h2 class="section-title">Reclaim Your Team's Sales Capacity</h2>
+    <p class="section-subtitle">See how much prospecting time and pipeline value your sales team can recover using Scott's AI frameworks.</p>
 
     <div class="wage-premium-explainer">
       <div class="wpe-block" data-wpe-delay="0">
         <div class="wpe-heading-wrap">
           <div class="wpe-bar"></div>
-          <h3 class="wpe-heading">What Is the Wage Premium?</h3>
+          <h3 class="wpe-heading">Reclaim High-Value Sales Hours</h3>
         </div>
-        <p>The wage premium is the additional income you can command above your current salary when you reposition yourself as a high-leverage, AI-fluent professional. It's not a raise you ask for — it's <span class="wpe-highlight">a market value you create</span>. Top earners in every industry capture it by signaling rare, in-demand skills.</p>
+        <p>Prospecting administrative work (research, finding context, drafting templates) eats up to 5 hours per week per rep. Scott's AI framework shifts this work from hours to minutes, giving reps their time back to do what they do best: <span class="wpe-highlight">talk to clients</span>.</p>
       </div>
 
       <div class="wpe-block" data-wpe-delay="220">
         <div class="wpe-heading-wrap">
           <div class="wpe-bar"></div>
-          <h3 class="wpe-heading">Why It Matters</h3>
+          <h3 class="wpe-heading">Scale Pipeline Output</h3>
         </div>
-        <p>Most professionals leave <span class="wpe-stat" data-wpe-count="50" data-wpe-suffix="%" data-wpe-prefix="30–">30–50%</span> of their earning potential on the table because they sell their experience the same way they did five years ago. AI is rewriting which skills the market pays for, and the gap between "useful" and "indispensable" is widening every quarter. The professionals who close that gap aren't working harder — they're positioning differently. Falling behind isn't a slow drift anymore; it's <span class="wpe-highlight">a cliff</span>.</p>
+        <p>When reps use AI to build highly personalized outreach scripts and find buyer pain points in 60 seconds, their connect rates soar. Sales teams adopting this framework see a <span class="wpe-stat" data-wpe-count="3" data-wpe-suffix="x" data-wpe-prefix="">3x</span> increase in overall pipeline velocity and convert outbound meetings significantly faster.</p>
       </div>
 
       <div class="wpe-block" data-wpe-delay="440">
         <div class="wpe-heading-wrap">
           <div class="wpe-bar"></div>
-          <h3 class="wpe-heading">How Practical AI Skills Help You Earn It</h3>
+          <h3 class="wpe-heading">The Human Premium</h3>
         </div>
-        <p>Practical AI skills let you do in an hour what your peers do in a week — and more importantly, let you frame that output as strategic value, not task output. You learn to use AI to amplify judgment, storytelling, and decision-making, the three things buyers and bosses still pay a premium for. That combination — AI fluency plus human storyselling — is what unlocks the <span class="wpe-stat" data-wpe-count="5" data-wpe-suffix="x" data-wpe-prefix="1.">1.5x</span>.</p>
+        <p>We teach your reps to use AI as an internal strategy partner rather than a spam bot, ensuring 100% SEC/FINRA compliant client privacy. That combination—AI speed and human storyselling—is what unlocks the ultimate sales advantage.</p>
       </div>
     </div>
 
     <div class="wage-premium-container">
       <!-- Input Stage -->
       <div id="calculatorStage" class="calculator-stage">
-        <p style="text-align:center; font-size:1.05rem; font-weight:700; color:#f5a623; margin:0 0 18px; letter-spacing:0.3px;">Enter in Your Current Salary</p>
+        <p style="text-align:center; font-size:1.05rem; font-weight:700; color:#f5a623; margin:0 0 18px; letter-spacing:0.3px;">Enter Your Sales Team Size</p>
         <div class="salary-input-group">
-          <label for="salaryInput">Annual Salary</label>
+          <label for="salaryInput">Number of Active Reps</label>
           <div class="input-wrapper">
-            <span class="currency-symbol">$</span>
-            <input type="number" id="salaryInput" placeholder="50000" min="30000" max="500000" required>
-            <span class="unit">/year</span>
+            <span class="currency-symbol">👥</span>
+            <input type="number" id="salaryInput" placeholder="10" min="3" max="38" required>
+            <span class="unit">Reps</span>
           </div>
         </div>
-        <button class="btn-primary calculate-btn" onclick="calculateWagePremium()">Calculate My Premium →</button>
-        <p class="input-note">We accept salaries from $30k to $500k</p>
+        <button class="btn-primary calculate-btn" onclick="calculateWagePremium()">Calculate Team Savings →</button>
+        <p class="input-note">We accept sales teams from 3 to 38 reps</p>
       </div>
 
       <!-- Lock Gate Stage (hidden until calculate clicked) -->
@@ -3258,21 +3294,35 @@
           </svg>
           <div class="lock-flash-ring" id="wageLockFlashRing"></div>
         </div>
-        <h3>Enter email to unlock your wage premium</h3>
-        <form class="email-gate-form" onsubmit="submitWagePremium(event)">
-          <input type="email" id="wageEmail" placeholder="your@email.com" required>
-          <button type="submit" class="btn-primary unlock-btn">Unlock My Wage Premium →</button>
+        <h3>Unlock Your Team Savings Report</h3>
+        <form class="email-gate-form" onsubmit="submitWagePremium(event)" style="display: flex; flex-direction: column; gap: 12px; text-align: left; max-width: 380px; margin: 0 auto;">
+          <div class="form-group" style="margin-bottom: 0; display: flex; flex-direction: column; gap: 4px;">
+            <label for="wageName" style="font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.85);">Full Name</label>
+            <input type="text" id="wageName" placeholder="John Doe" required style="background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 12px; color: #fff; outline: none; font-size: 0.95rem;">
+          </div>
+          <div class="form-group" style="margin-bottom: 0; display: flex; flex-direction: column; gap: 4px;">
+            <label for="wageCompany" style="font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.85);">Company</label>
+            <input type="text" id="wageCompany" placeholder="Acme Corp" required style="background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 12px; color: #fff; outline: none; font-size: 0.95rem;">
+          </div>
+          <div class="form-group" style="margin-bottom: 0; display: flex; flex-direction: column; gap: 4px;">
+            <label for="wageEmail" style="font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.85);">Work Email</label>
+            <input type="email" id="wageEmail" placeholder="you@company.com" required style="background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 12px; color: #fff; outline: none; font-size: 0.95rem;">
+          </div>
+          <button type="submit" class="btn-primary unlock-btn" style="margin-top: 10px; padding: 14px 0; font-size: 1.05rem; font-weight: 800; cursor: pointer; border-radius: 9999px; width: 100%;">Unlock Team Savings Report →</button>
         </form>
       </div>
 
       <!-- Results Stage (hidden until unlocked) -->
       <div id="resultsStage" class="results-stage" style="display:none;">
         <div class="results-content">
-          <h3>Your Wage Premium</h3>
+          <h3>Your Team's Reclaimed Sales Value</h3>
           <div class="premium-amount">
             <span class="currency">$</span><span class="amount" id="premiumAmount">0</span><span class="suffix">/year</span>
           </div>
-          <p class="premium-desc">That's <strong>1.5x</strong> your annual salary through strategic positioning in the job market.</p>
+          <p class="premium-desc">This represents the estimated economic value of reclaimed prospecting hours and accelerated pipeline velocity for your team.</p>
+          <div style="margin: 24px 0 32px; text-align: center;">
+            <a id="interactiveReportBtn" href="#" target="_blank" class="btn-primary" style="background: var(--babson-green); color: var(--navy) !important; border: none; font-weight: 800; font-size: 1.15rem; box-shadow: 0 10px 25px rgba(0, 208, 132, 0.3); animation: btnReportGlow 2s ease-in-out infinite; padding: 16px 36px; text-decoration: none;">📊 View Your Interactive ROI Report →</a>
+          </div>
           <div class="gift-block">
             <p class="gift-thanks">As a thank-you for sharing your email, we'd like to send you a free gift — the first chapter of Scott's book, <em>Storyselling in the Age of AI</em>.</p>
             <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
@@ -3294,7 +3344,7 @@
 <section id="formats">
   <div class="container">
     <div class="section-label reveal">Training Options</div>
-    <h2 class="section-title reveal">Training Formats</h2>
+    <h2 class="section-title reveal">High-Impact Training Formats</h2>
     <p class="section-subtitle reveal">Every format is designed for immediate application — not death-by-PowerPoint. Attendees leave with tools they can use that week.</p>
     <div class="formats-grid reveal-children">
       <div class="format-card">
@@ -3382,6 +3432,7 @@
         <div class="quote-mark">&ldquo;</div>
         <p class="testimonial-text">Scott's work directly contributed to $10 billion in new net assets from our market entry strategy. His ability to blend storyselling methodology with practical AI tools is unlike anything we've seen.</p>
         <div class="testimonial-author">Executive Vice President, Fidelity Investments</div>
+        <div class="testimonial-compliance" style="font-size: 0.65rem; color: rgba(255,255,255,0.35); margin-top: 6px; line-height: 1.25;">*Disclosures: Past performance is not indicative of future asset growth. Claims represent cumulative assets influenced by historical market entry strategies.</div>
       </div>
       <div class="testimonial-card">
         <div class="quote-mark">&ldquo;</div>
@@ -3554,6 +3605,43 @@
   </div>
 </section>
 
+<!-- FREE OFFERINGS: 15-MINUTE SALES SPRINT -->
+<section id="free-sprints" style="background: var(--navy-light); padding: 88px 0; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold);">
+  <div class="container" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center;">
+    <div>
+      <div class="section-label" style="color: var(--gold); background: none; -webkit-text-fill-color: var(--gold); -webkit-background-clip: unset; background-clip: unset; animation: none;">Free Masterclass</div>
+      <h2 class="section-title" style="color: var(--white); margin-bottom: 20px;">The 15-Minute LinkedIn Sales Sprint</h2>
+      <p style="color: rgba(255,255,255,0.75); font-size: 1.15rem; margin-bottom: 24px; line-height: 1.7;">
+        Want to try a "free sample" of Scott's training before booking a corporate engagement? Join our next live, high-intensity 15-minute sprint. No fluff, no software to buy—just one powerful, compliance-safe AI strategy you can use before your next sales call.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 32px;">
+        <div style="display: flex; align-items: center; gap: 12px; color: var(--white);">
+          <span style="color: var(--babson-green); font-size: 1.2rem; font-weight: bold;">✓</span>
+          <span style="font-size: 1rem; color: rgba(255,255,255,0.9);">Get the exact AI prompt that surfaces your buyer's deepest pain in 60 seconds.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; color: var(--white);">
+          <span style="color: var(--babson-green); font-size: 1.2rem; font-weight: bold;">✓</span>
+          <span style="font-size: 1rem; color: rgba(255,255,255,0.9);">Master the one-line connection request that prospects actually accept.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; color: var(--white);">
+          <span style="color: var(--babson-green); font-size: 1.2rem; font-weight: bold;">✓</span>
+          <span style="font-size: 1rem; color: rgba(255,255,255,0.9);">Learn the follow-up sequence that turns profile views into booked calls.</span>
+        </div>
+      </div>
+      <a href="https://15-minute-sales-sprint.netlify.app" target="_blank" class="btn-primary" style="display: inline-block; text-align: center; text-decoration: none;">Reserve Your Free Spot</a>
+    </div>
+    <div style="background: rgba(255,255,255,0.03); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; text-align: center;">
+      <div style="font-size: 0.8rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Next Live Session</div>
+      <div style="font-size: 2.2rem; font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 8px;">Wednesday</div>
+      <div style="font-size: 1.8rem; font-weight: 700; color: var(--blue); margin-bottom: 16px;">October 14, 2026</div>
+      <div style="font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-bottom: 24px;">7:00 PM Eastern (Zoom)</div>
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; font-size: 0.9rem; color: rgba(255,255,255,0.5); font-style: italic;">
+        Limited to 55 virtual seats for interactive Q&A.
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- BOOKING FORM -->
 <section id="book">
   <div class="container">
@@ -3618,7 +3706,7 @@
       </svg>
     </div>
     <div class="ty-title" style="color:var(--white);">You're all set.</div>
-    <p class="ty-text">Scott received your inquiry and will respond within 24 hours. In the meantime, register for the free 15-Minute Sales Sprint on June 17.</p>
+    <p class="ty-text">Scott received your inquiry and will respond within 24 hours. In the meantime, register for the free 15-Minute Sales Sprint on October 14.</p>
     <a href="https://15-minute-sales-sprint.netlify.app" class="btn-primary" style="margin-top:24px;display:inline-block;">Register for the Free Sprint &rarr;</a>
   </div>
 </section>
@@ -3691,23 +3779,23 @@
       return;
     }
 
-    // Part 1: fade in over 2s immediately
-    part1.style.transition = 'opacity 2s ease';
+    // Part 1: fade in over 0.5s immediately
+    part1.style.transition = 'opacity 0.5s ease';
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
         part1.style.opacity = '1';
       });
     });
 
-    // Part 2: starts fading in at t=4s (after 2s fade + 2s pause)
-    part2.style.transition = 'opacity 2s ease';
+    // Part 2: starts fading in at t=0.5s
+    part2.style.transition = 'opacity 1s ease';
     setTimeout(function() {
       part2.style.opacity = '1';
-      // Add orange pulse once part2 is fully visible (2s later)
+      // Add orange pulse once part2 is fully visible (1s later)
       setTimeout(function() {
         part2.classList.add('hero-part2-pulse');
-      }, 2000);
-    }, 4000);
+      }, 1000);
+    }, 500);
   })();
 
   /* ─────────────────────────────────────────────────────────────
@@ -3837,66 +3925,58 @@
      Key phrases appear bold + bright blue; rest stays white.
   ───────────────────────────────────────────────────────────── */
   (function() {
-    var segments = [
-      { text: "Most teams are running a 2015 playbook in 2026. ", styled: false },
-      { text: "Close the gap.", styled: true },
-      { text: " ", styled: false },
-      { text: "77% of employers want AI-ready salespeople.", styled: true },
-      { text: " Your team either has it or doesn't. The winning move isn't 'smarter prompts' - its combining AI with the one thing it can't do: build trust through a compelling story & narrative. ", styled: false },
-      { text: "Teams doing this see 3x faster pipelines and close rates", styled: true },
-      { text: " that move in days, not quarters.", styled: false }
+    var phrases = [
+      "win more deals.",
+      "book more meetings.",
+      "outsell the market."
     ];
 
     var output = document.getElementById('typewriter-output');
     var cursor = document.getElementById('tw-cursor');
     if (!output || !cursor) return;
 
-    // Pre-build DOM nodes for each segment (empty until typed into)
-    var segNodes = segments.map(function(seg) {
-      var node = seg.styled ? document.createElement('strong') : document.createElement('span');
-      if (seg.styled) {
-        node.style.color = '#007AFF';
-        node.style.fontWeight = '700';
-      }
-      output.appendChild(node);
-      return node;
-    });
-
     if (prefersReduced) {
-      segments.forEach(function(seg, i) { segNodes[i].textContent = seg.text; });
+      output.textContent = phrases[0];
       cursor.style.display = 'none';
+      window.typewriterComplete = true;
       return;
     }
 
-    var segIdx = 0;
+    var phraseIdx = 0;
     var charIdx = 0;
-    var charDelay = 50; // ms per character — normal reading speed
+    var isDeleting = false;
 
-    function type() {
-      if (segIdx >= segments.length) {
-        setTimeout(function() {
-          cursor.style.animation = 'none';
-          cursor.style.opacity = '0';
-          // Signal that typewriter is complete
-          window.typewriterComplete = true;
-        }, 1500);
-        return;
-      }
-      var seg = segments[segIdx];
-      var node = segNodes[segIdx];
-      if (charIdx < seg.text.length) {
-        node.textContent += seg.text.charAt(charIdx);
-        charIdx++;
-        setTimeout(type, charDelay);
+    function tick() {
+      var currentPhrase = phrases[phraseIdx];
+      
+      if (isDeleting) {
+        output.textContent = currentPhrase.substring(0, charIdx - 1);
+        charIdx--;
       } else {
-        segIdx++;
-        charIdx = 0;
-        type(); // advance to next segment immediately
+        output.textContent = currentPhrase.substring(0, charIdx + 1);
+        charIdx++;
       }
+
+      var nextDelay = isDeleting ? 30 : 60;
+
+      if (!isDeleting && charIdx === currentPhrase.length) {
+        // Signal typewriter complete on the first phrase so GSAP triggers
+        if (phraseIdx === 0) {
+          window.typewriterComplete = true;
+        }
+        nextDelay = 2000; // Pause at the end
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        nextDelay = 500; // Pause before typing next phrase
+      }
+
+      setTimeout(tick, nextDelay);
     }
 
-    // Start after headline animation: part1(2s) + pause(2s) + part2(2s) + 1s buffer = 7s
-    setTimeout(type, 7000);
+    // Start after headline animation is completed: ~1.5s
+    setTimeout(tick, 1500);
   })();
 
   /* ─────────────────────────────────────────────────────────────
@@ -4003,7 +4083,7 @@
     if (!problemSection) return;
 
     var compareFired = false;
-    var rowPace = 1000; // 1 second per row
+    var rowPace = 400; // 400ms per row
 
     var compareObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -4015,7 +4095,7 @@
           var goodItems = Array.from(problemSection.querySelectorAll('.compare-list-good li'));
           var t = 0;
 
-          // Step 1: Each X row — mark + text appear together, 1s apart
+          // Step 1: Each X row — mark + text appear together, 400ms apart
           badItems.forEach(function(li, i) {
             var sym = li.querySelector('.compare-x');
             var txt = li.querySelector('.item-text');
@@ -4024,16 +4104,16 @@
               setTimeout(function() { if (txt) txt.classList.add('text-visible'); }, 200);
             }, t + (i * rowPace));
           });
-          t += badItems.length * rowPace + 500;
+          t += badItems.length * rowPace + 200;
 
-          // Step 2: Red strikethroughs sweep across each X text, 600ms apart
+          // Step 2: Red strikethroughs sweep across each X text, 200ms apart
           badItems.forEach(function(li, i) {
             var txt = li.querySelector('.item-text');
-            if (txt) setTimeout(function() { txt.classList.add('strikethrough-visible'); }, t + (i * 600));
+            if (txt) setTimeout(function() { txt.classList.add('strikethrough-visible'); }, t + (i * 200));
           });
-          t += badItems.length * 600 + 500;
+          t += badItems.length * 200 + 200;
 
-          // Step 3: Each checkmark row — mark + text appear together, 1s apart
+          // Step 3: Each checkmark row — mark + text appear together, 400ms apart
           goodItems.forEach(function(li, i) {
             var sym = li.querySelector('.compare-check');
             var txt = li.querySelector('.item-text');
@@ -4131,17 +4211,34 @@
       var originalText = el.textContent;
       var inlineStyle = el.getAttribute('style') || '';
 
-      // Build char spans — preserve spaces as non-breaking so layout holds
+      // Split the text into words to prevent breaking inside words
+      var words = originalText.split(' ');
       var fragment = document.createDocumentFragment();
-      for (var ci = 0; ci < originalText.length; ci++) {
-        var ch = originalText[ci];
-        var span = document.createElement('span');
-        span.className = 'char-reveal-char';
-        span.textContent = ch === ' ' ? ' ' : ch;
-        // Restore space display width
-        if (ch === ' ') span.style.width = '0.3em';
-        fragment.appendChild(span);
-      }
+
+      words.forEach(function(wordText, wIdx) {
+        var wordSpan = document.createElement('span');
+        wordSpan.style.display = 'inline-block';
+        wordSpan.style.whiteSpace = 'nowrap';
+
+        for (var ci = 0; ci < wordText.length; ci++) {
+          var ch = wordText[ci];
+          var span = document.createElement('span');
+          span.className = 'char-reveal-char';
+          span.textContent = ch;
+          wordSpan.appendChild(span);
+        }
+
+        fragment.appendChild(wordSpan);
+
+        // Append a space span after each word except the last one
+        if (wIdx < words.length - 1) {
+          var spaceSpan = document.createElement('span');
+          spaceSpan.className = 'char-reveal-char';
+          spaceSpan.textContent = ' ';
+          spaceSpan.style.width = '0.3em';
+          fragment.appendChild(spaceSpan);
+        }
+      });
 
       // Add underline element
       var underline = document.createElement('span');
@@ -4565,13 +4662,13 @@
 let wageCalculatorState = { salary: 0, premium: 0, email: '' };
 
 function calculateWagePremium() {
-  const salary = parseFloat(document.getElementById('salaryInput').value);
-  if (isNaN(salary) || salary < 30000 || salary > 500000) {
-    alert('Please enter a salary between $30,000 and $500,000');
+  const reps = parseFloat(document.getElementById('salaryInput').value);
+  if (isNaN(reps) || reps < 3 || reps > 38) {
+    alert('Please enter a team size between 3 and 38 reps');
     return;
   }
-  wageCalculatorState.salary = salary;
-  wageCalculatorState.premium = Math.round(salary * 1.5);
+  wageCalculatorState.salary = reps;
+  wageCalculatorState.premium = reps * 13000;
   document.getElementById('calculatorStage').style.display = 'none';
   document.getElementById('lockStage').style.display = 'block';
   setTimeout(() => {
@@ -4582,19 +4679,39 @@ function calculateWagePremium() {
 
 function submitWagePremium(event) {
   event.preventDefault();
+  const name = document.getElementById('wageName').value.trim();
+  const company = document.getElementById('wageCompany').value.trim();
   const email = document.getElementById('wageEmail').value.trim();
-  if (!email) { alert('Please enter your email address'); return; }
+  
+  if (!name || !company || !email) { 
+    alert('Please fill out all fields'); 
+    return; 
+  }
+  
   wageCalculatorState.email = email;
   const submitBtn = event.target.querySelector('button');
   submitBtn.disabled = true;
+  submitBtn.textContent = 'Unlocking...';
+
   const formData = new URLSearchParams();
   formData.append('form-name', 'wage-premium-leads');
+  formData.append('name', name);
+  formData.append('company', company);
   formData.append('email', email);
   formData.append('annual_salary', wageCalculatorState.salary);
   formData.append('calculated_premium', wageCalculatorState.premium);
   formData.append('timestamp', new Date().toISOString());
-  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() })
-  .catch(e => console.log('Form submitted'));
+
+  fetch('/', { 
+    method: 'POST', 
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
+    body: formData.toString() 
+  })
+  .then(() => {
+    console.log('Calculator lead submitted via Netlify Forms');
+  })
+  .catch(e => console.error('Error submitting calculator lead:', e));
+
   unlockSequenceWage();
 }
 
@@ -4617,6 +4734,12 @@ function unlockSequenceWage() {
     document.getElementById('lockStage').style.display = 'none';
     document.getElementById('resultsStage').style.display = 'block';
     document.getElementById('premiumAmount').textContent = wageCalculatorState.premium.toLocaleString();
+    
+    const reportUrl = `report.html?reps=${wageCalculatorState.salary}&email=${encodeURIComponent(wageCalculatorState.email)}`;
+    document.getElementById('interactiveReportBtn').href = reportUrl;
+    
+    // Auto-open interactive report in new window
+    window.open(reportUrl, '_blank');
   }, 2600);
 }
 
@@ -4690,6 +4813,8 @@ function fireConfettiBurstWage(cx, cy) {
 
 <!-- Hidden Netlify form for wage premium capture -->
 <form name="wage-premium-leads" method="POST" netlify hidden>
+  <input type="text" name="name" />
+  <input type="text" name="company" />
   <input type="email" name="email" />
   <input type="number" name="annual_salary" />
   <input type="number" name="calculated_premium" />
@@ -4742,7 +4867,7 @@ function fireConfettiBurstWage(cx, cy) {
   };
 
   const radarChartData = {
-    labels: ['Speed to New Tech', 'Effectiveness in Pivoting', 'Resilience to Shifts', 'Proactive Innovation', 'Speed to New Tech'],
+    labels: ['Speed', 'Effectiveness', 'Resilience', 'Innovation', 'Adaptability'],
     emptyData: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
     fullData: [[60, 55, 65, 50, 60], [95, 88, 98, 92, 95]]
   };
