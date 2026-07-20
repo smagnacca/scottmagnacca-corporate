@@ -852,6 +852,89 @@
       font-weight: 600;
     }
 
+    /* ─── HARVARD CREDENTIAL MODAL ─── */
+    .harvard-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(6,14,26,0.75);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .harvard-modal-overlay.open { display: flex; }
+    .harvard-modal {
+      background: var(--white);
+      border-radius: 14px;
+      border-top: 4px solid var(--harvard-crimson);
+      max-width: 420px;
+      width: 100%;
+      padding: 32px 28px 28px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    .harvard-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--gray);
+      cursor: pointer;
+    }
+    .harvard-modal-title {
+      color: var(--harvard-crimson);
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin: 0 0 10px;
+    }
+    .harvard-modal-text {
+      color: var(--text-mid);
+      font-size: 0.95rem;
+      margin: 0 0 18px;
+    }
+    .harvard-modal-code-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--off-white);
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+    }
+    .harvard-modal-code {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.03em;
+    }
+    .harvard-modal-copy-btn {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .harvard-modal-copy-btn:hover { background: var(--gold-light); }
+    .harvard-modal-link {
+      display: inline-block;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+    .harvard-modal-link:hover { text-decoration: underline; }
+
     /* ─── BABSON FEATURE STRIP ─── */
     @keyframes babson-glow-pulse {
       0%, 100% { box-shadow: 0 0 0 2px rgba(0,208,132,0.25), 0 0 14px rgba(0,208,132,0.18); }
@@ -3530,16 +3613,29 @@
             <span class="cred-badge-value babson-green">Babson Online Course</span>
             <span class="cred-badge-label">AI Enabled Selling for Financial Professionals</span>
           </a>
-          <a href="https://cecredential-validation.tlt.harvard.edu/" target="_blank" class="cred-badge" style="text-decoration: none;">
+          <div class="cred-badge" style="cursor: pointer;" onclick="openHarvardModal()" role="button" tabindex="0" onkeypress="if(event.key==='Enter')openHarvardModal()">
             <span class="cred-badge-value harvard-crimson">Harvard Verified</span>
             <span class="cred-badge-label">Official Digital Credential — ALM Psychology</span>
-            <span class="cred-badge-label" style="display:block; margin-top:8px;">Enter this verification code to verify Scott's credential: <strong>25LF-6G2C-RSA9</strong></span>
-          </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- HARVARD CREDENTIAL VERIFICATION MODAL -->
+<div id="harvardModalOverlay" class="harvard-modal-overlay" onclick="if(event.target===this) closeHarvardModal()">
+  <div class="harvard-modal">
+    <button type="button" class="harvard-modal-close" onclick="closeHarvardModal()" aria-label="Close">&times;</button>
+    <h3 class="harvard-modal-title">Verify Scott's Harvard Credential</h3>
+    <p class="harvard-modal-text">Copy this verification code, then paste it into Harvard's CeDiD field to confirm authenticity.</p>
+    <div class="harvard-modal-code-row">
+      <code class="harvard-modal-code">25LF-6G2C-RSA9</code>
+      <button type="button" class="harvard-modal-copy-btn" onclick="copyHarvardCode(this)">Copy</button>
+    </div>
+    <a href="https://cecredential-validation.tlt.harvard.edu/" target="_blank" rel="noopener" class="harvard-modal-link">Go to Harvard Validation Site →</a>
+  </div>
+</div>
 
 <!-- BABSON FEATURE STRIP -->
 <div class="babson-strip-outer">
@@ -5162,6 +5258,45 @@ function fireConfettiBurstWage(cx, cy) {
   var section = document.getElementById('framework');
   if (section) obs.observe(section);
 })();
+
+// Harvard credential verification modal
+function openHarvardModal() {
+  document.getElementById('harvardModalOverlay').classList.add('open');
+}
+function closeHarvardModal() {
+  document.getElementById('harvardModalOverlay').classList.remove('open');
+}
+function copyHarvardCode(btn) {
+  var code = '25LF-6G2C-RSA9';
+  var original = btn.textContent;
+  function showResult(text) {
+    btn.textContent = text;
+    setTimeout(function() { btn.textContent = original; }, 1500);
+  }
+  function fallbackCopy() {
+    var ta = document.createElement('textarea');
+    ta.value = code;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    showResult(ok ? 'Copied!' : 'Select & copy manually');
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(function() {
+      showResult('Copied!');
+    }).catch(fallbackCopy);
+  } else {
+    fallbackCopy();
+  }
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeHarvardModal();
+});
 </script>
 
 </body>
