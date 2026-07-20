@@ -2,6 +2,21 @@
 
 All notable changes to the Scott Magnacca website will be documented in this file.
 
+## [1.1.1] - 2026-07-20
+
+### Added
+- **Harvard Credential Verification Modal** (`index.html`): Interactive modal popup for the Harvard Verified credential badge in the About section
+  - Click-to-open modal on credential badge (lines 3616-3619)
+  - Modal displays verification code: `25LF-6G2C-RSA9`
+  - Copy button with fallback support (Clipboard API + document.execCommand)
+  - Direct link to Harvard's CeDiD validation site
+  - CSS styling for modal overlay, styling (lines 856-905 in styles)
+  - JavaScript functions: `openHarvardModal()`, `closeHarvardModal()`, `copyHarvardCode()` (lines 5262-5283)
+
+### Technical
+- Improved credential verification UX: visitors can now easily copy the verification code and paste it directly into Harvard's validation portal
+- Deployed via manual Netlify CLI after GitHub Actions build failure (standard workaround)
+
 ## [1.1.0] - 2026-06-07
 
 ### Added
