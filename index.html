@@ -396,11 +396,29 @@
       object-fit: cover;
       opacity: 0;
       transition: opacity 0.4s ease;
-      z-index: -1;
+      z-index: 1;
       border-radius: 12px;
     }
     .framework-card:hover .framework-card-video {
-      opacity: 0.42;
+      opacity: 0.6;
+    }
+    /* Scrim overlay for readability (sits above video) */
+    .framework-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.7) 0%, rgba(15, 31, 61, 0.6) 100%);
+      z-index: 2;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    /* Content on top of everything */
+    .framework-card-label, .framework-card-title, .framework-card > p {
+      position: relative;
+      z-index: 3;
     }
     /* Video placeholder (while waiting for final videos) */
     .video-placeholder {
@@ -2945,8 +2963,8 @@
 
 <!-- HERO -->
 <section id="hero" style="position: relative; overflow: hidden;">
-  <!-- Background video (optional) — set src to actual video file when ready -->
-  <video id="hero-video-bg" autoplay muted loop playsinline style="display: none;">
+  <!-- Background video — hero section backdrop -->
+  <video id="hero-video-bg" autoplay muted loop playsinline>
     <source src="assets/video/hero-sales-ai.mp4" type="video/mp4">
   </video>
   <div class="container" style="position: relative; z-index: 10;">
@@ -3244,7 +3262,7 @@
 
       <!-- Card 1: Curiosity -->
       <div class="framework-card" data-accent="gold" style="position: relative; overflow: hidden;">
-        <video class="framework-card-video" data-video="cla-curiosity.mp4" autoplay muted loop playsinline style="display: none;">
+        <video class="framework-card-video" data-video="cla-curiosity.mp4" autoplay muted loop playsinline>
           <source src="assets/video/cla-curiosity.mp4" type="video/mp4">
         </video>
         <div class="orbit-wrap">

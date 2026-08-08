@@ -2,6 +2,32 @@
 
 All notable changes to the Scott Magnacca website will be documented in this file.
 
+## [Unreleased] - 2026-08-08
+
+### Added
+- **Video Integration Scaffolding** (`index.html`, `assets/video/`): Complete infrastructure for background and hover videos across hero section and CLA Framework cards
+  - **Hero background video** (35% opacity): `hero-sales-ai.mp4` with gradient scrim overlay ensures headline stays readable
+  - **CLA Framework card overlays** (60% opacity): Three embedded videos (Curiosity, Lifelong Learning, Agility & Adaptability) fade in on hover with scrim effects — brighter, more visible
+  - **Responsive behavior**: Desktop hover auto-play, mobile tap-to-toggle, all devices maintain aspect ratio
+  - **Demo page** (`video-demo.html`): Standalone visual demonstration of video effects and scaffolding
+  - **Video files** (3 of 6 generated): `hero-sales-ai.mp4` (2.5 MB), `cla-curiosity.mp4` (2.5 MB), `playbook-2026.mp4` (2.7 MB)
+
+### Technical
+- CSS video styling: `.video-background`, `.video-scrim` (gradient overlay), hover opacity transitions (0.4s ease)
+- Z-index layering fixed: video (z-1), scrim (z-2), content (z-3) for proper visibility
+- JavaScript video control: Hero auto-play on load, card hover/tap handlers with play/pause/reset logic
+- File structure: `assets/video/` contains test videos + 3 final Gemini Veo renders
+- **Status**: Full integration complete; 3 of 6 final videos in place; ready for remaining 3 videos
+
+### Changed
+- CLA card video opacity: 42% → 60% for better visibility and impact
+
+### Next Steps
+- Generate remaining 3 videos in Gemini Veo: `cla-learning.mp4`, `cla-agility.mp4`, and additional placeholder
+- Replace test videos in `assets/video/` with final renders
+- Verify loop seams and hover effects across desktop (Chrome/Safari), tablet, mobile
+- Screenshot proof before pushing feature branch to GitHub
+
 ## [1.1.1] - 2026-07-20
 
 ### Added

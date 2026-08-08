@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Integration Demo — CLA Framework</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #0a1628;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      color: #f5a623;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 48px;
+      max-width: 700px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 48px 0 32px;
+      color: #fff;
+    }
+
+    /* DEMO: Hero Background Video */
+    #hero-demo {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      border: 2px solid rgba(245,166,35,0.3);
+    }
+
+    #hero-demo video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+
+    #hero-demo-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.6) 0%, rgba(15, 31, 61, 0.5) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    #hero-demo-content h2 {
+      font-size: 2rem;
+      color: #f5a623;
+      text-align: center;
+    }
+
+    /* DEMO: CLA Cards with Video Overlays */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 2px solid rgba(245,166,35,0.2);
+      background: rgba(15, 31, 61, 0.8);
+      padding: 24px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(245,166,35,0.6);
+      box-shadow: 0 0 24px rgba(245,166,35,0.2);
+    }
+
+    .card video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+
+    .card:hover video {
+      opacity: 0.42;
+    }
+
+    .card-scrim {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.7) 0%, rgba(15, 31, 61, 0.6) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 3;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .card-label {
+      font-size: 0.85rem;
+      color: #f5a623;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+    }
+
+    .hover-hint {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 0.8rem;
+      color: rgba(245,166,35,0.6);
+      z-index: 4;
+    }
+
+    .info-box {
+      background: rgba(245,166,35,0.1);
+      border: 2px solid rgba(245,166,35,0.3);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 32px 0;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .info-box strong {
+      color: #f5a623;
+    }
+
+    code {
+      background: rgba(0,0,0,0.5);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎬 Video Integration Demo</h1>
+    <p class="subtitle">See the video scaffolding in action — hero background video and CLA Framework card hover overlays with opacity and scrim effects.</p>
+
+    <!-- HERO BACKGROUND VIDEO DEMO -->
+    <div class="section-title">Hero Section — Background Video (35% opacity)</div>
+    <div id="hero-demo">
+      <video autoplay muted loop playsinline>
+        <source src="assets/video/hero-sales-ai.mp4" type="video/mp4">
+      </video>
+      <div id="hero-demo-content">
+        <h2>Your Story Will.</h2>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Hero Video Effect:</strong> Reference video plays at 35% opacity in background. Gradient scrim overlay ensures headline stays readable. Text layer sits on top at z-index: 10.
+    </div>
+
+    <!-- CLA FRAMEWORK CARDS DEMO -->
+    <div class="section-title">CLA Framework Cards — Hover Video Overlays (42% opacity)</div>
+    <p style="margin-bottom: 24px; color: rgba(255,255,255,0.7);">👆 Hover over each card to see the video overlay appear with opacity and scrim effects.</p>
+
+    <div class="cards-grid">
+      <!-- Card 1: Curiosity -->
+      <div class="card">
+        <span class="hover-hint">Hover me</span>
+        <video autoplay muted loop playsinline data-video="cla-curiosity.mp4">
+          <source src="assets/video/cla-curiosity.mp4" type="video/mp4">
+        </video>
+        <div class="card-scrim"></div>
+        <div class="card-content">
+          <div class="card-icon">🔍</div>
+          <div class="card-label">The CLA — Principle 1</div>
+          <div class="card-title">Curiosity</div>
+          <p class="card-desc">Ask better questions. AI helps you find what to be curious about before every call — giving your team the context to open conversations that matter.</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Lifelong Learning -->
+      <div class="card">
+        <span class="hover-hint">Hover me</span>
+        <video autoplay muted loop playsinline data-video="cla-learning.mp4">
+          <source src="assets/video/cla-learning.mp4" type="video/mp4">
+        </video>
+        <div class="card-scrim"></div>
+        <div class="card-content">
+          <div class="card-icon">🎓</div>
+          <div class="card-label">The CLA — Principle 2</div>
+          <div class="card-title">Lifelong Learning</div>
+          <p class="card-desc">Markets move fast. The learn → apply → teach cycle keeps teams ahead of every shift. Teams that embed learning outperform those that rely on annual training.</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Agility & Adaptability -->
+      <div class="card">
+        <span class="hover-hint">Hover me</span>
+        <video autoplay muted loop playsinline data-video="cla-agility.mp4">
+          <source src="assets/video/cla-agility.mp4" type="video/mp4">
+        </video>
+        <div class="card-scrim"></div>
+        <div class="card-content">
+          <div class="card-icon">⚡</div>
+          <div class="card-label">The CLA — Principle 3</div>
+          <div class="card-title">Agility & Adaptability</div>
+          <p class="card-desc">Connection is a conversation, not a script. Adapt to every person, company, and moment. AI gives real-time signals — narrative intelligence tells you how to use them.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Card Video Effects:</strong>
+      <ul style="margin-top: 12px; margin-left: 20px; line-height: 1.8;">
+        <li>Each card has an embedded video element</li>
+        <li>On hover: video fades in at 42% opacity</li>
+        <li>Shaped gradient scrim keeps text readable</li>
+        <li>Icons, title, and description stay visible on top (z-index: 3)</li>
+        <li>Mobile: tap-to-toggle instead of hover</li>
+      </ul>
+    </div>
+
+    <div class="info-box" style="margin-top: 48px;">
+      <strong>📁 File Structure:</strong><br>
+      <code>assets/video/</code><br>
+      ├─ hero-sales-ai.mp4 (2.4 MB)<br>
+      ├─ cla-curiosity.mp4 (958 KB)<br>
+      ├─ cla-learning.mp4 (2.5 MB)<br>
+      └─ cla-agility.mp4 (958 KB)<br>
+      <br>
+      <strong>Ready to Swap:</strong> Replace these test videos with final renders from Gemini Veo when ready. The structure stays the same.
+    </div>
+
+    <div class="info-box">
+      <strong>Next Steps:</strong>
+      <ol style="margin-top: 12px; margin-left: 20px; line-height: 1.8;">
+        <li>Generate final 6 videos in Gemini Veo using prompts file</li>
+        <li>Replace test videos in <code>assets/video/</code></li>
+        <li>Test loop seams and hover effects locally</li>
+        <li>Screenshot proof (desktop, tablet, mobile)</li>
+        <li>Push feature branch to GitHub</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    // Simple hover pause/resume for demo
+    document.querySelectorAll('.card').forEach(card => {
+      const video = card.querySelector('video');
+      card.addEventListener('mouseenter', () => {
+        if (video) video.play();
+      });
+      card.addEventListener('mouseleave', () => {
+        if (video) {
+          video.pause();
+          video.currentTime = 0;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
