@@ -201,10 +201,19 @@
     #hero-part2 { color: #F5C518; }
     #hero-part2 span { color: #F5C518; }
     @keyframes pulseOrange {
-      0%, 100% { text-shadow: 0 0 8px rgba(245,166,35,0.3); }
-      50% { text-shadow: 0 0 28px rgba(245,166,35,1), 0 0 56px rgba(245,166,35,0.5); }
+      0%, 100% { text-shadow: 0 0 8px rgba(255,255,255,0.35); }
+      50% { text-shadow: 0 0 28px rgba(255,255,255,1), 0 0 56px rgba(255,255,255,0.6); }
     }
     .hero-part2-pulse { animation: pulseOrange 1.8s ease-in-out infinite; }
+
+    /* Subhead "3x faster pipelines" glow sentence */
+    #subhead-glow-text { transition: opacity 1s ease; }
+    .subhead-bold-glow {
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 14px rgba(255,255,255,0.85), 0 0 28px rgba(0,122,255,0.5);
+      transition: text-shadow 0.6s ease, color 0.3s ease;
+    }
 
     .hero-subhead {
       font-size: 1.25rem;
@@ -616,6 +625,122 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+    }
+    .research-card {
+      background: #fdfcf9;
+      border-radius: 6px;
+      padding: 48px 56px;
+      margin: 56px auto;
+      max-width: 820px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      position: relative;
+    }
+    .research-card-figure {
+      float: left;
+      width: 132px;
+      height: 132px;
+      margin: 0 24px 12px 0;
+    }
+    .research-card-figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .research-card-figure figcaption {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9aa0ab;
+      margin-top: 6px;
+      text-align: center;
+    }
+    @media (max-width: 520px) {
+      .research-card-figure { float: none; margin: 0 auto 16px; }
+    }
+    .research-card-kicker {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid #12151c;
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+    }
+    .research-card-label {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #007AFF;
+    }
+    .research-card-field {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9aa0ab;
+    }
+    .research-card-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #12151c;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .research-card-question {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #4a5160;
+      line-height: 1.55;
+      margin-bottom: 22px;
+    }
+    .research-card-body {
+      font-size: 1.02rem;
+      color: #262b34;
+      line-height: 1.85;
+      text-align: justify;
+      margin-bottom: 28px;
+    }
+    .research-card-body .drop-cap {
+      float: left;
+      font-size: 3.4rem;
+      line-height: 0.85;
+      font-weight: 700;
+      padding: 4px 8px 0 0;
+      color: #007AFF;
+    }
+    .research-card-citations {
+      border-top: 1px solid rgba(0,0,0,0.12);
+      padding-top: 18px;
+    }
+    .research-card-citations-label {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #9aa0ab;
+      margin-bottom: 10px;
+    }
+    .research-card-citations p {
+      font-size: 0.85rem;
+      color: #5a6170;
+      line-height: 1.7;
+      margin: 6px 0;
+      padding-left: 1.4em;
+      text-indent: -1.4em;
+    }
+    .research-card-citations a {
+      color: #007AFF;
+      text-decoration: underline;
+    }
+    @media (max-width: 700px) {
+      .research-card { padding: 32px 26px; margin: 40px 16px; }
+      .research-card-title { font-size: 1.3rem; }
     }
     .framework-card {
       background: rgba(255,255,255,0.04);
@@ -1515,14 +1640,7 @@
         text-align: center;
       }
       .cta-link {
-        display: block;
-        width: 100%;
-        max-width: 280px;
-        padding: 12px 20px;
-        border-bottom: none;
-        border: 1.5px solid var(--gold);
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(245,166,35,0.15);
+        display: inline;
       }
     }
 
@@ -2002,6 +2120,14 @@
       font-size: 0.7rem;
       color: rgba(255,255,255,0.35);
       margin-top: 4px;
+    }
+    .stat-source a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+    .stat-source a:hover {
+      color: #4DA3FF;
     }
     @media (max-width: 600px) {
       .stat-strip-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -2531,35 +2657,13 @@
       margin-top: 32px;
     }
     .cta-link {
-      color: #fff;
-      font-weight: 700;
-      border-bottom: 2px dashed var(--gold);
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: rgba(245,166,35,0.08);
-      transition: all 0.3s ease;
-      display: inline-block;
-      position: relative;
-      animation: ctaLinkPulse 2s infinite ease-in-out;
-      text-decoration: none;
+      color: #4DA3FF;
+      font-weight: 600;
+      text-decoration: underline;
+      transition: color 0.2s ease;
     }
     .cta-link:hover {
-      color: var(--navy) !important;
-      background: var(--gold) !important;
-      border-bottom-color: transparent;
-      box-shadow: 0 0 18px var(--gold);
-      transform: scale(1.05);
-    }
-    @keyframes ctaLinkPulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(245,166,35,0.4);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 0 12px 6px rgba(245,166,35,0.7);
-        transform: scale(1.04);
-        background: rgba(245,166,35,0.18);
-      }
+      color: #7FBFFF;
     }
     @keyframes btnReportGlow {
       0%, 100% { box-shadow: 0 0 0px rgba(0, 208, 132, 0); }
@@ -3017,7 +3121,7 @@
         </h1>
         <!-- Effect 2: typewriter subhead — JS populates #typewriter-output -->
         <p class="hero-subhead" id="hero-subhead">
-          Most teams are running a 2015 playbook in 2026. <strong style="color: #007AFF; font-weight: 700;">Close the gap.</strong> The winning move isn't 'smarter prompts'—it's using AI to hyper-personalize outreach and build trust. Teams doing this see 3x faster pipelines and win rates that move in days, not quarters. Your team will <span id="typewriter-output" style="color: #007AFF; font-weight: 700;"></span><span class="tw-cursor" id="tw-cursor"></span>
+          Most teams are running a 2015 playbook in 2026. <strong style="color: #007AFF; font-weight: 700;">Close the gap.</strong> The winning move isn't 'smarter prompts'—it's using AI to hyper-personalize outreach and build trust. <span id="subhead-glow-text" style="opacity:0;">Teams doing this see 3x faster pipelines and win rates that move in days, not quarters.</span> Your team will <span id="typewriter-output" style="color: #007AFF; font-weight: 700;"></span><span class="tw-cursor" id="tw-cursor"></span>
         </p>
         <!-- VALUE PROP PARAGRAPH WITH ANIMATIONS -->
         <div class="value-prop-paragraph">
@@ -3237,20 +3341,20 @@
   <div class="container">
     <p class="stat-strip-label">Why This Matters Now</p>
     <div class="stat-strip-grid">
-      <div class="stat-card" data-target="56" data-suffix="%" data-delay="0">
+      <div class="stat-card" data-target="62" data-suffix="%" data-delay="0">
         <div class="stat-number"><span class="stat-value">0</span><span class="stat-suffix">%</span></div>
         <p class="stat-desc">Higher earnings for AI-skilled professionals</p>
-        <p class="stat-source">McKinsey Global Institute</p>
+        <p class="stat-source"><a href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html" target="_blank" rel="noopener">PwC 2026 Global AI Jobs Barometer — Jun 2026</a></p>
       </div>
-      <div class="stat-card" data-target="3" data-suffix="x" data-delay="200">
-        <div class="stat-number"><span class="stat-value">0</span><span class="stat-suffix">x</span></div>
-        <p class="stat-desc">Faster pipeline velocity with AI-assisted prospecting</p>
-        <p class="stat-source">Salesforce State of Sales</p>
-      </div>
-      <div class="stat-card" data-target="77" data-suffix="%" data-delay="400">
+      <div class="stat-card" data-target="92" data-suffix="%" data-delay="200">
         <div class="stat-number"><span class="stat-value">0</span><span class="stat-suffix">%</span></div>
-        <p class="stat-desc">Of employers now require AI-ready capabilities</p>
-        <p class="stat-source">LinkedIn Workforce Report</p>
+        <p class="stat-desc">Of sellers with AI agents say it benefits their prospecting</p>
+        <p class="stat-source"><a href="https://www.salesforce.com/news/stories/state-of-sales-report-announcement-2026/" target="_blank" rel="noopener">Salesforce State of Sales Report — 2026</a></p>
+      </div>
+      <div class="stat-card" data-target="66" data-suffix="%" data-delay="400">
+        <div class="stat-number"><span class="stat-value">0</span><span class="stat-suffix">%</span></div>
+        <p class="stat-desc">Of leaders wouldn't hire someone without AI skills</p>
+        <p class="stat-source"><a href="https://news.microsoft.com/source/2024/05/08/microsoft-and-linkedin-release-the-2024-work-trend-index-on-the-state-of-ai-at-work/" target="_blank" rel="noopener">Microsoft & LinkedIn 2024 Work Trend Index — May 2024</a></p>
       </div>
     </div>
   </div>
@@ -3279,7 +3383,7 @@
     <p class="section-subtitle reveal">Three principles that transform how teams think, communicate, and adapt — with AI as the accelerator.</p>
     <div class="framework-intro reveal" style="max-width: 720px; margin: 32px auto 48px; text-align: center; font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,0.8);">
       <p><span id="methodology-tw-wrap" style="font-weight:700; transition: color 0.6s ease;"><span id="methodology-tw-out"></span><span id="methodology-cursor" style="animation: cursorBlink 0.9s step-end infinite;">|</span></span> You craft a narrative that resonates with your audience's hopes, fears, and ambitions. Then you take action, telling that story so compellingly that others believe, invest, and follow. For professionals, this isn't optional—it's the engine that turns vision into momentum.</p>
-      <p style="margin-top: 16px; color: rgba(255,255,255,0.7);">The three life skills of <span class="methodology-pulse">Curiosity, Lifelong learning and Agility &amp; Adaptability</span> are life skills. They are how your team embeds this power into every interaction, sustained by AI as the accelerator.</p>
+      <p style="margin-top: 16px; color: rgba(255,255,255,0.7);">The three life skills of <span class="methodology-pulse">Curiosity, Lifelong learning and Agility &amp; Adaptability (CLA)</span> are life skills. They are how your team embeds this power into every interaction, sustained by AI as the accelerator.</p>
     </div>
 
     <!-- YouTube: Storyselling in The Age of AI -->
@@ -3375,6 +3479,26 @@
         <p class="framework-card-desc">Connection and persuasion is a conversation, not a script. Adapt to every person, company, and moment. AI gives your team real-time signals — but only people with narrative intelligence know how to use them.</p>
       </div>
 
+    </div>
+
+    <!-- Research Card — Curiosity science callout -->
+    <div class="reveal research-card">
+      <div class="research-card-kicker">
+        <span class="research-card-label">Research Card</span>
+        <span class="research-card-field">Cognitive Science</span>
+      </div>
+      <figure class="research-card-figure">
+        <img src="assets/img/research-card-neuron.jpg" alt="Illustration of a neuron network representing neuroplasticity">
+        <figcaption>Fig. 1 — Neural Adaptation</figcaption>
+      </figure>
+      <div class="research-card-title">The Neuroscience of Curiosity</div>
+      <p class="research-card-question">Did you know your brain actually changes shape every single time you choose to get curious?</p>
+      <p class="research-card-body"><span class="drop-cap">G</span>roundbreaking research from Stanford University proves that simply believing you can get smarter physically rewires your brain to adapt faster (Dweck, 2006). On top of that, Harvard Business Review highlights that your "Curiosity Quotient"—your pure drive to learn—is now a far bigger predictor of long-term success than traditional IQ (Chamorro-Premuzic, 2014).</p>
+      <div class="research-card-citations" style="clear: both;">
+        <div class="research-card-citations-label">APA Citations</div>
+        <p>Chamorro-Premuzic, T. (2014, August 27). <a href="https://hbr.org/2014/08/curiosity-is-as-important-as-intelligence" target="_blank" rel="noopener">Curiosity is as important as intelligence</a>. Harvard Business Review.</p>
+        <p>Dweck, C. S. (2006). <em>Mindset: The new psychology of success</em>. Random House.</p>
+      </div>
     </div>
 
     <!-- 3Cs Comparative Analysis Charts -->
@@ -4070,23 +4194,53 @@
       return;
     }
 
-    // Part 1: fade in over 0.5s immediately
-    part1.style.transition = 'opacity 0.5s ease';
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        part1.style.opacity = '1';
-      });
-    });
+    var INITIAL_DELAY = 1500; // 1.5s (1 beat) after page load
 
-    // Part 2: starts fading in at t=0.5s
+    // Part 1: fade in over 0.5s, starting at t=1.5s
+    part1.style.transition = 'opacity 0.5s ease';
+    setTimeout(function() {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          part1.style.opacity = '1';
+        });
+      });
+    }, INITIAL_DELAY);
+
+    // Part 2: starts fading in at t=1.5s+0.5s
     part2.style.transition = 'opacity 1s ease';
     setTimeout(function() {
       part2.style.opacity = '1';
-      // Add orange pulse once part2 is fully visible (1s later)
+      // Add bright white pulse once part2 is fully visible (1s later)
       setTimeout(function() {
         part2.classList.add('hero-part2-pulse');
       }, 1000);
-    }, 500);
+    }, INITIAL_DELAY + 500);
+  })();
+
+  /* ─────────────────────────────────────────────────────────────
+     SUBHEAD GLOW SENTENCE — "Teams doing this see 3x faster..."
+     Fades in 2s after the headline sequence finishes (~3s in),
+     then gets a bold white/blue glow 2s after it appears.
+  ───────────────────────────────────────────────────────────── */
+  (function() {
+    var glowText = document.getElementById('subhead-glow-text');
+    if (!glowText) return;
+
+    if (prefersReduced) {
+      glowText.style.opacity = '1';
+      glowText.classList.add('subhead-bold-glow');
+      return;
+    }
+
+    var HEADLINE_DONE = 3000; // headline fully visible at ~3s
+    var FADE_START = HEADLINE_DONE + 2000; // 2s after headline finishes
+
+    setTimeout(function() {
+      glowText.style.opacity = '1';
+      setTimeout(function() {
+        glowText.classList.add('subhead-bold-glow');
+      }, 2000);
+    }, FADE_START);
   })();
 
   /* ─────────────────────────────────────────────────────────────
@@ -4746,11 +4900,7 @@
     valuePropTimeline
       .fromTo('.value-prop-sentence:nth-child(2)',
         { opacity: 0 },
-        { opacity: 1, duration: 0.5 }, ctaStart)
-      .fromTo('.value-prop-sentence:nth-child(2) .cta-link',
-        { textShadow: '0 0 0 rgba(245,166,35,0)' },
-        { textShadow: '0 0 8px rgba(245,166,35,0.6)', duration: 0.6, repeat: -1, yoyo: true },
-        ctaStart + 0.3);
+        { opacity: 1, duration: 0.5 }, ctaStart);
   }
 
   /* ─── BIO TYPEWRITER EFFECT ─── */
