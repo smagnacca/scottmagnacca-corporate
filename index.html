@@ -420,6 +420,44 @@
       position: relative;
       z-index: 3;
     }
+    /* Background videos for Problem, Formats, and Wage Premium sections */
+    .section-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.25;
+    }
+    #problem-video-bg, #formats-video-bg, #wage-premium-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    /* Scrim overlay for section backgrounds (maintains text readability) */
+    #problem::before, #formats::before, #wage-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.75) 0%, rgba(15, 31, 61, 0.7) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* Ensure content sits above video + scrim */
+    #problem > *, #formats > *, #wage-premium > * {
+      position: relative;
+      z-index: 2;
+    }
     /* Video placeholder (while waiting for final videos) */
     .video-placeholder {
       width: 100%;
@@ -3141,7 +3179,10 @@
 </section>
 
 <!-- THE PROBLEM -->
-<section id="problem">
+<section id="problem" style="position: relative; overflow: hidden;">
+  <video id="problem-video-bg" class="section-video-bg" autoplay muted loop playsinline>
+    <source src="assets/video/broll-network-data.mp4" type="video/mp4">
+  </video>
   <div class="container">
     <div class="section-label reveal">The Challenge</div>
     <h2 class="section-title reveal">The Legacy Sales Playbook is Broken</h2>
@@ -3405,7 +3446,10 @@
 </section>
 
 <!-- TEAM CAPACITY CALCULATOR -->
-<section id="wage-premium" class="wage-premium-section">
+<section id="wage-premium" class="wage-premium-section" style="position: relative; overflow: hidden;">
+  <video id="wage-premium-video-bg" class="section-video-bg" autoplay muted loop playsinline>
+    <source src="assets/video/broll-circuit.mp4" type="video/mp4">
+  </video>
   <div class="container">
     <div class="section-label">TEAM ROI CALCULATOR</div>
     <h2 class="section-title">Reclaim Your Team's Sales Capacity</h2>
@@ -3571,7 +3615,10 @@
 </section>
 
 <!-- SPEAKING & TRAINING FORMATS -->
-<section id="formats">
+<section id="formats" style="position: relative; overflow: hidden;">
+  <video id="formats-video-bg" class="section-video-bg" autoplay muted loop playsinline>
+    <source src="assets/video/broll-network-connect.mp4" type="video/mp4">
+  </video>
   <div class="container">
     <div class="section-label reveal">Training Options</div>
     <h2 class="section-title reveal">High-Impact Training Formats</h2>
