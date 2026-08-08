@@ -449,7 +449,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, rgba(10, 22, 40, 0.75) 0%, rgba(15, 31, 61, 0.7) 100%);
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.35) 0%, rgba(15, 31, 61, 0.25) 100%);
       z-index: 1;
       pointer-events: none;
     }
@@ -3233,8 +3233,11 @@
 </section>
 
 <!-- So What? Stat Strip -->
-<section id="so-what-stats">
-  <div class="container">
+<section id="so-what-stats" style="position: relative; overflow: hidden;">
+  <video id="so-what-stats-video-bg" class="section-video-bg" autoplay muted loop playsinline>
+    <source src="./assets/video/ai_neural_network.mp4" type="video/mp4" />
+  </video>
+  <div class="container" style="position: relative; z-index: 1;">
     <p class="stat-strip-label">Why This Matters Now</p>
     <div class="stat-strip-grid">
       <div class="stat-card" data-target="56" data-suffix="%" data-delay="0">
@@ -3897,8 +3900,11 @@
 </section>
 
 <!-- FREE OFFERINGS: 15-MINUTE SALES SPRINT -->
-<section id="free-sprints" style="background: var(--navy-light); padding: 88px 0; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold);">
-  <div class="container" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center;">
+<section id="free-sprints" style="position: relative; overflow: hidden; background: var(--navy-light); padding: 88px 0; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold);">
+  <video id="free-sprints-video-bg" class="section-video-bg" autoplay muted loop playsinline>
+    <source src="./assets/video/playbook-2026.mp4" type="video/mp4" />
+  </video>
+  <div class="container" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; position: relative; z-index: 1;">
     <div>
       <div class="section-label" style="color: var(--gold); background: none; -webkit-text-fill-color: var(--gold); -webkit-background-clip: unset; background-clip: unset; animation: none;">Free Masterclass</div>
       <h2 class="section-title" style="color: var(--white); margin-bottom: 20px;">The 15-Minute LinkedIn Sales Sprint</h2>
