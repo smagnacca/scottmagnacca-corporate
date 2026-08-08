@@ -12,6 +12,14 @@ All notable changes to the Scott Magnacca website will be documented in this fil
   - **Demo page** (`video-demo.html`): Standalone visual demonstration of video effects and scaffolding
   - **Video files** (3 of 6 generated): `hero-sales-ai.mp4` (2.5 MB), `cla-curiosity.mp4` (2.5 MB), `playbook-2026.mp4` (2.7 MB)
 
+- **Antigravity Broll Background Sections** (Session 2, 2026-08-08):
+  - **"The Challenge" section** (25% opacity): `broll-network-data.mp4` (1.6 MB) — Network/data visualization backdrop
+  - **"Training Formats" section** (25% opacity): `broll-network-connect.mp4` (1.7 MB) — Network connectivity backdrop
+  - **"Wage Premium Calculator" section** (25% opacity): `broll-circuit.mp4` (2.9 MB) — Circuit board/processing backdrop
+  - All with dark gradient scrim overlays (::before pseudo-elements) for text readability
+  - Autoplay, muted, looping; responsive sizing via `object-fit: cover`
+  - Source: VIDEO-PRODUCTION-MASTER Antigravity library (watermark-free, web-optimized)
+
 ### Technical
 - CSS video styling: `.video-background`, `.video-scrim` (gradient overlay), hover opacity transitions (0.4s ease)
 - Z-index layering fixed: video (z-1), scrim (z-2), content (z-3) for proper visibility
@@ -22,11 +30,16 @@ All notable changes to the Scott Magnacca website will be documented in this fil
 ### Changed
 - CLA card video opacity: 42% → 60% for better visibility and impact
 
-### Next Steps
-- Generate remaining 3 videos in Gemini Veo: `cla-learning.mp4`, `cla-agility.mp4`, and additional placeholder
+### Next Steps (Pending)
+- **Generate final 2 Gemini Veo videos** (when credits available):
+  - `cla-learning.mp4` — Lifelong Learning card (education/mentorship focus)
+  - `cla-agility.mp4` — Agility & Adaptability card (partnership/connection focus)
 - Replace test videos in `assets/video/` with final renders
+- Local preview: Verify background videos visible at 25% opacity (Problem, Formats, Wage Premium sections)
 - Verify loop seams and hover effects across desktop (Chrome/Safari), tablet, mobile
-- Screenshot proof before pushing feature branch to GitHub
+- Screenshot proof (desktop 1280px, tablet 768px, mobile 375px) before pushing feature branch to GitHub
+- Commit + push `feature/video-integration-v1` to GitHub
+- Create PR to main branch with final verification screenshots
 
 ## [1.1.1] - 2026-07-20
 
