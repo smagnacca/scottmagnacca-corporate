@@ -339,6 +339,103 @@
     .reveal-children.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
     .reveal-children.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
 
+    /* ─── VIDEO INTEGRATION ─── */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+    }
+    .video-wrapper video {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #000;
+    }
+    /* Background video: low opacity (0.7 hero, 0.42 sections) */
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+      z-index: 0;
+    }
+    .video-scrim {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.4) 0%, rgba(15, 31, 61, 0.3) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* Hero video (full background) */
+    #hero-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      z-index: -1;
+    }
+    /* Framework card hover video (overlay) */
+    .framework-card-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+      border-radius: 12px;
+    }
+    .framework-card:hover .framework-card-video {
+      opacity: 0.42;
+    }
+    /* Video placeholder (while waiting for final videos) */
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #1a2f4a 0%, #0f1f3d 50%, #060e1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-placeholder::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(245, 166, 35, 0.1), transparent);
+      animation: placeholderShimmer 2s ease-in-out infinite;
+    }
+    @keyframes placeholderShimmer {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+    .video-placeholder-text {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
     /* ─── THE PROBLEM ─── */
     #problem {
       background: var(--white);
@@ -2847,8 +2944,12 @@
 </div>
 
 <!-- HERO -->
-<section id="hero">
-  <div class="container">
+<section id="hero" style="position: relative; overflow: hidden;">
+  <!-- Background video (optional) — set src to actual video file when ready -->
+  <video id="hero-video-bg" autoplay muted loop playsinline style="display: none;">
+    <source src="assets/video/hero-sales-ai.mp4" type="video/mp4">
+  </video>
+  <div class="container" style="position: relative; z-index: 10;">
     <div class="hero-inner">
       <!-- LEFT COLUMN: text content -->
       <div class="hero-left">
@@ -3142,7 +3243,10 @@
     <div class="cards-3 reveal-children">
 
       <!-- Card 1: Curiosity -->
-      <div class="framework-card" data-accent="gold">
+      <div class="framework-card" data-accent="gold" style="position: relative; overflow: hidden;">
+        <video class="framework-card-video" data-video="cla-curiosity.mp4" autoplay muted loop playsinline style="display: none;">
+          <source src="assets/video/cla-curiosity.mp4" type="video/mp4">
+        </video>
         <div class="orbit-wrap">
           <div class="orbit-ring gold">
             <div class="framework-icon">
@@ -3164,7 +3268,10 @@
       </div>
 
       <!-- Card 2: Lifelong Learning -->
-      <div class="framework-card" data-accent="blue">
+      <div class="framework-card" data-accent="blue" style="position: relative; overflow: hidden;">
+        <video class="framework-card-video" data-video="cla-learning.mp4" autoplay muted loop playsinline style="display: none;">
+          <source src="assets/video/cla-learning.mp4" type="video/mp4">
+        </video>
         <div class="orbit-wrap">
           <div class="orbit-ring blue">
             <div class="framework-icon">
@@ -3186,7 +3293,10 @@
       </div>
 
       <!-- Card 3: Agility & Adaptability -->
-      <div class="framework-card" data-accent="gold">
+      <div class="framework-card" data-accent="gold" style="position: relative; overflow: hidden;">
+        <video class="framework-card-video" data-video="cla-agility.mp4" autoplay muted loop playsinline style="display: none;">
+          <source src="assets/video/cla-agility.mp4" type="video/mp4">
+        </video>
         <div class="orbit-wrap">
           <div class="orbit-ring gold">
             <div class="framework-icon">
@@ -5297,6 +5407,64 @@ function copyHarvardCode(btn) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeHarvardModal();
 });
+
+// ── VIDEO INTEGRATION ──
+(function() {
+  // Enable hero background video when ready
+  var heroBg = document.getElementById('hero-video-bg');
+  if (heroBg && heroBg.src) {
+    // Show video once it can play
+    heroBg.addEventListener('canplay', function() {
+      heroBg.style.display = 'block';
+    }, { once: true });
+  }
+
+  // CLA Framework card hover video overlays
+  document.querySelectorAll('.framework-card').forEach(function(card) {
+    var video = card.querySelector('.framework-card-video');
+    if (!video) return;
+
+    card.addEventListener('mouseenter', function() {
+      if (video.src || video.querySelector('source')) {
+        video.style.display = 'block';
+        video.play().catch(function(err) {
+          console.log('Video play failed:', err);
+        });
+      }
+    });
+
+    card.addEventListener('mouseleave', function() {
+      video.pause();
+      video.currentTime = 0;
+      video.style.display = 'none';
+    });
+  });
+
+  // Mobile: tap to toggle video (since hover doesn't exist on touch)
+  if (window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.framework-card').forEach(function(card) {
+      var video = card.querySelector('.framework-card-video');
+      var isPlaying = false;
+
+      card.addEventListener('click', function(e) {
+        if (!video) return;
+        if (!isPlaying && (video.src || video.querySelector('source'))) {
+          video.style.display = 'block';
+          video.play().catch(function(err) {
+            console.log('Video play failed:', err);
+          });
+          isPlaying = true;
+        } else {
+          video.pause();
+          video.currentTime = 0;
+          video.style.display = 'none';
+          isPlaying = false;
+        }
+        e.stopPropagation();
+      });
+    });
+  }
+})();
 </script>
 
 </body>
